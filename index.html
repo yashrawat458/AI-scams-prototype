@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Scams — Know Your Risk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="viewport">
+  <div class="screen" id="screen-1">
+    <!-- Background layers -->
+    <div class="background">
+      <div class="grid-bg">
+        <img src="assets/grid.svg" alt="" aria-hidden="true">
+      </div>
+      <div class="blue-panel"></div>
+    </div>
+
+    <!-- Clipboard illustration -->
+    <div class="clipboard-wrapper">
+      <div class="clipboard">
+        <img src="assets/clipboard.png" alt="Clipboard illustration">
+      </div>
+    </div>
+
+    <!-- Content -->
+    <!-- Section 1: Who are you? -->
+    <section class="section section-who" data-section="who">
+      <h2 class="section-title">Who are you?</h2>
+      <div class="bio-grid">
+          <!-- Age -->
+          <div class="bio-group" data-group="age">
+            <h3 class="bio-label">Age</h3>
+            <div class="chips">
+              <button class="chip" data-value="<18">&lt;18</button>
+              <button class="chip" data-value="18-24">18-24</button>
+              <button class="chip" data-value="25-34">25-34</button>
+              <button class="chip" data-value="35-44">35-44</button>
+              <button class="chip" data-value="45-54">45-54</button>
+              <button class="chip" data-value="55-64">55-64</button>
+              <button class="chip" data-value=">65">&gt;65</button>
+            </div>
+          </div>
+
+          <!-- Sex -->
+          <div class="bio-group" data-group="sex">
+            <h3 class="bio-label">Sex</h3>
+            <div class="chips">
+              <button class="chip" data-value="male">Male</button>
+              <button class="chip" data-value="female">Female</button>
+              <button class="chip" data-value="non-binary">Non-binary</button>
+            </div>
+          </div>
+
+          <!-- Occupation -->
+          <div class="bio-group" data-group="occupation">
+            <h3 class="bio-label">Occupation</h3>
+            <div class="chips">
+              <button class="chip" data-value="student">Student</button>
+              <button class="chip" data-value="salaried">Salaried</button>
+              <button class="chip" data-value="un-employed">Un-employed</button>
+              <button class="chip" data-value="self-employed">Self-employed</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <!-- Section 2: Do you have? -->
+    <section class="section section-have" data-section="have">
+      <h2 class="section-title">Do you have?</h2>
+      <div class="chips chips-wide" data-group="have">
+          <button class="chip" data-value="mobile-number">Mobile number</button>
+          <button class="chip" data-value="bank-account">Bank account</button>
+          <button class="chip" data-value="pan-number">PAN number</button>
+          <button class="chip" data-value="aadhar-number">Aadhar number</button>
+          <button class="chip" data-value="passport">Passport</button>
+          <button class="chip" data-value="demat-account">Demat account</button>
+          <button class="chip" data-value="instagram">Instagram</button>
+          <button class="chip" data-value="facebook">Facebook</button>
+          <button class="chip" data-value="whatsapp">Whatsapp</button>
+          <button class="chip" data-value="gmail">Gmail</button>
+        <button class="chip" data-value="telegram">Telegram</button>
+      </div>
+    </section>
+
+    <!-- Continue button -->
+    <div class="continue-wrapper">
+      <button class="continue-btn" id="continue-btn" disabled>
+        Continue
+        <span class="arrow">→</span>
+      </button>
+    </div>
+  </div><!-- end screen-1 -->
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- SCREEN 2 — "You've been PWNED!!" -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="screen screen-hidden" id="screen-2">
+    <!-- Background -->
+    <div class="background">
+      <div class="grid-bg grid-bg-2">
+        <img src="assets/grid.svg" alt="" aria-hidden="true">
+      </div>
+      <div class="blue-panel-full"></div>
+    </div>
+
+    <!-- Scattered devil emojis -->
+    <div class="emoji emoji-1"><img src="assets/devil-emoji-1.png" alt=""></div>
+    <div class="emoji emoji-2"><img src="assets/devil-emoji-1.png" alt=""></div>
+    <div class="emoji emoji-3"><img src="assets/devil-emoji-1.png" alt=""></div>
+    <div class="emoji emoji-4"><img src="assets/devil-emoji-1.png" alt=""></div>
+    <div class="emoji emoji-5"><img src="assets/devil-emoji-1.png" alt=""></div>
+    <div class="emoji emoji-6"><img src="assets/devil-emoji-1.png" alt=""></div>
+    <div class="emoji emoji-7"><img src="assets/devil-emoji-1.png" alt=""></div>
+
+    <!-- Center devil emoji (big) -->
+    <div class="center-devil">
+      <img src="assets/devil-emoji-1.png" alt="Devil emoji">
+    </div>
+
+    <!-- Main text -->
+    <p class="pwned-text">
+      <span class="pwned-white">You&rsquo;ve been </span><span class="pwned-pink">PWNED!!</span>
+    </p>
+
+    <!-- Link -->
+    <a class="pwned-link" href="https://haveibeenpwned.com" target="_blank">haveibeenpwned.com</a>
+  </div><!-- end screen-2 -->
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- SCREEN 3 — "Step 1. Data Harvesting" -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="screen screen-hidden" id="screen-3">
+    <!-- Background (same as Screen 1) -->
+    <div class="background">
+      <div class="grid-bg">
+        <img src="assets/grid.svg" alt="" aria-hidden="true">
+      </div>
+      <div class="blue-panel"></div>
+    </div>
+
+    <!-- AI amplification pills (top center) -->
+    <div class="s3-pills">
+      <span class="s3-pill s3-pill-active">Scalability</span>
+      <span class="s3-pill">Believability</span>
+      <span class="s3-pill">Personalization</span>
+    </div>
+
+    <!-- Left column: Step description -->
+    <div class="s3-left">
+      <div class="s3-step-header">
+        <p class="s3-step-label"><span class="s3-step-sm">Step </span><span class="s3-step-lg">1.</span></p>
+        <h2 class="s3-step-title">Data Harvesting</h2>
+      </div>
+      <div class="s3-step-body">
+        <p>Goal: Gather raw material to make the scam believable.</p>
+        <br>
+        <p>Scammers collect:</p>
+        <ul>
+          <li>Voice clips (social media videos, WhatsApp audios)</li>
+          <li>Photos/videos (Instagram, LinkedIn, Facebook)</li>
+          <li>Personal info (job, family, phone number)</li>
+          <li>Leaked data (emails, passwords, bank info)</li>
+          <li>Organizational details (who reports to whom)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Right column: Card + emojis -->
+    <div class="s3-right">
+      <div class="s3-robot-emoji">
+        <img src="assets/robot-emoji.png" alt="">
+      </div>
+
+      <!-- Crawling virus emojis -->
+      <div class="s3-crawler s3-crawler-1"><img src="assets/alien-emoji.png" alt=""></div>
+      <div class="s3-crawler s3-crawler-2"><img src="assets/alien-emoji.png" alt=""></div>
+      <div class="s3-crawler s3-crawler-3"><img src="assets/alien-emoji.png" alt=""></div>
+      <div class="s3-crawler s3-crawler-4"><img src="assets/alien-emoji.png" alt=""></div>
+      <div class="s3-crawler s3-crawler-5"><img src="assets/alien-emoji.png" alt=""></div>
+
+      <div class="s3-card">
+        <p class="s3-card-bold">AI's role: Helps scrape, organize, and profile victims fast. Even tiny data points become powerful when AI stitches them together.</p>
+        <br>
+        <p class="s3-card-regular">Without data, there is no personalization. Without personalization, AI scams lose power.</p>
+      </div>
+      <div class="s3-alien-emoji">
+        <img src="assets/alien-emoji.png" alt="">
+      </div>
+    </div>
+  </div><!-- end screen-3 -->
+
+  </div><!-- end viewport -->
+
+  <script src="script.js"></script>
+</body>
+</html>

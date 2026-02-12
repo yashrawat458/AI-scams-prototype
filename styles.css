@@ -1,0 +1,943 @@
+/* ========================================
+   RESET & BASE
+   ======================================== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  font-family: 'Rethink Sans', sans-serif;
+  background: #000;
+  color: #fff;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+/* ========================================
+   VIEWPORT — fixed 1920×1080, no scaling
+   ======================================== */
+.viewport {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: #000;
+}
+
+/* ========================================
+   SCREEN — fixed 1920×1080 canvas
+   ======================================== */
+.screen {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: #000;
+}
+
+/* ========================================
+   BACKGROUND LAYERS
+   ======================================== */
+.background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Figma: left 3px, top 0, 1974×1080 */
+.grid-bg {
+  position: absolute;
+  left: 3px;
+  top: 0;
+  width: 1974px;
+  height: 1080px;
+}
+
+.grid-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Figma: centered, 1920×662, color #1b2191 */
+.blue-panel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 1920px;
+  height: 662px;
+  background: #1b2191;
+  z-index: 1;
+}
+
+/* ========================================
+   CLIPBOARD ILLUSTRATION
+   Figma: left 1632, top 95, container 396×396
+          inner image 324×324, rotated -15°
+   ======================================== */
+.clipboard-wrapper {
+  position: absolute;
+  left: 1552px;
+  top: 95px;
+  width: 396px;
+  height: 396px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Entry animation */
+  animation: clipboardEnter 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s both;
+}
+
+/* Float applied to inner element to avoid transform conflict */
+.clipboard {
+  width: 324px;
+  height: 324px;
+  transform: rotate(-15deg);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  flex-shrink: 0;
+  animation: clipboardFloat 4s ease-in-out 2s infinite;
+}
+
+.clipboard:hover {
+  transform: rotate(-10deg) scale(1.05);
+}
+
+.clipboard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+}
+
+@keyframes clipboardEnter {
+  from {
+    opacity: 0;
+    transform: translateX(120px) translateY(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@keyframes clipboardFloat {
+  0%, 100% { transform: rotate(-15deg) translateY(0); }
+  50% { transform: rotate(-15deg) translateY(-12px); }
+}
+
+/* ========================================
+   SECTION 1 — "Who are you?"
+   Figma: left 76, top 288, width 1470
+   Inner gap: 18px (title to content)
+   ======================================== */
+.section-who {
+  position: absolute;
+  left: 76px;
+  top: 288px;
+  width: 1470px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  /* Entrance animation */
+  opacity: 0;
+  transform: translateY(30px);
+  animation: sectionFadeIn 0.7s ease-out 0.1s forwards;
+}
+
+/* ========================================
+   SECTION 2 — "Do you have?"
+   Figma: left 76, top 557, width 825
+   Inner gap: 36px (title to chips)
+   ======================================== */
+.section-have {
+  position: absolute;
+  left: 76px;
+  top: 557px;
+  width: 825px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  /* Entrance animation */
+  opacity: 0;
+  transform: translateY(30px);
+  animation: sectionFadeIn 0.7s ease-out 0.35s forwards;
+}
+
+@keyframes sectionFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   SECTION TITLES — 40px Rethink Sans Regular
+   ======================================== */
+.section-title {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: normal;
+  color: #fff;
+}
+
+/* ========================================
+   BIO GRID (Age / Sex / Occupation)
+   Figma: flex row, gap 62px
+   ======================================== */
+.bio-grid {
+  display: flex;
+  gap: 62px;
+  align-items: flex-start;
+}
+
+/* Each bio-group: flex column, gap 16px */
+.bio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+/* Figma widths */
+.bio-group[data-group="age"] {
+  width: 454px;
+}
+
+.bio-group[data-group="sex"] {
+  width: 336px;
+}
+
+.bio-group[data-group="occupation"] {
+  width: 556px;
+}
+
+/* Label: 32px, color #d4d4d4 */
+.bio-label {
+  font-size: 32px;
+  font-weight: 400;
+  line-height: normal;
+  color: #d4d4d4;
+}
+
+/* ========================================
+   CHIPS — flex wrap, gap 8px
+   ======================================== */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.chips-wide {
+  width: 100%;
+}
+
+/* Age & Sex chip areas follow parent width */
+.bio-group[data-group="age"] .chips {
+  width: 454px;
+}
+
+.bio-group[data-group="sex"] .chips {
+  width: 454px;
+}
+
+.bio-group[data-group="occupation"] .chips {
+  width: 556px;
+}
+
+/* Chip: padding 8 15, radius 36, font 20, color #211d07 */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 15px;
+  border-radius: 36px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  color: #211d07;
+  background: rgba(237, 227, 226, 0.36);
+  backdrop-filter: blur(4px);
+  transition:
+    background 0.25s ease,
+    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* Ripple overlay */
+.chip::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 0.4s, transform 0.4s;
+  pointer-events: none;
+}
+
+.chip:hover {
+  background: rgba(237, 227, 226, 0.6);
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.chip:active {
+  transform: scale(0.96);
+}
+
+.chip:active::after {
+  opacity: 1;
+  transform: scale(2);
+  transition: opacity 0s, transform 0s;
+}
+
+/* Selected = opaque white bg (0.98 alpha) */
+.chip.selected {
+  background: rgba(237, 227, 226, 0.98);
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.15),
+    0 0 0 2px rgba(255, 255, 255, 0.15);
+  transform: scale(1.02);
+}
+
+.chip.selected:hover {
+  background: rgba(237, 227, 226, 1);
+  transform: scale(1.06);
+}
+
+/* Staggered entrance — uses a one-shot class removed after play */
+.chip.entering {
+  opacity: 0;
+  animation: chipEnter 0.4s ease-out forwards;
+}
+
+@keyframes chipEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ========================================
+   CONTINUE BUTTON — below "Do you have?"
+   ======================================== */
+/* Blue panel: top 209, bottom 871. Keep button inside. */
+.continue-wrapper {
+  position: absolute;
+  left: 76px;
+  top: 810px;
+  z-index: 5;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: sectionFadeIn 0.7s ease-out 0.55s forwards;
+}
+
+.continue-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 36px;
+  border-radius: 50px;
+  font-size: 22px;
+  font-weight: 500;
+  color: #1b2191;
+  background: rgba(237, 227, 226, 0.25);
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease,
+    opacity 0.3s ease;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.continue-btn .arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.continue-btn:not([disabled]) {
+  background: rgba(237, 227, 226, 0.98);
+  opacity: 1;
+  pointer-events: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.continue-btn:not([disabled]):hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+}
+
+.continue-btn:not([disabled]):hover .arrow {
+  transform: translateX(4px);
+}
+
+.continue-btn:not([disabled]):active {
+  transform: scale(0.97);
+}
+
+/* ========================================
+   SELECTION FEEDBACK FLASH
+   ======================================== */
+/* Pulse ring on select — uses box-shadow transition, no animation override */
+.chip.just-selected {
+  box-shadow:
+    0 0 0 0 rgba(237, 227, 226, 0.5),
+    0 2px 10px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0s;
+}
+
+.chip.just-selected.pulse-out {
+  box-shadow:
+    0 0 0 10px rgba(237, 227, 226, 0),
+    0 2px 10px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.4s ease-out;
+}
+
+/* ========================================
+   SCREEN VISIBILITY
+   ======================================== */
+.screen-hidden {
+  display: none;
+}
+
+.screen-visible {
+  display: block;
+}
+
+/* ========================================
+   SCREEN 2 — "You've been PWNED!!"
+   ======================================== */
+
+/* Full blue background */
+.blue-panel-full {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1920px;
+  height: 1080px;
+  background: #1b2191;
+  z-index: 1;
+}
+
+/* Override grid position for full-bleed screen */
+.grid-bg-2 {
+  left: 0;
+}
+
+/* ========================================
+   CENTER DEVIL EMOJI
+   Figma: left 898, top 300, 165×165
+   ======================================== */
+.center-devil {
+  position: absolute;
+  left: 898px;
+  top: 300px;
+  width: 165px;
+  height: 165px;
+  z-index: 5;
+  /* bam entrance */
+  opacity: 0;
+  transform: scale(0);
+}
+
+.center-devil img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.center-devil.animate {
+  animation: bamEmoji 0.6s cubic-bezier(0.17, 0.89, 0.32, 1.49) forwards;
+}
+
+@keyframes bamEmoji {
+  0% { opacity: 0; transform: scale(0) rotate(-30deg); }
+  60% { opacity: 1; transform: scale(1.3) rotate(10deg); }
+  80% { transform: scale(0.9) rotate(-3deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+/* ========================================
+   PWNED TEXT
+   Figma: left 472, top 465, font 109.231px
+   ======================================== */
+.pwned-text {
+  position: absolute;
+  left: 472px;
+  top: 465px;
+  z-index: 5;
+  font-size: 109.231px;
+  font-weight: 400;
+  line-height: normal;
+  white-space: nowrap;
+  /* bam entrance */
+  opacity: 0;
+  transform: scale(0.3);
+}
+
+.pwned-white {
+  color: #fff;
+}
+
+.pwned-pink {
+  color: #d91cff;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.pwned-text.animate {
+  animation: bamText 0.7s cubic-bezier(0.17, 0.89, 0.32, 1.8) forwards;
+}
+
+@keyframes bamText {
+  0% { opacity: 0; transform: scale(0.3) rotate(-5deg); }
+  50% { opacity: 1; transform: scale(1.08) rotate(1deg); }
+  75% { transform: scale(0.97) rotate(-0.5deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+/* Screen shake on arrival */
+#screen-2.shake {
+  animation: screenShake 0.5s ease-out;
+}
+
+@keyframes screenShake {
+  0%, 100% { transform: translateX(0); }
+  10% { transform: translateX(-8px); }
+  20% { transform: translateX(8px); }
+  30% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  50% { transform: translateX(-3px); }
+  60% { transform: translateX(3px); }
+  70% { transform: translateX(-1px); }
+}
+
+/* ========================================
+   PWNED LINK
+   Figma: left 914, top 804, 13px, color #cccfff
+   ======================================== */
+.pwned-link {
+  position: absolute;
+  left: 914px;
+  top: 804px;
+  z-index: 5;
+  font-size: 13px;
+  font-weight: 400;
+  color: #cccfff;
+  text-decoration: underline;
+  /* Fade in late */
+  opacity: 0;
+}
+
+.pwned-link.animate {
+  animation: fadeIn 0.6s ease-out 1.2s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* ========================================
+   SCATTERED DEVIL EMOJIS (background)
+   Exact Figma positions & rotations
+   ======================================== */
+.emoji {
+  position: absolute;
+  z-index: 3;
+  opacity: 0;
+}
+
+.emoji img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.emoji.animate {
+  animation: emojiPop 0.5s cubic-bezier(0.17, 0.89, 0.32, 1.49) forwards;
+}
+
+@keyframes emojiPop {
+  0% { opacity: 0; transform: scale(0) rotate(0deg); }
+  70% { opacity: 0.7; transform: scale(1.2); }
+  100% { opacity: 0.6; transform: scale(1); }
+}
+
+/* Figma: left 1716, top 59, 87px, rotate -15.29deg */
+.emoji-1 {
+  left: 1716px;
+  top: 59px;
+  width: 87px;
+  height: 87px;
+}
+.emoji-1.animate { animation-delay: 0.1s; }
+
+/* Figma: left 91, top 915, 87px, rotate 7deg */
+.emoji-2 {
+  left: 91px;
+  top: 915px;
+  width: 87px;
+  height: 87px;
+}
+.emoji-2.animate { animation-delay: 0.3s; }
+
+/* Figma: left 188, top 241, 62px, rotate -15.29deg */
+.emoji-3 {
+  left: 188px;
+  top: 241px;
+  width: 62px;
+  height: 62px;
+}
+.emoji-3.animate { animation-delay: 0.15s; }
+
+/* Figma: left 1633, top 742, 89px, rotate 23.41deg */
+.emoji-4 {
+  left: 1633px;
+  top: 742px;
+  width: 89px;
+  height: 89px;
+}
+.emoji-4.animate { animation-delay: 0.4s; }
+
+/* Figma: left 859, top 1001, 89px, rotate -38.34deg */
+.emoji-5 {
+  left: 859px;
+  top: 950px;
+  width: 89px;
+  height: 89px;
+}
+.emoji-5.animate { animation-delay: 0.5s; }
+
+/* Figma: left 550, top -29(clamped to 0), 64px, rotate 75deg */
+.emoji-6 {
+  left: 550px;
+  top: 0px;
+  width: 64px;
+  height: 64px;
+}
+.emoji-6.animate { animation-delay: 0.2s; }
+
+/* Figma: left 591, top 702, 43px, rotate 160.72deg */
+.emoji-7 {
+  left: 591px;
+  top: 702px;
+  width: 43px;
+  height: 43px;
+}
+.emoji-7.animate { animation-delay: 0.35s; }
+
+/* ========================================
+   SCREEN 3 — "Step 1. Data Harvesting"
+   ======================================== */
+
+/* ── AI Amplification Pills ──
+   Figma: centered, top 230, width 406 */
+.s3-pills {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 230px;
+  width: 406px;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  /* Entrance */
+  opacity: 0;
+}
+
+.s3-pills.animate {
+  animation: fadeSlideDown 0.5s ease-out forwards;
+}
+
+.s3-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 15px;
+  border-radius: 36px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #211d07;
+  background: rgba(237, 227, 226, 0.36);
+}
+
+.s3-pill-active {
+  background: #7bf12c;
+}
+
+/* ── Left Column: Step description ──
+   Figma: left 110, top 303 */
+.s3-left {
+  position: absolute;
+  left: 110px;
+  top: 303px;
+  width: 905px;
+  z-index: 5;
+  /* Entrance */
+  opacity: 0;
+}
+
+.s3-left.animate {
+  animation: fadeSlideRight 0.6s ease-out 0.15s forwards;
+}
+
+.s3-step-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 440px;
+  margin-bottom: 24px;
+}
+
+.s3-step-label {
+  font-weight: 400;
+  color: #fff;
+}
+
+.s3-step-sm {
+  font-size: 20px;
+}
+
+.s3-step-lg {
+  font-size: 32px;
+}
+
+.s3-step-title {
+  font-size: 60.615px;
+  font-weight: 600;
+  font-style: italic;
+  color: #d91cff;
+  line-height: normal;
+}
+
+.s3-step-body {
+  font-size: 28.591px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.s3-step-body ul {
+  list-style: disc;
+  padding-left: 43px;
+  margin: 0;
+}
+
+.s3-step-body li {
+  line-height: normal;
+}
+
+.s3-step-body p {
+  margin: 0;
+}
+
+/* ── Right Column: Card + Emojis ──
+   Card Figma: relative to left col, offset ~65px right of left content */
+.s3-right {
+  position: absolute;
+  left: 1015px;
+  top: 303px;
+  z-index: 5;
+  /* Entrance */
+  opacity: 0;
+}
+
+.s3-right.animate {
+  animation: fadeSlideLeft 0.6s ease-out 0.3s forwards;
+}
+
+/* Robot emoji: top-right of card area
+   Figma: offset from card area, ~686px from left of right group, rotated -28.05deg */
+.s3-robot-emoji {
+  position: absolute;
+  right: -30px;
+  top: -20px;
+  width: 85px;
+  height: 85px;
+  transform: rotate(-28.05deg);
+  z-index: 6;
+}
+
+.s3-robot-emoji img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Card */
+.s3-card {
+  position: relative;
+  margin-top: 57px;
+  margin-left: 65px;
+  width: 678px;
+  background: #f4dfc1;
+  padding: 29px 38px;
+  z-index: 5;
+}
+
+.s3-card-bold {
+  font-size: 30.192px;
+  font-weight: 500;
+  color: #262626;
+}
+
+.s3-card-regular {
+  font-size: 30.192px;
+  font-weight: 400;
+  color: #262626;
+}
+
+/* Alien emoji: bottom-left of card area
+   Figma: mt 331 from right group top, rotated 16.5deg */
+.s3-alien-emoji {
+  position: absolute;
+  left: 0;
+  top: 331px;
+  width: 94px;
+  height: 94px;
+  transform: rotate(16.5deg);
+  z-index: 6;
+}
+
+.s3-alien-emoji img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Crawling virus emojis ── */
+.s3-crawler {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  z-index: 8;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.s3-crawler img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: virusWobble 0.5s ease-in-out infinite;
+}
+
+@keyframes virusWobble {
+  0%, 100% { transform: rotate(-8deg) scaleX(1.05); }
+  50%      { transform: rotate(8deg) scaleX(0.95); }
+}
+
+/* Crawler 1: skitters across top of card, left → right */
+.s3-crawler-1 { top: 42px; left: 80px; }
+.s3-right.animate .s3-crawler-1 {
+  animation: crawlTop 9s linear 1s infinite;
+}
+@keyframes crawlTop {
+  0%   { opacity: 0; transform: translate(0, 0); }
+  4%   { opacity: 1; }
+  50%  { transform: translate(300px, -12px); }
+  96%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(600px, 5px); }
+}
+
+/* Crawler 2: descends along right edge */
+.s3-crawler-2 { top: 60px; left: 730px; }
+.s3-right.animate .s3-crawler-2 {
+  animation: crawlRight 11s linear 2s infinite;
+}
+@keyframes crawlRight {
+  0%   { opacity: 0; transform: translate(0, 0) rotate(90deg); }
+  4%   { opacity: 1; }
+  50%  { transform: translate(-8px, 130px) rotate(100deg); }
+  96%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(5px, 280px) rotate(85deg); }
+}
+
+/* Crawler 3: skitters along bottom edge, right → left */
+.s3-crawler-3 { top: 320px; left: 690px; }
+.s3-right.animate .s3-crawler-3 {
+  animation: crawlBottom 10s linear 3s infinite;
+}
+@keyframes crawlBottom {
+  0%   { opacity: 0; transform: translate(0, 0) rotate(180deg); }
+  4%   { opacity: 1; }
+  50%  { transform: translate(-300px, 8px) rotate(190deg); }
+  96%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(-580px, -5px) rotate(175deg); }
+}
+
+/* Crawler 4: diagonal crawl across card face */
+.s3-crawler-4 { top: 80px; left: 120px; }
+.s3-right.animate .s3-crawler-4 {
+  animation: crawlDiag 13s linear 1.8s infinite;
+}
+@keyframes crawlDiag {
+  0%   { opacity: 0; transform: translate(0, 0) rotate(25deg); }
+  4%   { opacity: 1; }
+  25%  { transform: translate(150px, 60px) rotate(35deg); }
+  50%  { transform: translate(320px, 110px) rotate(20deg); }
+  75%  { transform: translate(470px, 170px) rotate(40deg); }
+  96%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(560px, 220px) rotate(25deg); }
+}
+
+/* Crawler 5: wanders erratically near the card */
+.s3-crawler-5 { top: 180px; left: 350px; }
+.s3-right.animate .s3-crawler-5 {
+  animation: crawlWander 15s ease-in-out 0.5s infinite;
+}
+@keyframes crawlWander {
+  0%   { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+  5%   { opacity: 0.85; }
+  15%  { transform: translate(-80px, -60px) rotate(-25deg); }
+  30%  { transform: translate(120px, -30px) rotate(15deg); }
+  45%  { transform: translate(60px, 90px) rotate(-10deg); }
+  60%  { transform: translate(-60px, 50px) rotate(30deg); }
+  75%  { transform: translate(100px, 110px) rotate(-20deg); }
+  90%  { transform: translate(-30px, -10px) rotate(10deg); }
+  95%  { opacity: 0.85; }
+  100% { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+}
+
+/* ── Screen 3 entrance animations ── */
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes fadeSlideRight {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeSlideLeft {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
