@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ── Navigation state ──
-  let currentScreen = 1, s2Ready = false, s3Ready = false, s4Ready = false, s5Ready = false, s6Ready = false, transitioning = false;
+  let currentScreen = 1, s2Ready = false, s3Ready = false, s4Ready = false, s5Ready = false, s6Ready = false, s7Ready = false, transitioning = false;
 
   document.addEventListener('wheel', (e) => {
     if (transitioning) return;
@@ -124,8 +124,10 @@ document.addEventListener('DOMContentLoaded', () => {
       else if (currentScreen === 3 && s3Ready) { transitioning = true; scrollToScreen4(); }
       else if (currentScreen === 4 && s4Ready) { transitioning = true; transitionToScreen5(); }
       else if (currentScreen === 5 && s5Ready) { transitioning = true; transitionToScreen6(); }
+      else if (currentScreen === 6 && s6Ready) { transitioning = true; transitionToScreen7(); }
     } else if (backward) {
-      if (currentScreen === 6 && s6Ready) { transitioning = true; reverseToScreen5(); }
+      if (currentScreen === 7 && s7Ready) { transitioning = true; reverseToScreen6(); }
+      else if (currentScreen === 6 && s6Ready) { transitioning = true; reverseToScreen5(); }
       else if (currentScreen === 5 && s5Ready) { transitioning = true; reverseToScreen4(); }
       else if (currentScreen === 4 && s4Ready) { transitioning = true; reverseToScreen3(); }
       else if (currentScreen === 3 && s3Ready) { transitioning = true; reverseToScreen2(); }
@@ -460,6 +462,105 @@ document.addEventListener('DOMContentLoaded', () => {
 
       currentScreen = 5;
       s6Ready = false;
+      transitioning = false;
+    }, 500);
+  }
+
+  // ── Screen 6 → 7 (Contact established) ──
+  function transitionToScreen7() {
+    // Fade out all S6 content
+    const s6Hint = $('#s6-scroll-hint');
+    s6Hint.style.transition = 'opacity 0.3s ease';
+    s6Hint.style.opacity = '0';
+    fadeOut($$('#screen-6 .s6-scammer-label, #screen-6 .s6-scammer-card, #screen-6 .s6-pills, #screen-6 .s6-left, #screen-6 .s6-right, #screen-6 .s6-victim-label, #screen-6 .s6-victim-card'), 'Y', 30);
+
+    setTimeout(() => {
+      // Hide S6
+      const screen6 = $('#screen-6');
+      screen6.classList.add('screen-hidden');
+      screen6.classList.remove('screen-visible');
+
+      // Show S7
+      const screen7 = $('#screen-7');
+      screen7.classList.remove('screen-hidden');
+      screen7.classList.add('screen-visible');
+
+      // Phase 1: Scammer slides in from left (trying to contact)
+      setTimeout(() => {
+        $('.s7-scammer-figure').classList.add('animate');
+      }, 100);
+
+      // Phase 2: Dots appear (attempting connection)
+      setTimeout(() => {
+        $('.s7-dots').classList.add('animate');
+      }, 600);
+
+      // Phase 3: Victim slides in from right (contact reaching)
+      setTimeout(() => {
+        $('.s7-victim-figure').classList.add('animate');
+      }, 1200);
+
+      // Phase 4: Dots start pulsing (connection established)
+      setTimeout(() => {
+        const dots = $('.s7-dots');
+        dots.classList.remove('animate');
+        dots.classList.add('connected');
+      }, 2000);
+
+      // Phase 5: "Contact established." text bams in
+      setTimeout(() => {
+        $('.s7-text').classList.add('animate');
+      }, 2200);
+
+      // Phase 6: Modes appear
+      setTimeout(() => {
+        $('.s7-modes').classList.add('animate');
+      }, 2800);
+
+      // Phase 7: Scroll hint last
+      setTimeout(() => {
+        $('#s7-scroll-hint').classList.add('animate');
+        currentScreen = 7;
+        s7Ready = true;
+        transitioning = false;
+      }, 3400);
+    }, 500);
+  }
+
+  // ── Screen 7 → 6 (reverse) ──
+  function reverseToScreen6() {
+    fadeOut($$('#screen-7 .s7-scammer-figure, #screen-7 .s7-dots, #screen-7 .s7-victim-figure, #screen-7 .s7-text, #screen-7 .s7-modes, #screen-7 .scroll-hint'), 'Y', 30);
+
+    setTimeout(() => {
+      const screen7 = $('#screen-7');
+      screen7.classList.add('screen-hidden');
+      screen7.classList.remove('screen-visible');
+
+      // Reset S7 elements
+      $$('#screen-7 .s7-scammer-figure, #screen-7 .s7-dots, #screen-7 .s7-victim-figure, #screen-7 .s7-text, #screen-7 .s7-modes, #screen-7 .scroll-hint').forEach(el => {
+        el.classList.remove('animate', 'connected');
+        el.style.transition = '';
+        el.style.opacity = '';
+        el.style.transform = '';
+      });
+
+      // Restore S6
+      const screen6 = $('#screen-6');
+      screen6.classList.remove('screen-hidden');
+      screen6.classList.add('screen-visible');
+
+      // Restore S6 animated elements
+      $$('#screen-6 .s6-scammer-label, #screen-6 #s6-scammer-card, #screen-6 .s6-left, #screen-6 .s6-right, #screen-6 .s6-pills, #screen-6 .s6-victim-label, #screen-6 #s6-victim-card').forEach(el => {
+        el.style.opacity = '';
+        el.style.transform = '';
+        el.style.transition = '';
+        el.classList.add('animate');
+      });
+      $('#s6-scroll-hint').style.opacity = '';
+      $('#s6-scroll-hint').classList.add('animate');
+
+      currentScreen = 6;
+      s7Ready = false;
       transitioning = false;
     }, 500);
   }

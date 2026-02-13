@@ -1802,3 +1802,196 @@ button {
   color: #000;
   width: 106px;
 }
+
+/* ========================================
+   SCREEN 7 — "Contact established."
+   Full-bleed blue, scammer ↔ victim
+   ======================================== */
+#screen-7 {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* ── Visual: Scammer + dots + Victim row ── */
+.s7-visual {
+  position: absolute;
+  left: 50%;
+  top: 240px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  z-index: 5;
+}
+
+.s7-scammer-figure {
+  width: 244px;
+  height: 244px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.s7-scammer-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.s7-scammer-figure.animate {
+  animation: s7SlideFromLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes s7SlideFromLeft {
+  0%   { opacity: 0; transform: translateX(-200px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+.s7-dots {
+  font-size: 137.6px;
+  color: #fff;
+  opacity: 0;
+  line-height: 1;
+  margin: 0 -10px;
+  letter-spacing: 8px;
+  user-select: none;
+}
+
+.s7-dots.animate {
+  animation: s7DotsAppear 1.5s ease-out forwards;
+}
+
+@keyframes s7DotsAppear {
+  0%   { opacity: 0; }
+  30%  { opacity: 0.15; }
+  60%  { opacity: 0.3; }
+  100% { opacity: 0.5; }
+}
+
+/* Pulsing dots after contact is established */
+.s7-dots.connected {
+  animation: s7DotsPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes s7DotsPulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%      { opacity: 0.8; transform: scale(1.05); }
+}
+
+.s7-victim-figure {
+  width: 244px;
+  height: 244px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.s7-victim-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.s7-victim-figure.animate {
+  animation: s7SlideFromRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes s7SlideFromRight {
+  0%   { opacity: 0; transform: translateX(200px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* ── "Contact established." text ── */
+.s7-text {
+  position: absolute;
+  left: 472px;
+  top: 497px;
+  z-index: 5;
+  font-size: 109.231px;
+  font-weight: 400;
+  color: #fff;
+  white-space: nowrap;
+  opacity: 0;
+  transform: scale(0.3);
+}
+
+.s7-text.animate {
+  animation: s7TextBam 0.8s cubic-bezier(0.17, 0.89, 0.32, 1.49) forwards;
+}
+
+@keyframes s7TextBam {
+  0%   { opacity: 0; transform: scale(0.3); }
+  50%  { opacity: 1; transform: scale(1.06); }
+  75%  { transform: scale(0.97); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ── Modes section ── */
+.s7-modes {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 661px;
+  width: 227px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+}
+
+.s7-modes.animate {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.s7-modes-label {
+  font-size: 24px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.67);
+  text-align: center;
+  margin: 0 0 4px 0;
+}
+
+.s7-modes-icons {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+}
+
+.s7-mode-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.s7-mode-phone {
+  width: 64px;
+  height: 64px;
+  transform: rotate(-2.69deg);
+}
+
+.s7-mode-phone img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.s7-mode-email {
+  width: 73px;
+  height: 73px;
+}
+
+.s7-mode-email img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.s7-mode-chat {
+  font-size: 60.292px;
+  line-height: 1;
+}
+
+/* Scroll hint override for S7 — right aligned like Figma */
+.s7-scroll-hint {
+  left: 1661px;
+}
