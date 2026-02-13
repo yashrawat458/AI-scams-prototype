@@ -112,7 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ── Navigation state ──
-  let currentScreen = 1, s2Ready = false, s3Ready = false, s4Ready = false, s5Ready = false, s6Ready = false, s7Ready = false, transitioning = false;
+  let currentScreen = 1, s2Ready = false, s3Ready = false, s4Ready = false, s5Ready = false, s6Ready = false, s7Ready = false, s8Ready = false, transitioning = false;
+  let chosenTactic = 'authority'; // stored when populating scammer card
 
   document.addEventListener('wheel', (e) => {
     if (transitioning) return;
@@ -125,8 +126,10 @@ document.addEventListener('DOMContentLoaded', () => {
       else if (currentScreen === 4 && s4Ready) { transitioning = true; transitionToScreen5(); }
       else if (currentScreen === 5 && s5Ready) { transitioning = true; transitionToScreen6(); }
       else if (currentScreen === 6 && s6Ready) { transitioning = true; transitionToScreen7(); }
+      else if (currentScreen === 7 && s7Ready) { transitioning = true; transitionToScreen8(); }
     } else if (backward) {
-      if (currentScreen === 7 && s7Ready) { transitioning = true; reverseToScreen6(); }
+      if (currentScreen === 8 && s8Ready) { transitioning = true; reverseToScreen7(); }
+      else if (currentScreen === 7 && s7Ready) { transitioning = true; reverseToScreen6(); }
       else if (currentScreen === 6 && s6Ready) { transitioning = true; reverseToScreen5(); }
       else if (currentScreen === 5 && s5Ready) { transitioning = true; reverseToScreen4(); }
       else if (currentScreen === 4 && s4Ready) { transitioning = true; reverseToScreen3(); }
@@ -333,6 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function populateScammerCard() {
     const tactic = pickScamTactic();
+    chosenTactic = tactic;
     const persona = SCAMMER_PERSONAS[tactic];
     const name = pick(persona.names);
 
@@ -635,6 +639,172 @@ document.addEventListener('DOMContentLoaded', () => {
 
       currentScreen = 2;
       s3Ready = false;
+      transitioning = false;
+    }, 500);
+  }
+
+  // ── Screen 7 → 8 (Emotional triggers) ──
+  const TACTIC_LABELS = {
+    authority: 'Authority Fabrication',
+    distress: 'Distress Manipulation',
+    affinity: 'Affinity Exploitation',
+    hijack: 'Identity Hijacking'
+  };
+
+  function populateS8Cards() {
+    // Copy scammer card data from S6
+    const s6Name = $('#s6-scammer-name');
+    if (s6Name) $('#s8-scammer-name').textContent = s6Name.textContent;
+    const s6Det = $('#s6-scammer-details');
+    if (s6Det) $('#s8-scammer-details').innerHTML = s6Det.innerHTML;
+
+    // Tactic pill
+    $('#s8-tactic-pill').textContent = TACTIC_LABELS[chosenTactic] || 'Authority Fabrication';
+
+    // Victim card
+    const sex = state.sex || 'male';
+    $('#s8-victim-avatar-img').src = sex === 'female' ? 'assets/woman-red-hair.png' : 'assets/man-red-hair.png';
+    $('#s8-victim-name').textContent = $('#s4-name').textContent;
+
+    const details = $('#s8-victim-details');
+    details.innerHTML = '';
+    $('#s4-details').querySelectorAll('span').forEach(span => {
+      const p = document.createElement('p');
+      p.textContent = span.textContent;
+      p.style.margin = '0';
+      details.appendChild(p);
+    });
+
+    const ids = $('#s8-victim-ids');
+    ids.innerHTML = '';
+    $('#s4-ids').querySelectorAll('span').forEach(span => {
+      const p = document.createElement('p');
+      p.textContent = span.textContent;
+      p.style.margin = '0';
+      ids.appendChild(p);
+    });
+  }
+
+  let s8TimerInterval = null;
+
+  function transitionToScreen8() {
+    // Fade out S7 elements
+    fadeOut($$('#screen-7 .s7-scammer-figure, #screen-7 .s7-dots, #screen-7 .s7-victim-figure, #screen-7 .s7-text, #screen-7 .s7-modes, #screen-7 .scroll-hint'), 'Y', 30);
+
+    // Populate S8 cards
+    populateS8Cards();
+
+    setTimeout(() => {
+      // Hide S7
+      const screen7 = $('#screen-7');
+      screen7.classList.add('screen-hidden');
+      screen7.classList.remove('screen-visible');
+
+      // Show S8
+      const screen8 = $('#screen-8');
+      screen8.classList.remove('screen-hidden');
+      screen8.classList.add('screen-visible');
+
+      // Trigger cascade animation
+      screen8.classList.add('s8-animate');
+
+      // Stagger the tactic cards
+      setTimeout(() => {
+        $$('.s8-tactic-card').forEach((card, i) => {
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, i * 120);
+        });
+      }, 900);
+
+      // Stagger emojis
+      setTimeout(() => {
+        $$('.s8-emo').forEach((emo, i) => {
+          setTimeout(() => {
+            emo.style.opacity = '1';
+          }, i * 80);
+        });
+      }, 700);
+
+      // Start timer countdown
+      let elapsed = 0;
+      const timerEl = $('#s8-timer');
+      const progressEl = $('.s8-time-progress');
+      if (s8TimerInterval) clearInterval(s8TimerInterval);
+      s8TimerInterval = setInterval(() => {
+        elapsed++;
+        const mins = Math.floor(elapsed / 60);
+        const secs = (elapsed % 60).toString().padStart(2, '0');
+        timerEl.textContent = `${mins}:${secs}`;
+        // Progress bar grows slowly (max ~546px in Figma over ~4min feel)
+        const pct = Math.min(elapsed / 240, 1);
+        progressEl.style.width = (546 * pct) + 'px';
+      }, 1000);
+
+      // Scroll hint + ready
+      setTimeout(() => {
+        $('#s8-scroll-hint').classList.add('animate');
+        currentScreen = 8;
+        s8Ready = true;
+        transitioning = false;
+      }, 2000);
+    }, 500);
+  }
+
+  // ── Screen 8 → 7 (reverse) ──
+  function reverseToScreen7() {
+    // Stop timer
+    if (s8TimerInterval) { clearInterval(s8TimerInterval); s8TimerInterval = null; }
+
+    fadeOut($$('#screen-8 .s8-scammer-label, #screen-8 .s8-scammer-card, #screen-8 .s8-tactic-pill, #screen-8 .s8-mode-icon, #screen-8 .s8-isolation-lines, #screen-8 .s8-isolation-label, #screen-8 .s8-pills, #screen-8 .s8-step-content, #screen-8 .s8-tactics-row, #screen-8 .s8-time-bar, #screen-8 .s8-victim-label, #screen-8 .s8-victim-card, #screen-8 .scroll-hint'), 'Y', 30);
+
+    setTimeout(() => {
+      const screen8 = $('#screen-8');
+      screen8.classList.add('screen-hidden');
+      screen8.classList.remove('screen-visible');
+      screen8.classList.remove('s8-animate');
+
+      // Reset all S8 elements
+      $$('#screen-8 .s8-scammer-label, #screen-8 .s8-scammer-card, #screen-8 .s8-tactic-pill, #screen-8 .s8-mode-icon, #screen-8 .s8-isolation-lines, #screen-8 .s8-isolation-label, #screen-8 .s8-pills, #screen-8 .s8-step-content, #screen-8 .s8-tactics-row, #screen-8 .s8-time-bar, #screen-8 .s8-victim-label, #screen-8 .s8-victim-card, #screen-8 .scroll-hint').forEach(el => {
+        el.style.transition = '';
+        el.style.opacity = '';
+        el.style.transform = '';
+      });
+
+      // Reset tactic cards
+      $$('.s8-tactic-card').forEach(card => {
+        card.style.opacity = '';
+        card.style.transform = '';
+      });
+
+      // Reset emojis
+      $$('.s8-emo').forEach(emo => {
+        emo.style.opacity = '';
+      });
+
+      // Reset timer
+      $('#s8-timer').textContent = '0:00';
+      $('.s8-time-progress').style.width = '0';
+
+      // Restore S7
+      const screen7 = $('#screen-7');
+      screen7.classList.remove('screen-hidden');
+      screen7.classList.add('screen-visible');
+
+      // Re-animate S7 elements
+      $$('#screen-7 .s7-scammer-figure, #screen-7 .s7-dots, #screen-7 .s7-victim-figure, #screen-7 .s7-text, #screen-7 .s7-modes').forEach(el => {
+        el.style.opacity = '';
+        el.style.transform = '';
+        el.style.transition = '';
+        el.classList.add('animate');
+      });
+      $('.s7-dots').classList.add('connected');
+      $('#s7-scroll-hint').style.opacity = '';
+      $('#s7-scroll-hint').classList.add('animate');
+
+      currentScreen = 7;
+      s8Ready = false;
       transitioning = false;
     }, 500);
   }

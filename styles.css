@@ -1995,3 +1995,422 @@ button {
 .s7-scroll-hint {
   left: 1661px;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   SCREEN 8 — "Step 3. Emotional triggers"
+   ═══════════════════════════════════════════════════════════ */
+#screen-8 {
+  position: absolute;
+  left: 0; top: 0;
+  width: 1920px; height: 1080px;
+  overflow: hidden;
+}
+
+/* ── Scammer label ──────────────────────────── */
+.s8-scammer-label {
+  position: absolute;
+  left: 375px; top: 27px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 800;
+  font-size: 11.2px;
+  color: #d91cff;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  opacity: 0;
+}
+
+/* ── Scammer card ───────────────────────────── */
+.s8-scammer-card {
+  position: absolute;
+  left: 366px; top: 40px;
+  width: 335px; height: 154px;
+  border: 1px solid #d91cff;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+  opacity: 0;
+}
+
+.s8-scammer-avatar {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.s8-scammer-avatar img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.s8-scammer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.s8-scammer-name {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 700;
+  font-size: 19.2px;
+  color: #fff;
+  margin: 0;
+}
+
+.s8-scammer-details {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400;
+  font-size: 12.8px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.4;
+}
+
+/* ── Tactic pill ────────────────────────────── */
+.s8-tactic-pill {
+  position: absolute;
+  left: 730px; top: 74px;
+  background: #ede3e2;
+  border-radius: 24px;
+  padding: 8px 20px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 600;
+  font-size: 19.2px;
+  color: #23272f;
+  white-space: nowrap;
+  opacity: 0;
+}
+
+/* ── Mode of contact icon ──────────────────── */
+.s8-mode-icon {
+  position: absolute;
+  left: 1035px; top: 54px;
+  width: 91px; height: 91px;
+  opacity: 0;
+}
+.s8-mode-icon img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+}
+
+/* ── Isolation lines (green dashed border) ── */
+.s8-isolation-lines {
+  position: absolute;
+  left: 66px; top: 111px;
+  width: 1810px; height: 816px;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.s8-isolation-lines img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+}
+
+/* ── ISOLATION rotated label ────────────────── */
+.s8-isolation-label {
+  position: absolute;
+  left: 18px; top: 442px;
+  transform: rotate(-90deg);
+  transform-origin: center center;
+  opacity: 0;
+}
+.s8-isolation-pill {
+  background: #22c55e;
+  border-radius: 24px;
+  padding: 6px 16px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── AI amplification pills ────────────────── */
+.s8-pills {
+  position: absolute;
+  left: 132px; top: 230px;
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+}
+.s8-pill {
+  background: rgba(255,255,255,0.1);
+  border-radius: 24px;
+  padding: 6px 16px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
+}
+.s8-pill-active {
+  background: rgba(34,197,94,0.2);
+  color: #22c55e;
+}
+
+/* ── Step 3 content area ───────────────────── */
+.s8-step-content {
+  position: absolute;
+  left: 132px; top: 272px;
+  width: 1650px;
+  opacity: 0;
+}
+.s8-step-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 0;
+}
+.s8-step-label {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  margin: 0;
+}
+.s8-step-sm {
+  font-size: 14px;
+}
+.s8-step-lg {
+  font-size: 35px;
+  font-weight: 700;
+  color: #fff;
+}
+.s8-step-title {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 700;
+  font-size: 35px;
+  color: #fff;
+  margin: 0;
+}
+
+/* ── Emoji row ──────────────────────────────── */
+.s8-emojis {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+  margin-left: 528px;
+}
+.s8-emo {
+  width: 78px; height: 78px;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* ── Description ────────────────────────────── */
+.s8-description {
+  position: absolute;
+  left: 0; top: 103px;
+  width: 500px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.7);
+  margin: 0;
+}
+
+/* ── Trigger tactic cards ──────────────────── */
+.s8-tactics-row {
+  position: absolute;
+  left: 128px; top: 569px;
+  display: flex;
+  gap: 38px;
+  opacity: 0;
+}
+.s8-tactic-card {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.s8-tc-pill {
+  display: inline-block;
+  align-self: flex-start;
+  background: #ede3e2;
+  border-radius: 24px;
+  padding: 4px 14px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: #23272f;
+}
+.s8-tc-text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.s8-tc-text p {
+  margin: 0;
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.85);
+  font-style: italic;
+}
+
+/* ── Time bar ──────────────────────────────── */
+.s8-time-bar {
+  position: absolute;
+  left: 0; top: 828px;
+  width: 1920px;
+  height: 40px;
+  opacity: 0;
+}
+.s8-time-strip {
+  position: absolute;
+  left: 0; top: 14px;
+  width: 1920px; height: 16px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 0;
+  overflow: hidden;
+}
+.s8-time-progress {
+  position: absolute;
+  left: 0; top: 0;
+  width: 0;
+  height: 16px;
+  background: #fff;
+  border-radius: 0 8px 8px 0;
+  transition: width 4s linear;
+}
+.s8-time-text {
+  position: absolute;
+  left: 580px; top: -4px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  white-space: nowrap;
+  margin: 0;
+}
+.s8-clock {
+  position: absolute;
+  left: 0; top: 0;
+  width: 47px; height: 47px;
+  animation: s8ClockDrift 60s linear infinite;
+}
+.s8-clock img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+}
+
+@keyframes s8ClockDrift {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(1400px); }
+}
+
+/* ── Victim label ──────────────────────────── */
+.s8-victim-label {
+  position: absolute;
+  left: 375px; top: 873px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 800;
+  font-size: 11.2px;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  opacity: 0;
+}
+
+/* ── Mini victim card ─────────────────────── */
+.s8-victim-card {
+  position: absolute;
+  left: 366px; top: 889px;
+  width: 335px; height: 154px;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  box-sizing: border-box;
+  opacity: 0;
+}
+.s8-victim-avatar {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.s8-victim-avatar img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.s8-victim-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 140px;
+}
+.s8-victim-name {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 700;
+  font-size: 19.2px;
+  color: #fff;
+  margin: 0;
+}
+.s8-victim-details {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400;
+  font-size: 12.8px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.4;
+}
+.s8-victim-ids {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-left: auto;
+}
+
+/* ── Scroll hint for S8 ───────────────────── */
+.s8-scroll-hint {
+  left: 1661px;
+}
+
+/* ── S8 animation helpers ─────────────────── */
+.s8-animate .s8-scammer-label,
+.s8-animate .s8-scammer-card,
+.s8-animate .s8-tactic-pill,
+.s8-animate .s8-mode-icon,
+.s8-animate .s8-victim-label,
+.s8-animate .s8-victim-card {
+  animation: s8FadeIn 0.5s ease forwards;
+}
+
+.s8-animate .s8-isolation-lines {
+  animation: s8IsolationGrow 1s ease 0.3s forwards;
+}
+.s8-animate .s8-isolation-label {
+  animation: s8FadeIn 0.5s ease 0.6s forwards;
+}
+.s8-animate .s8-pills {
+  animation: s8FadeIn 0.4s ease 0.4s forwards;
+}
+.s8-animate .s8-step-content {
+  animation: s8FadeIn 0.5s ease 0.5s forwards;
+}
+.s8-animate .s8-tactics-row {
+  animation: s8FadeIn 0.3s ease 0.7s forwards;
+}
+.s8-animate .s8-time-bar {
+  animation: s8FadeIn 0.4s ease 1s forwards;
+}
+
+@keyframes s8FadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes s8IsolationGrow {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
