@@ -1997,7 +1997,7 @@ button {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SCREEN 8 — "Step 3. Emotional triggers"
+   SCREEN 8 — "Step 3. Emotional triggers"  (Figma-matched)
    ═══════════════════════════════════════════════════════════ */
 #screen-8 {
   position: absolute;
@@ -2006,83 +2006,88 @@ button {
   overflow: hidden;
 }
 
-/* ── Scammer label ──────────────────────────── */
+/* ── Scammer label (italic 32px like Figma) ─────── */
 .s8-scammer-label {
   position: absolute;
-  left: 375px; top: 27px;
+  left: 29px; top: 69px;
   font-family: 'Rethink Sans', sans-serif;
-  font-weight: 800;
-  font-size: 11.2px;
-  color: #d91cff;
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 32px;
+  color: #fff;
+  margin: 0;
   opacity: 0;
 }
 
-/* ── Scammer card ───────────────────────────── */
+/* ── Scammer card (beige bg, pink border) ── */
 .s8-scammer-card {
   position: absolute;
-  left: 366px; top: 40px;
+  left: 366px; top: 24px;
   width: 335px; height: 154px;
-  border: 1px solid #d91cff;
-  border-radius: 16px;
+  background: #f4dfc1;
+  border: 4.431px solid #d91cff;
+  border-radius: 7px;
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 16px;
+  gap: 0;
+  padding: 0;
   box-sizing: border-box;
+  overflow: hidden;
   opacity: 0;
 }
-
 .s8-scammer-avatar {
-  width: 80px; height: 80px;
-  border-radius: 50%;
+  width: 120px; height: 120px;
   overflow: hidden;
   flex-shrink: 0;
+  margin-left: -26px;
+  margin-top: 10px;
 }
 .s8-scammer-avatar img {
   width: 100%; height: 100%;
   object-fit: cover;
 }
-
 .s8-scammer-info {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3.5px;
+  padding-left: 0;
+  padding-top: 18px;
+  align-self: flex-start;
 }
-
 .s8-scammer-name {
   font-family: 'Rethink Sans', sans-serif;
-  font-weight: 700;
-  font-size: 19.2px;
-  color: #fff;
+  font-weight: 500;
+  font-size: 14.18px;
+  color: #000;
   margin: 0;
 }
-
 .s8-scammer-details {
   font-family: 'Rethink Sans', sans-serif;
   font-weight: 400;
-  font-size: 12.8px;
-  color: rgba(255,255,255,0.7);
-  line-height: 1.4;
+  font-size: 14.18px;
+  color: #000;
+  line-height: 1.25;
+}
+.s8-scammer-details p {
+  margin: 0;
 }
 
-/* ── Tactic pill ────────────────────────────── */
+/* ── Tactic pill ────────────────── */
 .s8-tactic-pill {
   position: absolute;
-  left: 730px; top: 74px;
+  left: 645px; top: 74px;
   background: #ede3e2;
   border-radius: 24px;
-  padding: 8px 20px;
+  padding: 11px 21px;
   font-family: 'Rethink Sans', sans-serif;
-  font-weight: 600;
-  font-size: 19.2px;
-  color: #23272f;
+  font-weight: 400;
+  font-size: 24px;
+  color: #211d07;
   white-space: nowrap;
   opacity: 0;
 }
 
-/* ── Mode of contact icon ──────────────────── */
+/* ── Mode of contact icon ─────── */
 .s8-mode-icon {
   position: absolute;
   left: 1035px; top: 54px;
@@ -2094,138 +2099,138 @@ button {
   object-fit: contain;
 }
 
-/* ── Isolation lines (green dashed border) ── */
+/* ── Isolation lines SVG ───────── */
 .s8-isolation-lines {
   position: absolute;
   left: 66px; top: 111px;
   width: 1810px; height: 816px;
   opacity: 0;
-  transition: opacity 0.6s ease;
 }
 .s8-isolation-lines img {
   width: 100%; height: 100%;
-  object-fit: contain;
+  object-fit: fill;
 }
 
-/* ── ISOLATION rotated label ────────────────── */
+/* ── ISOLATION rotated label ───── */
 .s8-isolation-label {
   position: absolute;
-  left: 18px; top: 442px;
-  transform: rotate(-90deg);
-  transform-origin: center center;
+  left: 13px; top: 442px;
+  width: 54px; height: 163px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0;
 }
 .s8-isolation-pill {
-  background: #22c55e;
-  border-radius: 24px;
-  padding: 6px 16px;
+  transform: rotate(-90deg);
+  background: #fff;
+  padding: 11px 21px;
   font-family: 'Rethink Sans', sans-serif;
-  font-weight: 700;
-  font-size: 14px;
-  color: #fff;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 24px;
+  color: #211d07;
   white-space: nowrap;
 }
 
-/* ── AI amplification pills ────────────────── */
+/* ── AI pills (centered) ─────── */
 .s8-pills {
   position: absolute;
-  left: 132px; top: 230px;
+  left: 50%; top: 230px;
+  transform: translateX(-50%);
   display: flex;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 406px;
+  justify-content: center;
   opacity: 0;
 }
-.s8-pill {
-  background: rgba(255,255,255,0.1);
-  border-radius: 24px;
-  padding: 6px 16px;
+.s8-pill-grey {
+  background: #6767ae;
+  border-radius: 36px;
+  padding: 8px 15px;
   font-family: 'Rethink Sans', sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-  color: rgba(255,255,255,0.4);
+  font-weight: 400;
+  font-size: 16px;
+  color: #211d07;
 }
-.s8-pill-active {
-  background: rgba(34,197,94,0.2);
-  color: #22c55e;
+.s8-pill-green {
+  background: #7bf12c;
+  border-radius: 36px;
+  padding: 8px 15px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #211d07;
 }
 
-/* ── Step 3 content area ───────────────────── */
+/* ── Step 3 content area ─────── */
 .s8-step-content {
   position: absolute;
-  left: 132px; top: 272px;
-  width: 1650px;
-  opacity: 0;
-}
-.s8-step-header {
+  left: 132px; top: 285px;
+  width: 1024px;
   display: flex;
-  align-items: baseline;
-  gap: 16px;
-  margin-bottom: 0;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
 }
 .s8-step-label {
   font-family: 'Rethink Sans', sans-serif;
   font-weight: 400;
-  font-size: 14px;
-  color: rgba(255,255,255,0.5);
+  font-size: 20px;
+  color: #fff;
   margin: 0;
+  line-height: 1;
 }
 .s8-step-sm {
-  font-size: 14px;
+  font-size: 20px;
 }
-.s8-step-lg {
-  font-size: 35px;
-  font-weight: 700;
-  color: #fff;
+.s8-step-num {
+  font-size: 32px;
 }
 .s8-step-title {
   font-family: 'Rethink Sans', sans-serif;
-  font-weight: 700;
-  font-size: 35px;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 60.615px;
+  color: #d91cff;
+  margin: 0;
+  line-height: 1;
+  background: #1b2191;
+  display: inline-block;
+}
+.s8-description {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.35;
   color: #fff;
   margin: 0;
+  margin-top: 30px;
+  width: 100%;
 }
 
-/* ── Emoji row ──────────────────────────────── */
-.s8-emojis {
-  display: flex;
-  gap: 12px;
-  margin-top: 4px;
-  margin-left: 528px;
-}
+/* ── Emojis (absolute positioned) ───── */
 .s8-emo {
+  position: absolute;
   width: 78px; height: 78px;
   object-fit: contain;
   opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
-/* ── Description ────────────────────────────── */
-.s8-description {
-  position: absolute;
-  left: 0; top: 103px;
-  width: 500px;
-  font-family: 'Rethink Sans', sans-serif;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 1.5;
-  color: rgba(255,255,255,0.7);
-  margin: 0;
-}
-
-/* ── Trigger tactic cards ──────────────────── */
+/* ── Trigger tactic cards ────── */
 .s8-tactics-row {
   position: absolute;
   left: 128px; top: 569px;
   display: flex;
-  gap: 38px;
+  gap: 53px;
   opacity: 0;
 }
 .s8-tactic-card {
-  width: 280px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 15px;
+  width: auto;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.4s ease, transform 0.4s ease;
@@ -2235,110 +2240,108 @@ button {
   align-self: flex-start;
   background: #ede3e2;
   border-radius: 24px;
-  padding: 4px 14px;
+  padding: 12px 12px;
   font-family: 'Rethink Sans', sans-serif;
-  font-weight: 600;
-  font-size: 13px;
-  color: #23272f;
+  font-weight: 400;
+  font-size: 24.174px;
+  color: #211d07;
+  line-height: 1.3;
 }
 .s8-tc-text {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
+  max-width: 321px;
 }
 .s8-tc-text p {
   margin: 0;
   font-family: 'Rethink Sans', sans-serif;
   font-weight: 400;
-  font-size: 13px;
-  line-height: 1.5;
-  color: rgba(255,255,255,0.85);
-  font-style: italic;
+  font-size: 15.109px;
+  line-height: 1.4;
+  color: #fff;
 }
 
-/* ── Time bar ──────────────────────────────── */
+/* ── Time bar ────────────────── */
 .s8-time-bar {
   position: absolute;
-  left: 0; top: 828px;
+  left: 0; top: 812px;
   width: 1920px;
-  height: 40px;
+  height: 60px;
   opacity: 0;
 }
 .s8-time-strip {
   position: absolute;
-  left: 0; top: 14px;
+  left: 0; top: 16px;
   width: 1920px; height: 16px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 0;
-  overflow: hidden;
+  background: rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
 }
 .s8-time-progress {
   position: absolute;
   left: 0; top: 0;
   width: 0;
   height: 16px;
-  background: #fff;
-  border-radius: 0 8px 8px 0;
-  transition: width 4s linear;
+  background: #d9d9d9;
 }
 .s8-time-text {
   position: absolute;
-  left: 580px; top: -4px;
+  left: 82px; top: 3px;
   font-family: 'Rethink Sans', sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-  color: #fff;
+  font-weight: 400;
+  font-size: 13px;
+  color: #141d45;
   white-space: nowrap;
   margin: 0;
+  z-index: 1;
 }
 .s8-clock {
   position: absolute;
-  left: 0; top: 0;
+  left: 522px; top: 0;
   width: 47px; height: 47px;
-  animation: s8ClockDrift 60s linear infinite;
 }
 .s8-clock img {
   width: 100%; height: 100%;
   object-fit: contain;
 }
 
-@keyframes s8ClockDrift {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(1400px); }
-}
-
-/* ── Victim label ──────────────────────────── */
+/* ── Victim label (italic 32px) ────── */
 .s8-victim-label {
   position: absolute;
-  left: 375px; top: 873px;
+  left: 29px; top: 945px;
   font-family: 'Rethink Sans', sans-serif;
-  font-weight: 800;
-  font-size: 11.2px;
-  color: rgba(255,255,255,0.6);
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 32px;
+  color: #fff;
+  margin: 0;
   opacity: 0;
 }
 
-/* ── Mini victim card ─────────────────────── */
+/* ── Victim card (beige bg, gold border) ── */
 .s8-victim-card {
   position: absolute;
   left: 366px; top: 889px;
   width: 335px; height: 154px;
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 16px;
+  background: #f4dfc1;
+  border: 4.431px solid #cca46a;
+  border-radius: 7px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 16px;
+  gap: 0;
+  padding: 0;
   box-sizing: border-box;
+  overflow: hidden;
   opacity: 0;
 }
 .s8-victim-avatar {
-  width: 80px; height: 80px;
-  border-radius: 50%;
+  width: 61px; height: 61px;
   overflow: hidden;
   flex-shrink: 0;
+  margin-left: 7px;
+  margin-top: 40px;
+  align-self: flex-start;
 }
 .s8-victim-avatar img {
   width: 100%; height: 100%;
@@ -2347,36 +2350,51 @@ button {
 .s8-victim-info {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  max-width: 140px;
+  gap: 3.5px;
+  padding-left: 9px;
+  padding-top: 18px;
+  align-self: flex-start;
 }
 .s8-victim-name {
   font-family: 'Rethink Sans', sans-serif;
-  font-weight: 700;
-  font-size: 19.2px;
-  color: #fff;
+  font-weight: 500;
+  font-size: 14.18px;
+  color: #000;
   margin: 0;
 }
 .s8-victim-details {
   font-family: 'Rethink Sans', sans-serif;
   font-weight: 400;
-  font-size: 12.8px;
-  color: rgba(255,255,255,0.7);
-  line-height: 1.4;
+  font-size: 14.18px;
+  color: #000;
+  line-height: 1.25;
+}
+.s8-victim-details p {
+  margin: 0;
 }
 .s8-victim-ids {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4.4px;
   margin-left: auto;
+  padding-right: 10px;
+  padding-top: 50px;
+  align-self: flex-start;
+}
+.s8-victim-ids p {
+  margin: 0;
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400;
+  font-size: 8.862px;
+  color: #000;
 }
 
-/* ── Scroll hint for S8 ───────────────────── */
+/* ── Scroll hint S8 ───────────── */
 .s8-scroll-hint {
   left: 1661px;
 }
 
-/* ── S8 animation helpers ─────────────────── */
+/* ── S8 animation helpers ─────── */
 .s8-animate .s8-scammer-label,
 .s8-animate .s8-scammer-card,
 .s8-animate .s8-tactic-pill,
@@ -2385,7 +2403,6 @@ button {
 .s8-animate .s8-victim-card {
   animation: s8FadeIn 0.5s ease forwards;
 }
-
 .s8-animate .s8-isolation-lines {
   animation: s8IsolationGrow 1s ease 0.3s forwards;
 }
@@ -2409,7 +2426,6 @@ button {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes s8IsolationGrow {
   from { opacity: 0; transform: scale(0.95); }
   to   { opacity: 1; transform: scale(1); }

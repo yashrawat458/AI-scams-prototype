@@ -686,6 +686,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   let s8TimerInterval = null;
+  let s8Elapsed = 0;
 
   function transitionToScreen8() {
     // Fade out S7 elements
@@ -720,27 +721,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Stagger emojis
       setTimeout(() => {
-        $$('.s8-emo').forEach((emo, i) => {
+        $$('#screen-8 .s8-emo').forEach((emo, i) => {
           setTimeout(() => {
             emo.style.opacity = '1';
           }, i * 80);
         });
       }, 700);
 
-      // Start timer countdown
-      let elapsed = 0;
-      const timerEl = $('#s8-timer');
-      const progressEl = $('.s8-time-progress');
-      if (s8TimerInterval) clearInterval(s8TimerInterval);
-      s8TimerInterval = setInterval(() => {
-        elapsed++;
-        const mins = Math.floor(elapsed / 60);
-        const secs = (elapsed % 60).toString().padStart(2, '0');
-        timerEl.textContent = `${mins}:${secs}`;
-        // Progress bar grows slowly (max ~546px in Figma over ~4min feel)
-        const pct = Math.min(elapsed / 240, 1);
-        progressEl.style.width = (546 * pct) + 'px';
-      }, 1000);
+      // Start timer only after animations settle (~2s)
+      setTimeout(() => {
+        s8Elapsed = 0;
+        const timerEl = $('#s8-timer');
+        const progressEl = $('.s8-time-progress');
+        const clockEl = $('#s8-clock');
+        timerEl.textContent = '0:00';
+        progressEl.style.width = '0';
+        clockEl.style.left = '0px';
+
+        if (s8TimerInterval) clearInterval(s8TimerInterval);
+        s8TimerInterval = setInterval(() => {
+          s8Elapsed++;
+          const mins = Math.floor(s8Elapsed / 60);
+          const secs = (s8Elapsed % 60).toString().padStart(2, '0');
+          timerEl.textContent = `${mins}:${secs}`;
+          // Progress bar: 546px over ~4 mins (240s)
+          const pct = Math.min(s8Elapsed / 240, 1);
+          progressEl.style.width = (546 * pct) + 'px';
+          // Clock drifts with the progress bar
+          clockEl.style.left = (546 * pct) + 'px';
+        }, 1000);
+      }, 2000);
 
       // Scroll hint + ready
       setTimeout(() => {
@@ -758,6 +768,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (s8TimerInterval) { clearInterval(s8TimerInterval); s8TimerInterval = null; }
 
     fadeOut($$('#screen-8 .s8-scammer-label, #screen-8 .s8-scammer-card, #screen-8 .s8-tactic-pill, #screen-8 .s8-mode-icon, #screen-8 .s8-isolation-lines, #screen-8 .s8-isolation-label, #screen-8 .s8-pills, #screen-8 .s8-step-content, #screen-8 .s8-tactics-row, #screen-8 .s8-time-bar, #screen-8 .s8-victim-label, #screen-8 .s8-victim-card, #screen-8 .scroll-hint'), 'Y', 30);
+
+    // Also fade emojis
+    $$('#screen-8 .s8-emo').forEach(emo => {
+      emo.style.transition = 'opacity 0.5s ease';
+      emo.style.opacity = '0';
+    });
 
     setTimeout(() => {
       const screen8 = $('#screen-8');
@@ -779,13 +795,16 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       // Reset emojis
-      $$('.s8-emo').forEach(emo => {
+      $$('#screen-8 .s8-emo').forEach(emo => {
+        emo.style.transition = '';
         emo.style.opacity = '';
       });
 
-      // Reset timer
+      // Reset timer & clock
       $('#s8-timer').textContent = '0:00';
       $('.s8-time-progress').style.width = '0';
+      $('#s8-clock').style.left = '0px';
+      s8Elapsed = 0;
 
       // Restore S7
       const screen7 = $('#screen-7');
