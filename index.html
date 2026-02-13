@@ -129,12 +129,23 @@
 
     <!-- Link -->
     <a class="pwned-link" href="https://haveibeenpwned.com" target="_blank">haveibeenpwned.com</a>
+
+    <!-- Scroll hint -->
+    <div class="scroll-hint" id="s2-scroll-hint">
+      <div class="scroll-hint-mouse">
+        <img src="assets/mouse-shape.svg" alt="" class="scroll-hint-body">
+        <img src="assets/mouse-wheel.svg" alt="" class="scroll-hint-wheel">
+      </div>
+      <span>scroll to continue</span>
+    </div>
   </div><!-- end screen-2 -->
 
   <!-- ════════════════════════════════════════ -->
   <!-- SCREEN 3 — "Step 1. Data Harvesting" -->
   <!-- ════════════════════════════════════════ -->
-  <div class="screen screen-hidden" id="screen-3">
+  <!-- Horizontal scroll container for Screens 3 & 4 -->
+  <div class="scroll-container screen-hidden" id="scroll-container-3-4">
+  <div class="screen" id="screen-3">
     <!-- Background (same as Screen 1) -->
     <div class="background">
       <div class="grid-bg">
@@ -192,7 +203,260 @@
         <img src="assets/alien-emoji.png" alt="">
       </div>
     </div>
+
+    <!-- Scroll hint -->
+    <div class="scroll-hint" id="s3-scroll-hint">
+      <div class="scroll-hint-mouse">
+        <img src="assets/mouse-shape.svg" alt="" class="scroll-hint-body">
+        <img src="assets/mouse-wheel.svg" alt="" class="scroll-hint-wheel">
+      </div>
+      <span>scroll to continue</span>
+    </div>
   </div><!-- end screen-3 -->
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- SCREEN 4 — Character Profile Card -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="screen" id="screen-4">
+    <!-- Background (centered blue panel) -->
+    <div class="background">
+      <div class="grid-bg">
+        <img src="assets/grid.svg" alt="" aria-hidden="true">
+      </div>
+      <div class="blue-panel"></div>
+    </div>
+
+    <!-- ID card illustration (tilted, left side) -->
+    <div class="s4-id-card">
+      <img src="assets/id-card.png" alt="ID card">
+    </div>
+
+    <!-- Profile card (centered) -->
+    <div class="s4-profile-card">
+      <div class="s4-avatar">
+        <img src="assets/man-red-hair.png" alt="Profile" id="s4-avatar-img">
+      </div>
+      <div class="s4-info">
+        <div class="s4-name-row">
+          <p class="s4-name" id="s4-name"></p>
+          <div class="s4-details-row" id="s4-details"></div>
+        </div>
+        <div class="s4-ids" id="s4-ids"></div>
+        <p class="s4-bio" id="s4-bio"></p>
+      </div>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="scroll-hint" id="s4-scroll-hint">
+      <div class="scroll-hint-mouse">
+        <img src="assets/mouse-shape.svg" alt="" class="scroll-hint-body">
+        <img src="assets/mouse-wheel.svg" alt="" class="scroll-hint-wheel">
+      </div>
+      <span>scroll to continue</span>
+    </div>
+  </div><!-- end screen-4 -->
+  </div><!-- end scroll-container -->
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- SCREEN 5 — "Step 2. Synthesis" -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="screen screen-hidden" id="screen-5">
+    <!-- Background -->
+    <div class="background">
+      <div class="grid-bg">
+        <img src="assets/grid.svg" alt="" aria-hidden="true">
+      </div>
+      <div class="blue-panel"></div>
+    </div>
+
+    <!-- AI amplification pills -->
+    <div class="s5-pills">
+      <span class="s5-pill">Scalability</span>
+      <span class="s5-pill s5-pill-active">Believability</span>
+      <span class="s5-pill s5-pill-active">Personalization</span>
+    </div>
+
+    <!-- Center: Step header + Scammer -->
+    <div class="s5-center">
+      <div class="s5-step-header">
+        <p class="s5-step-label"><span class="s5-step-sm">Step </span><span class="s5-step-lg">2.</span></p>
+        <h2 class="s5-step-title">Synthesis</h2>
+      </div>
+      <div class="s5-scammer">
+        <img src="assets/scammer.png" alt="Scammer">
+      </div>
+    </div>
+
+    <!-- Mind-map connection lines -->
+    <div class="s5-lines">
+      <img src="assets/mind-map-lines.svg" alt="">
+    </div>
+
+    <!-- Tactic cards: top-left -->
+    <div class="s5-tactic s5-tactic-tl">
+      <div class="s5-tactic-pill">Authority Fabrication</div>
+      <div class="s5-tactic-text">
+        <p>Scammer claims institutional power.</p>
+        <br>
+        <p>Examples: police, bank official, tax officer, courier, telecom, HR.</p>
+      </div>
+    </div>
+
+    <!-- Tactic cards: top-right -->
+    <div class="s5-tactic s5-tactic-tr">
+      <div class="s5-tactic-pill">Distress Manipulation</div>
+      <div class="s5-tactic-text">
+        <p>Scammer performs vulnerability to trigger rescue instinct.</p>
+        <br>
+        <p>Examples: stranded traveler, medical emergency plea, charity fraud.</p>
+      </div>
+    </div>
+
+    <!-- Tactic cards: bottom-left -->
+    <div class="s5-tactic s5-tactic-bl">
+      <div class="s5-tactic-pill">Affinity Exploitation</div>
+      <div class="s5-tactic-text">
+        <p>Scammer builds perceived similarity or attraction.</p>
+        <br>
+        <p>Examples: romance scams, investment "insider" groups, shared community/religion, alumni networks.</p>
+      </div>
+    </div>
+
+    <!-- Tactic cards: bottom-right -->
+    <div class="s5-tactic s5-tactic-br">
+      <div class="s5-tactic-pill">Identity Hijacking</div>
+      <div class="s5-tactic-text">
+        <p>Scammer impersonates someone already trusted.</p>
+        <br>
+        <p>Examples: brother in emergency, CEO asking for transfer, friend requesting OTP.</p>
+      </div>
+    </div>
+
+    <!-- Victim label -->
+    <p class="s5-victim-label">Victim</p>
+
+    <!-- Mini victim ID card (populated by JS) -->
+    <div class="s5-victim-card" id="s5-victim-card">
+      <div class="s5-victim-avatar">
+        <img src="assets/man-red-hair.png" alt="" id="s5-victim-avatar-img">
+      </div>
+      <div class="s5-victim-info">
+        <p class="s5-victim-name" id="s5-victim-name"></p>
+        <div class="s5-victim-details" id="s5-victim-details"></div>
+      </div>
+      <div class="s5-victim-ids" id="s5-victim-ids"></div>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="scroll-hint" id="s5-scroll-hint">
+      <div class="scroll-hint-mouse">
+        <img src="assets/mouse-shape.svg" alt="" class="scroll-hint-body">
+        <img src="assets/mouse-wheel.svg" alt="" class="scroll-hint-wheel">
+      </div>
+      <span>scroll to continue</span>
+    </div>
+  </div><!-- end screen-5 -->
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- SCREEN 6 — "Step 2. Synthesis" (detail) -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="screen screen-hidden" id="screen-6">
+    <!-- Background -->
+    <div class="background">
+      <div class="grid-bg">
+        <img src="assets/grid.svg" alt="" aria-hidden="true">
+      </div>
+      <div class="blue-panel"></div>
+    </div>
+
+    <!-- Scammer label -->
+    <p class="s6-scammer-label">Scammer</p>
+
+    <!-- Scammer persona card (pink border) -->
+    <div class="s6-scammer-card" id="s6-scammer-card">
+      <div class="s6-scammer-avatar">
+        <img src="assets/scammer.png" alt="" id="s6-scammer-avatar-img">
+      </div>
+      <div class="s6-scammer-info">
+        <p class="s6-scammer-name" id="s6-scammer-name"></p>
+        <div class="s6-scammer-details" id="s6-scammer-details"></div>
+      </div>
+    </div>
+
+    <!-- AI amplification pills -->
+    <div class="s6-pills">
+      <span class="s6-pill">Scalability</span>
+      <span class="s6-pill s6-pill-active">Believability</span>
+      <span class="s6-pill s6-pill-active">Personalization</span>
+    </div>
+
+    <!-- Left column: Step 2 description -->
+    <div class="s6-left">
+      <div class="s6-step-header">
+        <p class="s6-step-label"><span class="s6-step-sm">Step </span><span class="s6-step-lg">2.</span></p>
+        <h2 class="s6-step-title">Synthesis</h2>
+      </div>
+      <div class="s6-step-body">
+        <p>Goal: Create a convincing digital persona you will trust.</p>
+        <br>
+        <p>This could be:</p>
+        <ul>
+          <li>A cloned voice (friend, boss, police)</li>
+          <li>A deepfake video (celebrity, executive)</li>
+          <li>A realistic chat persona (romantic partner, recruiter)</li>
+          <li>A fake website/app that looks official</li>
+          <li>AI-written messages that sound human and context-aware</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Right column: AI card + emojis -->
+    <div class="s6-right">
+      <div class="s6-robot-emoji">
+        <img src="assets/robot-emoji.png" alt="">
+      </div>
+
+      <!-- Crawling virus emojis -->
+      <div class="s6-crawler s6-crawler-1"><img src="assets/alien-emoji.png" alt=""></div>
+      <div class="s6-crawler s6-crawler-2"><img src="assets/alien-emoji.png" alt=""></div>
+      <div class="s6-crawler s6-crawler-3"><img src="assets/alien-emoji.png" alt=""></div>
+      <div class="s6-crawler s6-crawler-4"><img src="assets/alien-emoji.png" alt=""></div>
+      <div class="s6-crawler s6-crawler-5"><img src="assets/alien-emoji.png" alt=""></div>
+
+      <div class="s6-card">
+        <p class="s6-card-bold">AI's role: Turns raw data into believable identity artefacts – voice, face, language style, authority tone.</p>
+        <br>
+        <p class="s6-card-regular">Humans trust familiar identity signals more than logic.</p>
+      </div>
+      <div class="s6-alien-emoji">
+        <img src="assets/alien-emoji.png" alt="">
+      </div>
+    </div>
+
+    <!-- Victim label -->
+    <p class="s6-victim-label">Victim</p>
+
+    <!-- Mini victim ID card (same as S5) -->
+    <div class="s6-victim-card" id="s6-victim-card">
+      <div class="s6-victim-avatar">
+        <img src="assets/man-red-hair.png" alt="" id="s6-victim-avatar-img">
+      </div>
+      <div class="s6-victim-info">
+        <p class="s6-victim-name" id="s6-victim-name"></p>
+        <div class="s6-victim-details" id="s6-victim-details"></div>
+      </div>
+      <div class="s6-victim-ids" id="s6-victim-ids"></div>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="scroll-hint" id="s6-scroll-hint">
+      <div class="scroll-hint-mouse">
+        <img src="assets/mouse-shape.svg" alt="" class="scroll-hint-body">
+        <img src="assets/mouse-wheel.svg" alt="" class="scroll-hint-wheel">
+      </div>
+      <span>scroll to continue</span>
+    </div>
+  </div><!-- end screen-6 -->
 
   </div><!-- end viewport -->
 

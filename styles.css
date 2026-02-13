@@ -247,11 +247,7 @@ button {
   width: 100%;
 }
 
-/* Age & Sex chip areas follow parent width */
-.bio-group[data-group="age"] .chips {
-  width: 454px;
-}
-
+.bio-group[data-group="age"] .chips,
 .bio-group[data-group="sex"] .chips {
   width: 454px;
 }
@@ -359,20 +355,20 @@ button {
 .continue-btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px 36px;
-  border-radius: 50px;
-  font-size: 22px;
-  font-weight: 500;
-  color: #1b2191;
-  background: rgba(237, 227, 226, 0.25);
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 15px;
+  border-radius: 36px;
+  font-size: 20px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.4);
+  background: rgba(217, 28, 255, 0.25);
   transition:
     background 0.3s ease,
     color 0.3s ease,
     transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
     box-shadow 0.3s ease,
     opacity 0.3s ease;
-  opacity: 0.5;
   pointer-events: none;
 }
 
@@ -382,15 +378,15 @@ button {
 }
 
 .continue-btn:not([disabled]) {
-  background: rgba(237, 227, 226, 0.98);
-  opacity: 1;
+  background: #d91cff;
+  color: #fff;
   pointer-events: auto;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 20px rgba(217, 28, 255, 0.35);
 }
 
 .continue-btn:not([disabled]):hover {
   transform: scale(1.05);
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 30px rgba(217, 28, 255, 0.5);
 }
 
 .continue-btn:not([disabled]):hover .arrow {
@@ -469,7 +465,6 @@ button {
 .center-devil img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
 
 .center-devil.animate {
@@ -576,7 +571,6 @@ button {
 .emoji img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
 
 .emoji.animate {
@@ -785,10 +779,10 @@ button {
   z-index: 6;
 }
 
-.s3-robot-emoji img {
+.s3-robot-emoji img,
+.s3-alien-emoji img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
 
 /* Card */
@@ -802,17 +796,14 @@ button {
   z-index: 5;
 }
 
-.s3-card-bold {
+.s3-card-bold,
+.s3-card-regular {
   font-size: 30.192px;
-  font-weight: 500;
   color: #262626;
 }
 
-.s3-card-regular {
-  font-size: 30.192px;
-  font-weight: 400;
-  color: #262626;
-}
+.s3-card-bold { font-weight: 500; }
+.s3-card-regular { font-weight: 400; }
 
 /* Alien emoji: bottom-left of card area
    Figma: mt 331 from right group top, rotated 16.5deg */
@@ -826,11 +817,7 @@ button {
   z-index: 6;
 }
 
-.s3-alien-emoji img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+
 
 /* ── Crawling virus emojis ── */
 .s3-crawler {
@@ -940,4 +927,878 @@ button {
 @keyframes fadeSlideLeft {
   from { opacity: 0; transform: translateX(40px); }
   to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ========================================
+   HORIZONTAL SCROLL CONTAINER
+   Wraps screens 3 & 4 for scroll transition
+   ======================================== */
+.scroll-container {
+  position: relative;
+  width: 3840px; /* 2 screens side-by-side */
+  height: 1080px;
+  display: flex;
+  transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-container .screen {
+  flex-shrink: 0;
+}
+
+.scroll-container.scrolled {
+  transform: translateX(-1920px);
+}
+
+/* ========================================
+   SCREEN 4 — Character Profile Card
+   ======================================== */
+
+/* ID card (tilted) — overlaps card from left, rotate 15deg */
+/* ID card — Figma: 318px container, 260px inner image, rotated 15deg */
+.s4-id-card {
+  position: absolute;
+  left: 369px;
+  top: 383px;
+  width: 318px;
+  height: 318px;
+  z-index: 6;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.s4-id-card.animate {
+  animation: s4SlideFromLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.35s forwards;
+}
+
+@keyframes s4SlideFromLeft {
+  from { opacity: 0; transform: translateX(-120px) rotate(25deg); }
+  to   { opacity: 1; transform: translateX(0) rotate(15deg); }
+}
+
+.s4-id-card img {
+  width: 260px;
+  height: 260px;
+  object-fit: contain;
+}
+
+/* Profile card — Figma: left 626, top 369, bg #f4dfc1, border #f1ebe3 */
+.s4-profile-card {
+  position: absolute;
+  left: 626px;
+  top: 369px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+  background: #f4dfc1;
+  border: 10px solid #f1ebe3;
+  border-radius: 10px;
+  z-index: 5;
+  opacity: 0;
+}
+
+.s4-profile-card.animate {
+  animation: s4SlideFromRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s forwards;
+}
+
+@keyframes s4SlideFromRight {
+  from { opacity: 0; transform: translateX(120px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Avatar — emoji head, Figma: 140×134 */
+.s4-avatar {
+  width: 140px;
+  height: 134px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.s4-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Info block */
+.s4-info {
+  width: 552px;
+  display: flex;
+  flex-direction: column;
+  gap: 31px;
+  color: #000;
+}
+
+.s4-name-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.s4-name {
+  margin: 0;
+}
+
+.s4-details-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.s4-ids {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 60px;
+  font-size: 16px;
+  font-weight: 400;
+  width: 399px;
+}
+
+.s4-bio {
+  font-size: 12px;
+  font-weight: 500;
+  color: #000;
+  margin: 0;
+}
+
+/* ========================================
+   SCREEN 5 — "Step 2. Synthesis"
+   ======================================== */
+#screen-5 {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* ── Pills ── */
+.s5-pills {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 230px;
+  width: 406px;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  opacity: 0;
+}
+
+.s5-pills.animate {
+  animation: fadeSlideDown 0.5s ease-out forwards;
+}
+
+.s5-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 15px;
+  border-radius: 36px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #211d07;
+  background: #6767ae;
+}
+
+.s5-pill-active {
+  background: #7bf12c;
+}
+
+/* ── Center: Step header + Scammer ── */
+.s5-center {
+  position: absolute;
+  left: 807px;
+  top: 333px;
+  width: 317px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+}
+
+.s5-center.animate {
+  animation: s5ScammerSlideIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes s5ScammerSlideIn {
+  from { opacity: 0; transform: translateY(60px) scale(0.9); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.s5-step-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.s5-step-label {
+  font-weight: 400;
+  color: #fff;
+}
+
+.s5-step-sm { font-size: 20px; }
+.s5-step-lg { font-size: 32px; }
+
+.s5-step-title {
+  font-size: 60.615px;
+  font-weight: 600;
+  font-style: italic;
+  color: #d91cff;
+  line-height: normal;
+}
+
+.s5-scammer {
+  width: 317px;
+  height: 317px;
+  overflow: hidden;
+}
+
+.s5-scammer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: levitate 3s ease-in-out infinite;
+}
+
+@keyframes levitate {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-15px); }
+}
+
+/* ── Mind-map connection lines ── */
+.s5-lines {
+  position: absolute;
+  left: 548px;
+  top: 393px;
+  width: 821px;
+  height: 253px;
+  z-index: 4;
+  opacity: 0;
+}
+
+.s5-lines.animate {
+  animation: s5LinesIn 0.8s ease-out 0.4s forwards;
+}
+
+@keyframes s5LinesIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.s5-lines img {
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Tactic cards (shared) ── */
+.s5-tactic {
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  opacity: 0;
+}
+
+.s5-tactic-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 21px;
+  border-radius: 51px;
+  background: #ede3e2;
+  font-size: 24px;
+  font-weight: 400;
+  color: #211d07;
+  white-space: nowrap;
+}
+
+.s5-tactic-text {
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+  width: 242px;
+}
+
+.s5-tactic-text p { margin: 0; }
+
+/* Positions from Figma */
+.s5-tactic-tl {
+  left: 291px;
+  top: 372px;
+  width: 279px;
+}
+
+.s5-tactic-tr {
+  left: 1348px;
+  top: 372px;
+  width: 283px;
+}
+
+.s5-tactic-bl {
+  left: 300px;
+  top: 611px;
+  width: 261px;
+}
+
+.s5-tactic-br {
+  left: 1348px;
+  top: 611px;
+  width: 242px;
+}
+
+.s5-tactic-br .s5-tactic-text {
+  font-size: 12.851px;
+}
+
+.s5-tactic-tr .s5-tactic-text {
+  font-size: 12.851px;
+}
+
+/* Tactic entrance animations */
+.s5-tactic-tl.animate { animation: s5TacticFromLeft 0.6s ease-out 0.5s forwards; }
+.s5-tactic-bl.animate { animation: s5TacticFromLeft 0.6s ease-out 0.7s forwards; }
+.s5-tactic-tr.animate { animation: s5TacticFromRight 0.6s ease-out 0.6s forwards; }
+.s5-tactic-br.animate { animation: s5TacticFromRight 0.6s ease-out 0.8s forwards; }
+
+@keyframes s5TacticFromLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes s5TacticFromRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Victim label ── */
+.s5-victim-label {
+  position: absolute;
+  left: 29px;
+  top: 955px;
+  z-index: 5;
+  font-size: 32px;
+  font-weight: 400;
+  font-style: italic;
+  color: #fff;
+  opacity: 0;
+}
+
+.s5-victim-label.animate {
+  animation: fadeIn 0.5s ease-out 0.3s forwards;
+}
+
+/* ── Mini victim ID card ── */
+.s5-victim-card {
+  position: absolute;
+  left: 190px;
+  top: 899px;
+  width: 335px;
+  height: 154px;
+  z-index: 6;
+  background: #f4dfc1;
+  border: 4.431px solid #cca46a;
+  border-radius: 7px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.s5-victim-card.animate {
+  animation: s5VictimFlyDown 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes s5VictimFlyDown {
+  0%   { opacity: 0; transform: translate(436px, -530px) scale(1.6); }
+  15%  { opacity: 1; }
+  100% { opacity: 1; transform: translate(0, 0) scale(1); }
+}
+
+.s5-victim-avatar {
+  position: absolute;
+  left: 7px;
+  top: 47px;
+  width: 61px;
+  height: 61px;
+  overflow: hidden;
+}
+
+.s5-victim-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.s5-victim-name {
+  position: absolute;
+  left: 77px;
+  top: 18px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+  margin: 0;
+}
+
+.s5-victim-details {
+  position: absolute;
+  left: 77px;
+  top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000;
+}
+
+.s5-victim-ids {
+  position: absolute;
+  left: 190px;
+  top: 58px;
+  display: flex;
+  flex-direction: column;
+  gap: 4.4px;
+  font-size: 8.86px;
+  font-weight: 400;
+  color: #000;
+  width: 106px;
+}
+
+/* ========================================
+   SHARED SCROLL HINT — bottom-right of screen
+   ======================================== */
+.scroll-hint {
+  position: absolute;
+  left: 1467px;
+  top: 981px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  opacity: 0;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.scroll-hint.animate {
+  animation: fadeInHint 0.6s ease-out 0.3s forwards;
+}
+
+.scroll-hint-mouse {
+  position: relative;
+  width: 22px;
+  height: 22px;
+}
+
+.scroll-hint-body {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.scroll-hint-wheel {
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  width: 14%;
+  height: 40%;
+  transform: translateX(-50%);
+  animation: mouseScroll 1.5s ease-in-out infinite;
+}
+
+@keyframes fadeInHint {
+  to { opacity: 0.6; }
+}
+
+@keyframes mouseScroll {
+  0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  50%      { opacity: 0.3; transform: translateX(-50%) translateY(6px); }
+}
+
+/* ========================================
+   SCREEN 6 — "Step 2. Synthesis" (detail)
+   ======================================== */
+#screen-6 {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* ── Scammer label ── */
+.s6-scammer-label {
+  position: absolute;
+  left: 29px;
+  top: 69px;
+  z-index: 5;
+  font-size: 32px;
+  font-weight: 400;
+  font-style: italic;
+  color: #fff;
+  opacity: 0;
+}
+
+.s6-scammer-label.animate {
+  animation: fadeIn 0.5s ease-out 0.3s forwards;
+}
+
+/* ── Scammer persona card (pink border) ── */
+.s6-scammer-card {
+  position: absolute;
+  left: 366px;
+  top: 24px;
+  width: 335px;
+  height: 154px;
+  z-index: 6;
+  background: #f4dfc1;
+  border: 4.431px solid #d91cff;
+  border-radius: 7px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.s6-scammer-card.animate {
+  animation: s6ScammerCardIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes s6ScammerCardIn {
+  0%   { opacity: 0; transform: translateY(-60px) scale(0.8); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.s6-scammer-avatar {
+  position: absolute;
+  left: -26px;
+  top: 11px;
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+}
+
+.s6-scammer-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.s6-scammer-info {
+  position: absolute;
+  left: 77px;
+  top: 18px;
+}
+
+.s6-scammer-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+  margin: 0 0 2px 0;
+}
+
+.s6-scammer-details {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000;
+}
+
+/* ── Pills ── */
+.s6-pills {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 230px;
+  width: 406px;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  opacity: 0;
+}
+
+.s6-pills.animate {
+  animation: fadeSlideDown 0.5s ease-out forwards;
+}
+
+.s6-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 15px;
+  border-radius: 36px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #211d07;
+  background: #6767ae;
+}
+
+.s6-pill-active {
+  background: #7bf12c;
+}
+
+/* ── Left Column: Step 2 description ──
+   Figma: left 110, top 303, width 905 */
+.s6-left {
+  position: absolute;
+  left: 110px;
+  top: 303px;
+  width: 905px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 53px;
+  opacity: 0;
+}
+
+.s6-left.animate {
+  animation: fadeSlideRight 0.6s ease-out 0.15s forwards;
+}
+
+.s6-step-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 440px;
+}
+
+.s6-step-label {
+  font-weight: 400;
+  color: #fff;
+}
+
+.s6-step-sm { font-size: 20px; }
+.s6-step-lg { font-size: 32px; }
+
+.s6-step-title {
+  font-size: 60.615px;
+  font-weight: 600;
+  font-style: italic;
+  color: #d91cff;
+  line-height: normal;
+}
+
+.s6-step-body {
+  font-size: 28.591px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.s6-step-body ul {
+  list-style: disc;
+  padding-left: 43px;
+  margin: 0;
+}
+
+.s6-step-body li {
+  line-height: normal;
+}
+
+.s6-step-body p {
+  margin: 0;
+}
+
+/* ── Right Column: AI Card + Emojis ──
+   Same approach as S3's right column */
+.s6-right {
+  position: absolute;
+  left: 1015px;
+  top: 303px;
+  z-index: 5;
+  opacity: 0;
+}
+
+.s6-right.animate {
+  animation: fadeSlideLeft 0.6s ease-out 0.3s forwards;
+}
+
+/* Robot emoji: top-right, rotated -28.05deg */
+.s6-robot-emoji {
+  position: absolute;
+  right: -30px;
+  top: -20px;
+  width: 85px;
+  height: 85px;
+  transform: rotate(-28.05deg);
+  z-index: 6;
+}
+
+.s6-robot-emoji img,
+.s6-alien-emoji img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Card (beige) */
+.s6-card {
+  position: relative;
+  margin-top: 57px;
+  margin-left: 65px;
+  width: 622px;
+  background: #f4dfc1;
+  padding: 29px 38px;
+  z-index: 5;
+}
+
+.s6-card-bold,
+.s6-card-regular {
+  font-size: 30.192px;
+  color: #262626;
+}
+
+.s6-card-bold { font-weight: 500; }
+.s6-card-regular { font-weight: 400; }
+
+/* Alien emoji: bottom-left, rotated 16.5deg */
+.s6-alien-emoji {
+  position: absolute;
+  left: 0;
+  top: 331px;
+  width: 94px;
+  height: 94px;
+  transform: rotate(16.5deg);
+  z-index: 6;
+}
+
+/* ── Crawling virus emojis ── */
+.s6-crawler {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  z-index: 8;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.s6-crawler img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: virusWobble 0.5s ease-in-out infinite;
+}
+
+/* Crawler 1: skitters across top of card, left → right */
+.s6-crawler-1 { top: 42px; left: 80px; }
+.s6-right.animate .s6-crawler-1 {
+  animation: crawlTop 9s linear 1s infinite;
+}
+
+/* Crawler 2: descends along right edge */
+.s6-crawler-2 { top: 60px; left: 680px; }
+.s6-right.animate .s6-crawler-2 {
+  animation: crawlRight 11s linear 2s infinite;
+}
+
+/* Crawler 3: skitters along bottom edge, right → left */
+.s6-crawler-3 { top: 320px; left: 640px; }
+.s6-right.animate .s6-crawler-3 {
+  animation: crawlBottom 10s linear 3s infinite;
+}
+
+/* Crawler 4: diagonal crawl across card face */
+.s6-crawler-4 { top: 80px; left: 120px; }
+.s6-right.animate .s6-crawler-4 {
+  animation: crawlDiag 13s linear 1.8s infinite;
+}
+
+/* Crawler 5: wanders erratically near the card */
+.s6-crawler-5 { top: 180px; left: 350px; }
+.s6-right.animate .s6-crawler-5 {
+  animation: crawlWander 15s ease-in-out 0.5s infinite;
+}
+
+/* ── S6 Victim label ── */
+.s6-victim-label {
+  position: absolute;
+  left: 29px;
+  top: 955px;
+  z-index: 5;
+  font-size: 32px;
+  font-weight: 400;
+  font-style: italic;
+  color: #fff;
+  opacity: 0;
+}
+
+.s6-victim-label.animate {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* ── S6 Mini victim ID card (same layout as S5) ── */
+.s6-victim-card {
+  position: absolute;
+  left: 190px;
+  top: 899px;
+  width: 335px;
+  height: 154px;
+  z-index: 6;
+  background: #f4dfc1;
+  border: 4.431px solid #cca46a;
+  border-radius: 7px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.s6-victim-card.animate {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.s6-victim-avatar {
+  position: absolute;
+  left: 7px;
+  top: 47px;
+  width: 61px;
+  height: 61px;
+  overflow: hidden;
+}
+
+.s6-victim-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.s6-victim-name {
+  position: absolute;
+  left: 77px;
+  top: 18px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+  margin: 0;
+}
+
+.s6-victim-details {
+  position: absolute;
+  left: 77px;
+  top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000;
+}
+
+.s6-victim-ids {
+  position: absolute;
+  left: 190px;
+  top: 58px;
+  display: flex;
+  flex-direction: column;
+  gap: 4.4px;
+  font-size: 8.86px;
+  font-weight: 400;
+  color: #000;
+  width: 106px;
 }
