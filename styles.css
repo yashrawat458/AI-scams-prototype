@@ -2006,23 +2006,32 @@ button {
   overflow: hidden;
 }
 
-/* ── Scammer label (italic 32px like Figma) ─────── */
-.s8-scammer-label {
+/* ── Scammer flex row ─────────────────── */
+.s8-scammer-row {
   position: absolute;
-  left: 29px; top: 69px;
+  left: 29px; top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 27px;
+  opacity: 0;
+}
+.s8-scammer-label {
   font-family: 'Rethink Sans', sans-serif;
   font-weight: 400;
   font-style: italic;
   font-size: 32px;
   color: #fff;
   margin: 0;
-  opacity: 0;
+  white-space: nowrap;
+}
+.s8-scammer-inner {
+  display: flex;
+  align-items: center;
+  gap: 112px;
 }
 
 /* ── Scammer card (beige bg, pink border) ── */
 .s8-scammer-card {
-  position: absolute;
-  left: 366px; top: 24px;
   width: 335px; height: 154px;
   background: #f4dfc1;
   border: 4.431px solid #d91cff;
@@ -2033,7 +2042,6 @@ button {
   padding: 0;
   box-sizing: border-box;
   overflow: hidden;
-  opacity: 0;
 }
 .s8-scammer-avatar {
   width: 120px; height: 120px;
@@ -2074,8 +2082,6 @@ button {
 
 /* ── Tactic pill ────────────────── */
 .s8-tactic-pill {
-  position: absolute;
-  left: 645px; top: 74px;
   background: #ede3e2;
   border-radius: 24px;
   padding: 11px 21px;
@@ -2084,15 +2090,12 @@ button {
   font-size: 24px;
   color: #211d07;
   white-space: nowrap;
-  opacity: 0;
 }
 
 /* ── Mode of contact icon ─────── */
 .s8-mode-icon {
-  position: absolute;
-  left: 1035px; top: 54px;
   width: 91px; height: 91px;
-  opacity: 0;
+  flex-shrink: 0;
 }
 .s8-mode-icon img {
   width: 100%; height: 100%;
@@ -2186,6 +2189,14 @@ button {
 }
 .s8-step-num {
   font-size: 32px;
+}
+.s8-step-header-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.s8-step-title-wrap {
+  display: inline-block;
 }
 .s8-step-title {
   font-family: 'Rethink Sans', sans-serif;
@@ -2306,23 +2317,27 @@ button {
   object-fit: contain;
 }
 
-/* ── Victim label (italic 32px) ────── */
-.s8-victim-label {
+/* ── Victim flex row ───────────────── */
+.s8-victim-row {
   position: absolute;
-  left: 29px; top: 945px;
+  left: 29px; top: 889px;
+  display: flex;
+  align-items: center;
+  gap: 73px;
+  opacity: 0;
+}
+.s8-victim-label {
   font-family: 'Rethink Sans', sans-serif;
   font-weight: 400;
   font-style: italic;
   font-size: 32px;
   color: #fff;
   margin: 0;
-  opacity: 0;
+  white-space: nowrap;
 }
 
 /* ── Victim card (beige bg, gold border) ── */
 .s8-victim-card {
-  position: absolute;
-  left: 366px; top: 889px;
   width: 335px; height: 154px;
   background: #f4dfc1;
   border: 4.431px solid #cca46a;
@@ -2333,7 +2348,6 @@ button {
   padding: 0;
   box-sizing: border-box;
   overflow: hidden;
-  opacity: 0;
 }
 .s8-victim-avatar {
   width: 61px; height: 61px;
@@ -2391,16 +2405,12 @@ button {
 
 /* ── Scroll hint S8 ───────────── */
 .s8-scroll-hint {
-  left: 1661px;
+  left: 1467px;
 }
 
 /* ── S8 animation helpers ─────── */
-.s8-animate .s8-scammer-label,
-.s8-animate .s8-scammer-card,
-.s8-animate .s8-tactic-pill,
-.s8-animate .s8-mode-icon,
-.s8-animate .s8-victim-label,
-.s8-animate .s8-victim-card {
+.s8-animate .s8-scammer-row,
+.s8-animate .s8-victim-row {
   animation: s8FadeIn 0.5s ease forwards;
 }
 .s8-animate .s8-isolation-lines {

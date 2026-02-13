@@ -767,7 +767,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Stop timer
     if (s8TimerInterval) { clearInterval(s8TimerInterval); s8TimerInterval = null; }
 
-    fadeOut($$('#screen-8 .s8-scammer-label, #screen-8 .s8-scammer-card, #screen-8 .s8-tactic-pill, #screen-8 .s8-mode-icon, #screen-8 .s8-isolation-lines, #screen-8 .s8-isolation-label, #screen-8 .s8-pills, #screen-8 .s8-step-content, #screen-8 .s8-tactics-row, #screen-8 .s8-time-bar, #screen-8 .s8-victim-label, #screen-8 .s8-victim-card, #screen-8 .scroll-hint'), 'Y', 30);
+    fadeOut($$('#screen-8 .s8-scammer-row, #screen-8 .s8-isolation-lines, #screen-8 .s8-isolation-label, #screen-8 .s8-pills, #screen-8 .s8-step-content, #screen-8 .s8-tactics-row, #screen-8 .s8-time-bar, #screen-8 .s8-victim-row, #screen-8 .scroll-hint'), 'Y', 30);
 
     // Also fade emojis
     $$('#screen-8 .s8-emo').forEach(emo => {
@@ -782,7 +782,7 @@ document.addEventListener('DOMContentLoaded', () => {
       screen8.classList.remove('s8-animate');
 
       // Reset all S8 elements
-      $$('#screen-8 .s8-scammer-label, #screen-8 .s8-scammer-card, #screen-8 .s8-tactic-pill, #screen-8 .s8-mode-icon, #screen-8 .s8-isolation-lines, #screen-8 .s8-isolation-label, #screen-8 .s8-pills, #screen-8 .s8-step-content, #screen-8 .s8-tactics-row, #screen-8 .s8-time-bar, #screen-8 .s8-victim-label, #screen-8 .s8-victim-card, #screen-8 .scroll-hint').forEach(el => {
+      $$('#screen-8 .s8-scammer-row, #screen-8 .s8-isolation-lines, #screen-8 .s8-isolation-label, #screen-8 .s8-pills, #screen-8 .s8-step-content, #screen-8 .s8-tactics-row, #screen-8 .s8-time-bar, #screen-8 .s8-victim-row, #screen-8 .scroll-hint').forEach(el => {
         el.style.transition = '';
         el.style.opacity = '';
         el.style.transform = '';

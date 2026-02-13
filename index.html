@@ -517,29 +517,27 @@
       <div class="blue-panel"></div>
     </div>
 
-    <!-- Scammer label -->
-    <p class="s8-scammer-label">Scammer</p>
-
-    <!-- Scammer card (beige bg, pink border – matching Figma) -->
-    <div class="s8-scammer-card" id="s8-scammer-card">
-      <div class="s8-scammer-avatar">
-        <img src="assets/standing.png" alt="" id="s8-scammer-avatar-img">
-      </div>
-      <div class="s8-scammer-info">
-        <p class="s8-scammer-name" id="s8-scammer-name"></p>
-        <div class="s8-scammer-details" id="s8-scammer-details"></div>
+    <!-- Scammer row: label + card + tactic pill + phone icon -->
+    <div class="s8-scammer-row">
+      <p class="s8-scammer-label">Scammer</p>
+      <div class="s8-scammer-inner">
+        <div class="s8-scammer-card" id="s8-scammer-card">
+          <div class="s8-scammer-avatar">
+            <img src="assets/standing.png" alt="" id="s8-scammer-avatar-img">
+          </div>
+          <div class="s8-scammer-info">
+            <p class="s8-scammer-name" id="s8-scammer-name"></p>
+            <div class="s8-scammer-details" id="s8-scammer-details"></div>
+          </div>
+        </div>
+        <div class="s8-tactic-pill" id="s8-tactic-pill">Authority Fabrication</div>
+        <div class="s8-mode-icon" id="s8-mode-icon">
+          <img src="assets/phone-emoji.png" alt="">
+        </div>
       </div>
     </div>
 
-    <!-- Tactic pill (identity they chose) -->
-    <div class="s8-tactic-pill" id="s8-tactic-pill">Authority Fabrication</div>
-
-    <!-- Mode of contact icon -->
-    <div class="s8-mode-icon" id="s8-mode-icon">
-      <img src="assets/phone-emoji.png" alt="">
-    </div>
-
-    <!-- Isolation lines (green dashed border) -->
+    <!-- Isolation lines SVG -->
     <div class="s8-isolation-lines">
       <img src="assets/isolation-lines.svg" alt="">
     </div>
@@ -558,13 +556,14 @@
 
     <!-- Step 3 header + description -->
     <div class="s8-step-content">
-      <p class="s8-step-label"><span class="s8-step-sm">Step </span><span class="s8-step-num">3.</span></p>
-      <h2 class="s8-step-title">Emotional triggers</h2>
-
+      <div class="s8-step-header-block">
+        <p class="s8-step-label"><span class="s8-step-sm">Step </span><span class="s8-step-num">3.</span></p>
+        <div class="s8-step-title-wrap"><h2 class="s8-step-title">Emotional triggers</h2></div>
+      </div>
       <p class="s8-description">Scammers engineer isolation to intensify urgency, pushing victims to act before doubt or outside perspective can intervene.</p>
     </div>
 
-    <!-- Emotion emojis (absolute positioned to match Figma) -->
+    <!-- Emotion emojis (absolute positioned per Figma) -->
     <img src="assets/emoji-hearts.png" alt="" class="s8-emo" data-idx="0" style="left:660px;top:297px;transform:rotate(-12deg)">
     <img src="assets/emoji-smile.png" alt="" class="s8-emo" data-idx="1" style="left:760px;top:297px;transform:rotate(12deg)">
     <img src="assets/emoji-fear.png" alt="" class="s8-emo" data-idx="2" style="left:859px;top:297px;transform:rotate(-12deg)">
@@ -577,7 +576,7 @@
     <img src="assets/emoji-exhale.png" alt="" class="s8-emo" data-idx="9" style="left:1556px;top:297px;transform:rotate(12deg)">
     <img src="assets/emoji-starstruck.png" alt="" class="s8-emo" data-idx="10" style="left:1656px;top:297px;transform:rotate(-12deg)">
 
-    <!-- Tactics row: Fear, Desperation, FOMO, Obligation, Curiosity -->
+    <!-- Tactics row -->
     <div class="s8-tactics-row">
       <div class="s8-tactic-card">
         <div class="s8-tc-pill">Fear</div>
@@ -627,19 +626,19 @@
       </div>
     </div>
 
-    <!-- Victim label -->
-    <p class="s8-victim-label">Victim</p>
-
-    <!-- Victim card (beige bg, gold border – matching Figma) -->
-    <div class="s8-victim-card" id="s8-victim-card">
-      <div class="s8-victim-avatar">
-        <img src="assets/man-red-hair.png" alt="" id="s8-victim-avatar-img">
+    <!-- Victim row: label + card -->
+    <div class="s8-victim-row">
+      <p class="s8-victim-label">Victim</p>
+      <div class="s8-victim-card" id="s8-victim-card">
+        <div class="s8-victim-avatar">
+          <img src="assets/man-red-hair.png" alt="" id="s8-victim-avatar-img">
+        </div>
+        <div class="s8-victim-info">
+          <p class="s8-victim-name" id="s8-victim-name"></p>
+          <div class="s8-victim-details" id="s8-victim-details"></div>
+        </div>
+        <div class="s8-victim-ids" id="s8-victim-ids"></div>
       </div>
-      <div class="s8-victim-info">
-        <p class="s8-victim-name" id="s8-victim-name"></p>
-        <div class="s8-victim-details" id="s8-victim-details"></div>
-      </div>
-      <div class="s8-victim-ids" id="s8-victim-ids"></div>
     </div>
 
     <!-- Scroll hint -->
