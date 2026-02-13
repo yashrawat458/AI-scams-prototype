@@ -3,6 +3,18 @@
  */
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ── Viewport scaling ──
+  function scaleViewport() {
+    const vp = document.querySelector('.viewport');
+    if (!vp) return;
+    const scaleX = window.innerWidth / 1920;
+    const scaleY = window.innerHeight / 1080;
+    const scale = Math.min(scaleX, scaleY);
+    vp.style.transform = `scale(${scale})`;
+  }
+  scaleViewport();
+  window.addEventListener('resize', scaleViewport);
+
   const state = { age: null, sex: null, occupation: null, have: new Set() };
   const $ = s => document.querySelector(s);
   const $$ = s => document.querySelectorAll(s);
@@ -112,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ── Navigation state ──
-  let currentScreen = 1, s2Ready = false, s3Ready = false, s4Ready = false, s5Ready = false, s6Ready = false, s7Ready = false, s8Ready = false, transitioning = false;
+  let currentScreen = 1, s2Ready = false, s3Ready = false, s4Ready = false, s5Ready = false, s6Ready = false, s7Ready = false, s8Ready = false, s9Ready = false, transitioning = false;
   let chosenTactic = 'authority'; // stored when populating scammer card
 
   document.addEventListener('wheel', (e) => {
@@ -128,7 +140,8 @@ document.addEventListener('DOMContentLoaded', () => {
       else if (currentScreen === 6 && s6Ready) { transitioning = true; transitionToScreen7(); }
       else if (currentScreen === 7 && s7Ready) { transitioning = true; transitionToScreen8(); }
     } else if (backward) {
-      if (currentScreen === 8 && s8Ready) { transitioning = true; reverseToScreen7(); }
+      if (currentScreen === 9 && s9Ready) { transitioning = true; reverseToScreen8(); }
+      else if (currentScreen === 8 && s8Ready) { transitioning = true; reverseToScreen7(); }
       else if (currentScreen === 7 && s7Ready) { transitioning = true; reverseToScreen6(); }
       else if (currentScreen === 6 && s6Ready) { transitioning = true; reverseToScreen5(); }
       else if (currentScreen === 5 && s5Ready) { transitioning = true; reverseToScreen4(); }
@@ -749,6 +762,12 @@ document.addEventListener('DOMContentLoaded', () => {
           progressEl.style.width = (546 * pct) + 'px';
           // Clock drifts with the progress bar
           clockEl.style.left = (546 * pct) + 'px';
+
+          // Auto-transition to Screen 9 at 30 seconds
+          if (s8Elapsed >= 30 && !transitioning && currentScreen === 8) {
+            transitioning = true;
+            transitionToScreen9();
+          }
         }, 1000);
       }, 2000);
 
@@ -827,6 +846,136 @@ document.addEventListener('DOMContentLoaded', () => {
       transitioning = false;
     }, 500);
   }
+
+  // ── Screen 8 → 9 (auto at 30s) ──
+  function transitionToScreen9() {
+    // Stop timer
+    if (s8TimerInterval) { clearInterval(s8TimerInterval); s8TimerInterval = null; }
+
+    // Fade out all S8 elements
+    fadeOut($$('#screen-8 .s8-scammer-row, #screen-8 .s8-isolation-lines, #screen-8 .s8-isolation-label, #screen-8 .s8-pills, #screen-8 .s8-step-content, #screen-8 .s8-tactics-row, #screen-8 .s8-time-bar, #screen-8 .s8-victim-row, #screen-8 .scroll-hint'), 'Y', 30);
+
+    $$('#screen-8 .s8-emo').forEach(emo => {
+      emo.style.transition = 'opacity 0.5s ease';
+      emo.style.opacity = '0';
+    });
+
+    setTimeout(() => {
+      const screen8 = $('#screen-8');
+      screen8.classList.add('screen-hidden');
+      screen8.classList.remove('screen-visible');
+      screen8.classList.remove('s8-animate');
+
+      // Show S9
+      const screen9 = $('#screen-9');
+      screen9.classList.remove('screen-hidden');
+      screen9.classList.add('screen-visible');
+      screen9.classList.add('s9-animate');
+
+      // Scroll hint + ready
+      setTimeout(() => {
+        $('#s9-scroll-hint').classList.add('animate');
+        currentScreen = 9;
+        s9Ready = true;
+        s8Ready = false;
+        transitioning = false;
+      }, 1200);
+    }, 600);
+  }
+
+  // ── Screen 9 → 8 (back) ──
+  function reverseToScreen8() {
+    fadeOut($$('#screen-9 .s9-headline, #screen-9 .s9-body, #screen-9 .s9-time-bar, #screen-9 .scroll-hint, #screen-9 .s9-back-btn'), 'Y', 30);
+
+    setTimeout(() => {
+      const screen9 = $('#screen-9');
+      screen9.classList.add('screen-hidden');
+      screen9.classList.remove('screen-visible');
+      screen9.classList.remove('s9-animate');
+
+      // Reset S9 elements
+      $$('#screen-9 .s9-headline, #screen-9 .s9-body, #screen-9 .s9-time-bar, #screen-9 .scroll-hint, #screen-9 .s9-back-btn').forEach(el => {
+        el.style.transition = '';
+        el.style.opacity = '';
+        el.style.transform = '';
+      });
+
+      // Restore S8 (re-trigger its build)
+      // Reset all S8 elements first
+      $$('#screen-8 .s8-scammer-row, #screen-8 .s8-isolation-lines, #screen-8 .s8-isolation-label, #screen-8 .s8-pills, #screen-8 .s8-step-content, #screen-8 .s8-tactics-row, #screen-8 .s8-time-bar, #screen-8 .s8-victim-row, #screen-8 .scroll-hint').forEach(el => {
+        el.style.transition = '';
+        el.style.opacity = '';
+        el.style.transform = '';
+      });
+      $$('.s8-tactic-card').forEach(card => { card.style.opacity = ''; card.style.transform = ''; });
+      $$('#screen-8 .s8-emo').forEach(emo => { emo.style.transition = ''; emo.style.opacity = ''; });
+      $('#s8-timer').textContent = '0:00';
+      $('.s8-time-progress').style.width = '0';
+      $('#s8-clock').style.left = '0px';
+      s8Elapsed = 0;
+
+      const screen8 = $('#screen-8');
+      screen8.classList.remove('screen-hidden');
+      screen8.classList.add('screen-visible');
+      screen8.classList.add('s8-animate');
+
+      // Re-stagger tactic cards
+      setTimeout(() => {
+        $$('.s8-tactic-card').forEach((card, i) => {
+          setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; }, i * 120);
+        });
+      }, 900);
+
+      // Re-stagger emojis
+      setTimeout(() => {
+        $$('#screen-8 .s8-emo').forEach((emo, i) => {
+          setTimeout(() => { emo.style.opacity = '1'; }, i * 80);
+        });
+      }, 700);
+
+      // Restart timer
+      setTimeout(() => {
+        s8Elapsed = 0;
+        const timerEl = $('#s8-timer');
+        const progressEl = $('.s8-time-progress');
+        const clockEl = $('#s8-clock');
+        timerEl.textContent = '0:00';
+        progressEl.style.width = '0';
+        clockEl.style.left = '0px';
+
+        if (s8TimerInterval) clearInterval(s8TimerInterval);
+        s8TimerInterval = setInterval(() => {
+          s8Elapsed++;
+          const mins = Math.floor(s8Elapsed / 60);
+          const secs = (s8Elapsed % 60).toString().padStart(2, '0');
+          timerEl.textContent = `${mins}:${secs}`;
+          const pct = Math.min(s8Elapsed / 240, 1);
+          progressEl.style.width = (546 * pct) + 'px';
+          clockEl.style.left = (546 * pct) + 'px';
+
+          if (s8Elapsed >= 30 && !transitioning && currentScreen === 8) {
+            transitioning = true;
+            transitionToScreen9();
+          }
+        }, 1000);
+      }, 2000);
+
+      setTimeout(() => {
+        $('#s8-scroll-hint').classList.add('animate');
+        currentScreen = 8;
+        s8Ready = true;
+        s9Ready = false;
+        transitioning = false;
+      }, 2000);
+    }, 500);
+  }
+
+  // ── Back button for S9 ──
+  $('#s9-back-btn').addEventListener('click', () => {
+    if (transitioning) return;
+    transitioning = true;
+    reverseToScreen8();
+  });
 
   // ── Keyboard a11y ──
   allChips.forEach(chip => {

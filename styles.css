@@ -8,12 +8,14 @@
 }
 
 html, body {
-  width: 1920px;
-  height: 1080px;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   font-family: 'Rethink Sans', sans-serif;
   background: #000;
   color: #fff;
+  margin: 0;
+  padding: 0;
 }
 
 button {
@@ -31,6 +33,8 @@ button {
   height: 1080px;
   overflow: hidden;
   background: #000;
+  transform-origin: top left;
+  /* JS sets transform: scale(...) */
 }
 
 /* ========================================
@@ -2439,4 +2443,126 @@ button {
 @keyframes s8IsolationGrow {
   from { opacity: 0; transform: scale(0.95); }
   to   { opacity: 1; transform: scale(1); }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SCREEN 9 — "An average phone call lasts 30s."
+   ═══════════════════════════════════════════════════════════ */
+#screen-9 {
+  position: absolute;
+  left: 0; top: 0;
+  width: 1920px; height: 1080px;
+  overflow: hidden;
+}
+
+.s9-headline {
+  position: absolute;
+  left: 171px; top: 363px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400;
+  font-size: 56.123px;
+  color: #d91cff;
+  margin: 0;
+  line-height: normal;
+  opacity: 0;
+}
+
+.s9-body {
+  position: absolute;
+  left: 609px; top: 465px;
+  width: 1239px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400;
+  font-size: 56.123px;
+  color: #fff;
+  margin: 0;
+  line-height: normal;
+  white-space: pre-wrap;
+  opacity: 0;
+}
+
+/* ── Time bar (frozen at 3:42) ───── */
+.s9-time-bar {
+  position: absolute;
+  left: 0; top: 828px;
+  width: 1920px;
+  height: 60px;
+  opacity: 0;
+}
+.s9-time-strip {
+  position: absolute;
+  left: 0; top: 16px;
+  width: 1920px; height: 16px;
+  background: rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+}
+.s9-time-progress {
+  position: absolute;
+  left: 0; top: 0;
+  width: 546px;
+  height: 16px;
+  background: #d9d9d9;
+}
+.s9-time-text {
+  position: absolute;
+  left: 89px; top: 3px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  color: #141d45;
+  white-space: nowrap;
+  margin: 0;
+  z-index: 1;
+}
+.s9-clock {
+  position: absolute;
+  left: 522px; top: 0;
+  width: 47px; height: 47px;
+}
+.s9-clock img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+}
+
+/* ── Scroll hint S9 ───────────── */
+.s9-scroll-hint {
+  left: 1467px;
+  opacity: 0.6;
+}
+
+/* ── Back button ─────────────── */
+.s9-back-btn {
+  position: absolute;
+  left: 40px; top: 980px;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.25);
+  cursor: pointer;
+  transition: background 0.2s;
+  z-index: 10;
+}
+.s9-back-btn:hover {
+  background: rgba(255,255,255,0.22);
+}
+
+/* ── S9 animations ─────────── */
+.s9-animate .s9-headline {
+  animation: s9FadeIn 0.6s ease forwards;
+}
+.s9-animate .s9-body {
+  animation: s9FadeIn 0.6s ease 0.3s forwards;
+}
+.s9-animate .s9-time-bar {
+  animation: s9FadeIn 0.5s ease 0.5s forwards;
+}
+
+@keyframes s9FadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
