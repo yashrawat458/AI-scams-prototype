@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ════ NAV CORE — transition state + wheel router ════ */
 
   // ── Navigation state ──
-  let currentScreen = 1, s2Ready = false, s3Ready = false, s4Ready = false, s5Ready = false, s6Ready = false, s7Ready = false, s8Ready = false, s9Ready = false, transitioning = false;
+  let currentScreen = 1, s2Ready = false, s3Ready = false, s4Ready = false, s5Ready = false, s6Ready = false, s7Ready = false, s8Ready = false, s9Ready = false, s10Ready = false, s11Ready = false, s12Ready = false, s13Ready = false, s14Ready = false, transitioning = false;
   let chosenTactic = 'authority'; // stored when populating scammer card
 
   document.addEventListener('wheel', (e) => {
@@ -169,8 +169,18 @@ document.addEventListener('DOMContentLoaded', () => {
       else if (currentScreen === 6 && s6Ready) { transitioning = true; transitionToScreen7(); }
       else if (currentScreen === 7 && s7Ready) { transitioning = true; transitionToScreen8(); }
       else if (currentScreen === 8 && s8Ready && s8ReturnedFromS9) { transitioning = true; transitionToScreen9(); }
+      else if (currentScreen === 9 && s9Ready) { transitioning = true; transitionToScreen10(); }
+      else if (currentScreen === 10 && s10Ready) { transitioning = true; transitionToScreen11(); }
+      else if (currentScreen === 11 && s11Ready) { transitioning = true; transitionToScreen12(); }
+      else if (currentScreen === 12 && s12Ready) { transitioning = true; transitionToScreen13(); }
+      else if (currentScreen === 13 && s13Ready) { transitioning = true; transitionToScreen14(); }
     } else if (backward) {
-      if (currentScreen === 9 && s9Ready) { transitioning = true; reverseToScreen8(); }
+      if (currentScreen === 14 && s14Ready) { transitioning = true; reverseToScreen13(); }
+      else if (currentScreen === 13 && s13Ready) { transitioning = true; reverseToScreen12(); }
+      else if (currentScreen === 12 && s12Ready) { transitioning = true; reverseToScreen11(); }
+      else if (currentScreen === 11 && s11Ready) { transitioning = true; reverseToScreen10(); }
+      else if (currentScreen === 10 && s10Ready) { transitioning = true; reverseToScreen9(); }
+      else if (currentScreen === 9 && s9Ready) { transitioning = true; reverseToScreen8(); }
       else if (currentScreen === 8 && s8Ready) { transitioning = true; reverseToScreen7(); }
       else if (currentScreen === 7 && s7Ready) { transitioning = true; reverseToScreen6(); }
       else if (currentScreen === 6 && s6Ready) { transitioning = true; reverseToScreen5(); }
@@ -1010,6 +1020,248 @@ document.addEventListener('DOMContentLoaded', () => {
     transitioning = true;
     reverseToScreen8();
   });
+
+  /* ════════════════════════════════════════════════════
+   *  Helper: copy scammer + victim cards to any screen prefix
+   * ════════════════════════════════════════════════════ */
+  function populateCallCards(prefix) {
+    const s6Name = $('#s6-scammer-name');
+    if (s6Name) $(`#${prefix}-scammer-name`).textContent = s6Name.textContent;
+    const s6Det = $('#s6-scammer-details');
+    if (s6Det) $(`#${prefix}-scammer-details`).innerHTML = s6Det.innerHTML;
+
+    $(`#${prefix}-tactic-pill`).textContent = TACTIC_LABELS[chosenTactic] || 'Authority Fabrication';
+
+    const sex = state.sex || 'male';
+    $(`#${prefix}-victim-avatar-img`).src = sex === 'female' ? 'assets/woman-red-hair.png' : 'assets/man-red-hair.png';
+    $(`#${prefix}-victim-name`).textContent = $('#s4-name').textContent;
+
+    const details = $(`#${prefix}-victim-details`);
+    details.innerHTML = '';
+    $('#s4-details').querySelectorAll('span').forEach(span => {
+      const p = document.createElement('p'); p.textContent = span.textContent; p.style.margin = '0'; details.appendChild(p);
+    });
+
+    const ids = $(`#${prefix}-victim-ids`);
+    ids.innerHTML = '';
+    $('#s4-ids').querySelectorAll('span').forEach(span => {
+      const p = document.createElement('p'); p.textContent = span.textContent; p.style.margin = '0'; ids.appendChild(p);
+    });
+  }
+
+  /* ════════════════════════════════════════════════════
+   *  SCREEN 9 → SCREEN 10
+   * ════════════════════════════════════════════════════ */
+  function transitionToScreen10() {
+    populateCallCards('s10');
+
+    const s9 = $('#screen-9');
+    fadeOut(s9.querySelectorAll('.s9-headline, .s9-body, .s9-time-bar-wrap, .s9-back-btn, .scroll-hint'));
+
+    setTimeout(() => {
+      s9.classList.add('screen-hidden'); s9.classList.remove('screen-visible');
+
+      const s10 = $('#screen-10');
+      s10.classList.remove('screen-hidden'); s10.classList.add('screen-visible');
+      s10.classList.add('s10-animate');
+
+      // Stagger emotion emojis
+      setTimeout(() => {
+        $$('#screen-10 .s10-emo').forEach((emo, i) => {
+          setTimeout(() => { emo.style.transition = 'opacity 0.4s ease'; emo.style.opacity = '1'; }, i * 70);
+        });
+      }, 400);
+
+      setTimeout(() => {
+        $('#s10-scroll-hint').classList.add('animate');
+        currentScreen = 10; s10Ready = true; transitioning = false;
+      }, 1000);
+    }, 600);
+  }
+
+  function reverseToScreen9() {
+    const s10 = $('#screen-10');
+    fadeOut($$('#screen-10 .s10-step-header, #screen-10 .s10-emo, #screen-10 .s10-goal-text, #screen-10 .s10-ai-card, #screen-10 .s10-robot, #screen-10 .s10-alien, #screen-10 .s10-time-bar, #screen-10 .scroll-hint'));
+
+    setTimeout(() => {
+      s10.classList.add('screen-hidden'); s10.classList.remove('screen-visible');
+      s10.classList.remove('s10-animate');
+      $$('#screen-10 .s10-emo').forEach(emo => { emo.style.opacity = '0'; emo.style.transition = ''; });
+
+      const s9 = $('#screen-9');
+      s9.classList.remove('screen-hidden'); s9.classList.add('screen-visible');
+      s9.classList.add('s9-animate');
+
+      setTimeout(() => {
+        currentScreen = 9; s9Ready = true; s10Ready = false; transitioning = false;
+      }, 600);
+    }, 500);
+  }
+
+  /* ════════════════════════════════════════════════════
+   *  SCREEN 10 → SCREEN 11
+   * ════════════════════════════════════════════════════ */
+  function transitionToScreen11() {
+    const s10 = $('#screen-10');
+    fadeOut($$('#screen-10 .s10-step-header, #screen-10 .s10-emo, #screen-10 .s10-goal-text, #screen-10 .s10-ai-card, #screen-10 .s10-robot, #screen-10 .s10-alien, #screen-10 .s10-time-bar, #screen-10 .scroll-hint'));
+
+    setTimeout(() => {
+      s10.classList.add('screen-hidden'); s10.classList.remove('screen-visible');
+
+      const s11 = $('#screen-11');
+      s11.classList.remove('screen-hidden'); s11.classList.add('screen-visible');
+      s11.classList.add('s11-animate');
+
+      setTimeout(() => {
+        $('#s11-scroll-hint').classList.add('animate');
+        currentScreen = 11; s11Ready = true; transitioning = false;
+      }, 800);
+    }, 500);
+  }
+
+  function reverseToScreen10() {
+    const s11 = $('#screen-11');
+    s11.classList.add('screen-hidden'); s11.classList.remove('screen-visible');
+    s11.classList.remove('s11-animate');
+    $('.s11-center').style.opacity = '0';
+
+    populateCallCards('s10');
+    const s10 = $('#screen-10');
+    s10.classList.remove('screen-hidden'); s10.classList.add('screen-visible');
+    s10.classList.add('s10-animate');
+    $$('#screen-10 .s10-emo').forEach((emo, i) => {
+      setTimeout(() => { emo.style.transition = 'opacity 0.4s ease'; emo.style.opacity = '1'; }, i * 50);
+    });
+    setTimeout(() => {
+      currentScreen = 10; s10Ready = true; s11Ready = false; transitioning = false;
+    }, 600);
+  }
+
+  /* ════════════════════════════════════════════════════
+   *  SCREEN 11 → SCREEN 12
+   * ════════════════════════════════════════════════════ */
+  function transitionToScreen12() {
+    populateCallCards('s12');
+
+    const s11 = $('#screen-11');
+    fadeOut([$('.s11-center')]);
+
+    setTimeout(() => {
+      s11.classList.add('screen-hidden'); s11.classList.remove('screen-visible');
+
+      const s12 = $('#screen-12');
+      s12.classList.remove('screen-hidden'); s12.classList.add('screen-visible');
+      s12.classList.add('s12-animate');
+
+      setTimeout(() => {
+        $('#s12-scroll-hint').classList.add('animate');
+        currentScreen = 12; s12Ready = true; transitioning = false;
+      }, 900);
+    }, 500);
+  }
+
+  function reverseToScreen11() {
+    const s12 = $('#screen-12');
+    fadeOut($$('#screen-12 .s12-step-header, #screen-12 .s12-money, #screen-12 .s12-emotion-pill, #screen-12 .s12-time-bar, #screen-12 .scroll-hint'));
+
+    setTimeout(() => {
+      s12.classList.add('screen-hidden'); s12.classList.remove('screen-visible');
+      s12.classList.remove('s12-animate');
+
+      const s11 = $('#screen-11');
+      s11.classList.remove('screen-hidden'); s11.classList.add('screen-visible');
+      s11.classList.add('s11-animate');
+      $('.s11-center').style.opacity = '0';
+
+      setTimeout(() => {
+        currentScreen = 11; s11Ready = true; s12Ready = false; transitioning = false;
+      }, 700);
+    }, 500);
+  }
+
+  /* ════════════════════════════════════════════════════
+   *  SCREEN 12 → SCREEN 13
+   * ════════════════════════════════════════════════════ */
+  function transitionToScreen13() {
+    populateCallCards('s13');
+
+    const s12 = $('#screen-12');
+    fadeOut($$('#screen-12 .s12-step-header, #screen-12 .s12-money, #screen-12 .s12-emotion-pill, #screen-12 .s12-time-bar, #screen-12 .scroll-hint'));
+
+    setTimeout(() => {
+      s12.classList.add('screen-hidden'); s12.classList.remove('screen-visible');
+
+      const s13 = $('#screen-13');
+      s13.classList.remove('screen-hidden'); s13.classList.add('screen-visible');
+      s13.classList.add('s13-animate');
+
+      setTimeout(() => {
+        $('#s13-scroll-hint').classList.add('animate');
+        currentScreen = 13; s13Ready = true; transitioning = false;
+      }, 900);
+    }, 500);
+  }
+
+  function reverseToScreen12() {
+    const s13 = $('#screen-13');
+    fadeOut($$('#screen-13 .s13-step-content, #screen-13 .s13-ai-card, #screen-13 .s13-robot, #screen-13 .s13-alien, #screen-13 .s13-money-small, #screen-13 .s13-emotion-pill, #screen-13 .s13-time-bar, #screen-13 .scroll-hint'));
+
+    setTimeout(() => {
+      s13.classList.add('screen-hidden'); s13.classList.remove('screen-visible');
+      s13.classList.remove('s13-animate');
+
+      populateCallCards('s12');
+      const s12 = $('#screen-12');
+      s12.classList.remove('screen-hidden'); s12.classList.add('screen-visible');
+      s12.classList.add('s12-animate');
+
+      setTimeout(() => {
+        currentScreen = 12; s12Ready = true; s13Ready = false; transitioning = false;
+      }, 700);
+    }, 500);
+  }
+
+  /* ════════════════════════════════════════════════════
+   *  SCREEN 13 → SCREEN 14
+   * ════════════════════════════════════════════════════ */
+  function transitionToScreen14() {
+    const s13 = $('#screen-13');
+    fadeOut($$('#screen-13 .s13-step-content, #screen-13 .s13-ai-card, #screen-13 .s13-robot, #screen-13 .s13-alien, #screen-13 .s13-money-small, #screen-13 .s13-emotion-pill, #screen-13 .s13-time-bar, #screen-13 .scroll-hint'));
+
+    setTimeout(() => {
+      s13.classList.add('screen-hidden'); s13.classList.remove('screen-visible');
+
+      const s14 = $('#screen-14');
+      s14.classList.remove('screen-hidden'); s14.classList.add('screen-visible');
+      s14.classList.add('s14-animate');
+
+      setTimeout(() => {
+        $('#s14-scroll-hint').classList.add('animate');
+        currentScreen = 14; s14Ready = true; transitioning = false;
+      }, 1000);
+    }, 500);
+  }
+
+  function reverseToScreen13() {
+    const s14 = $('#screen-14');
+    fadeOut([$('.s14-ghost'), $('.s14-step-block')]);
+
+    setTimeout(() => {
+      s14.classList.add('screen-hidden'); s14.classList.remove('screen-visible');
+      s14.classList.remove('s14-animate');
+      $('.s14-ghost').style.opacity = '0';
+      $('.s14-step-block').style.opacity = '0';
+
+      populateCallCards('s13');
+      const s13 = $('#screen-13');
+      s13.classList.remove('screen-hidden'); s13.classList.add('screen-visible');
+      s13.classList.add('s13-animate');
+
+      setTimeout(() => {
+        currentScreen = 13; s13Ready = true; s14Ready = false; transitioning = false;
+      }, 700);
+    }, 500);
+  }
 
   // ── Keyboard a11y ──
   allChips.forEach(chip => {

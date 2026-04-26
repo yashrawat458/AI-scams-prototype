@@ -2619,3 +2619,588 @@ button {
   from { opacity: 0; transform: translateY(15px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+/* ════════════════════════════════════════════════════════════════════
+ *  SCREENS 10–14 — Shared call-screen chrome helpers
+ * ════════════════════════════════════════════════════════════════════ */
+
+/* ── Shared scammer/victim card (used by S10, S12, S13) ── */
+.s10-scammer-card, .s12-scammer-card, .s13-scammer-card {
+  position: absolute;
+  left: 198px; top: 24px;
+  width: 335px; height: 154px;
+  background: #f4dfc1;
+  border: 4.431px solid #d91cff;
+  border-radius: 7px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.s10-scammer-avatar, .s12-scammer-avatar, .s13-scammer-avatar {
+  position: absolute;
+  left: -26px; top: 11px;
+  width: 120px; height: 120px;
+  overflow: hidden;
+}
+.s10-scammer-avatar img, .s12-scammer-avatar img, .s13-scammer-avatar img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.s10-scammer-name, .s12-scammer-name, .s13-scammer-name {
+  position: absolute;
+  left: 77px; top: 18px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 500;
+  font-size: 14.18px; color: #000; margin: 0;
+  width: 225px;
+}
+.s10-scammer-details, .s12-scammer-details, .s13-scammer-details {
+  position: absolute;
+  left: 78px; top: 37px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400; font-size: 14.18px; color: #000;
+  line-height: 1.25;
+}
+.s10-scammer-details p, .s12-scammer-details p, .s13-scammer-details p { margin: 0; }
+
+.s10-victim-card, .s12-victim-card, .s13-victim-card {
+  position: absolute;
+  left: 198px; top: 889px;
+  width: 335px; height: 154px;
+  background: #f4dfc1;
+  border: 4.431px solid #cca46a;
+  border-radius: 7px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.s10-victim-avatar, .s12-victim-avatar, .s13-victim-avatar {
+  position: absolute;
+  left: 7px; top: 47px;
+  width: 61px; height: 61px; overflow: hidden;
+}
+.s10-victim-avatar img, .s12-victim-avatar img, .s13-victim-avatar img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.s10-victim-info, .s12-victim-info, .s13-victim-info {
+  position: absolute;
+  left: 77px; top: 18px;
+}
+.s10-victim-name, .s12-victim-name, .s13-victim-name {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 500; font-size: 14.18px; color: #000; margin: 0;
+}
+.s10-victim-details, .s12-victim-details, .s13-victim-details {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400; font-size: 14.18px; color: #000; line-height: 1.25;
+  margin-top: 3.5px;
+}
+.s10-victim-details p, .s12-victim-details p, .s13-victim-details p { margin: 0; }
+.s10-victim-ids, .s12-victim-ids, .s13-victim-ids {
+  position: absolute;
+  right: 10px; top: 58px;
+  display: flex; flex-direction: column; gap: 4.4px;
+}
+.s10-victim-ids p, .s12-victim-ids p, .s13-victim-ids p {
+  margin: 0; font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400; font-size: 8.862px; color: #000;
+}
+
+/* Shared labels */
+.s10-scammer-label, .s12-scammer-label, .s13-scammer-label {
+  position: absolute;
+  left: 29px; top: 69px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-style: italic; font-weight: 400;
+  font-size: 32px; color: #fff; margin: 0;
+}
+.s10-victim-label, .s12-victim-label, .s13-victim-label {
+  position: absolute;
+  left: 29px; top: 945px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-style: italic; font-weight: 400;
+  font-size: 32px; color: #fff; margin: 0;
+}
+/* Tactic pill + phone */
+.s10-tactic-pill, .s12-tactic-pill, .s13-tactic-pill {
+  position: absolute;
+  left: 645px; top: 74px;
+  background: #ede3e2;
+  padding: 11px 21px; border-radius: 24px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-size: 24px; color: #211d07;
+  white-space: nowrap;
+}
+.s10-phone-icon, .s12-phone-icon, .s13-phone-icon {
+  position: absolute;
+  left: 1035px; top: 54px;
+  width: 91px; height: 91px;
+}
+.s10-phone-icon img, .s12-phone-icon img, .s13-phone-icon img {
+  width: 100%; height: 100%; object-fit: contain;
+}
+/* AI Amplification pills row */
+.s10-pills, .s12-pills, .s13-pills {
+  position: absolute;
+  left: 50%; top: 230px;
+  transform: translateX(-50%);
+  display: flex; flex-wrap: wrap; gap: 16px;
+  width: 406px;
+}
+.s10-pill, .s12-pill, .s13-pill {
+  padding: 8px 15px; border-radius: 36px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-size: 16px; color: #211d07;
+  white-space: nowrap;
+}
+.s10-pill-grey, .s12-pill-grey, .s13-pill-grey { background: #6767ae; }
+.s10-pill-green { background: #7bf12c; }
+
+/* ISOLATION label (shared) */
+.s10-isolation-label, .s12-isolation-label, .s13-isolation-label {
+  position: absolute;
+  left: 39px; top: 442px;
+  width: 54px; height: 163px;
+  display: flex; align-items: center; justify-content: center;
+}
+.s10-isolation-pill, .s12-isolation-pill, .s13-isolation-pill {
+  background: #fff;
+  padding: 11px 21px;
+  transform: rotate(-90deg);
+  white-space: nowrap;
+  font-family: 'Rethink Sans', sans-serif;
+  font-size: 24px; color: #211d07;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+ *  SCREEN 10 — Step 3 Emotional Triggers (detail)
+ * ════════════════════════════════════════════════════════════════════ */
+#screen-10 { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; }
+
+.s10-step-header {
+  position: absolute;
+  left: 132px; top: 285px;
+  opacity: 0;
+}
+.s10-step-label {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400; font-size: 0; color: #fff; margin: 0 0 12px;
+}
+.s10-step-sm { font-size: 20px; }
+.s10-step-num { font-size: 32px; }
+.s10-step-title {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 600; font-style: italic;
+  font-size: 60.615px; color: #d91cff;
+  margin: 0; white-space: nowrap;
+  background: #1b2191;
+  display: inline-block;
+}
+.s10-emo {
+  position: absolute;
+  top: 297px; width: 79px; height: 79px;
+  object-fit: contain; opacity: 0;
+}
+.s10-goal-text {
+  position: absolute;
+  left: 134px; top: 531px;
+  width: 790px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400; font-size: 43.97px; color: #fff;
+  margin: 0; line-height: 1.2;
+  opacity: 0;
+}
+.s10-ai-card {
+  position: absolute;
+  left: 952px; top: 498px;
+  width: 867px;
+  background: #f4dfc1;
+  padding: 29px 38px;
+  box-sizing: border-box;
+  opacity: 0;
+}
+.s10-ai-bold {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 500; font-size: 30.192px; color: #262626;
+  margin: 0 0 8px;
+}
+.s10-ai-reg {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400; font-size: 30.192px; color: #262626;
+  margin: 0;
+}
+.s10-robot {
+  position: absolute;
+  left: 899px; top: 448px;
+  width: 85px; height: 85px;
+  object-fit: contain;
+  transform: rotate(-28.05deg);
+  opacity: 0;
+}
+.s10-alien {
+  position: absolute;
+  left: 1754px; top: 654px;
+  width: 94px; height: 94px;
+  object-fit: contain;
+  transform: rotate(16.5deg);
+  opacity: 0;
+}
+/* Time bar frozen at 3:42 (progress 546px, clock 522px) */
+.s10-time-bar {
+  position: absolute;
+  left: 0; top: 812px;
+  width: 1920px; height: 60px;
+  opacity: 0;
+}
+.s10-time-strip {
+  position: absolute;
+  left: 0; top: 16px;
+  width: 1920px; height: 16px;
+  background: rgba(255,255,255,0.06);
+}
+.s10-time-progress {
+  position: absolute;
+  left: 0; top: 0;
+  width: 546px; height: 16px;
+  background: #d9d9d9;
+  display: flex; align-items: center;
+  padding-left: 75px; box-sizing: border-box; overflow: hidden;
+}
+.s10-time-text {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400; font-size: 13px; color: #141d45;
+  white-space: nowrap; margin: 0; flex-shrink: 0;
+}
+.s10-clock {
+  position: absolute;
+  left: 522px; top: 0;
+  width: 47px; height: 47px;
+}
+.s10-clock img { width: 100%; height: 100%; object-fit: contain; }
+.s10-scroll-hint { left: 1661px; }
+
+/* S10 animation */
+.s10-animate .s10-step-header,
+.s10-animate .s10-goal-text,
+.s10-animate .s10-ai-card,
+.s10-animate .s10-robot,
+.s10-animate .s10-alien,
+.s10-animate .s10-time-bar {
+  animation: s10FadeIn 0.5s ease forwards;
+}
+.s10-animate .s10-goal-text   { animation-delay: 0.15s; }
+.s10-animate .s10-ai-card     { animation-delay: 0.25s; }
+.s10-animate .s10-robot       { animation-delay: 0.25s; }
+.s10-animate .s10-alien       { animation-delay: 0.35s; }
+.s10-animate .s10-time-bar    { animation-delay: 0.3s; }
+@keyframes s10FadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ════════════════════════════════════════════════════════════════════
+ *  SCREEN 11 — Enter your PIN
+ * ════════════════════════════════════════════════════════════════════ */
+#screen-11 { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; }
+.s11-bg {
+  position: absolute; inset: 0;
+  background: #1b2191;
+}
+.s11-center {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex; flex-direction: column;
+  align-items: center; gap: 25px;
+  opacity: 0;
+}
+.s11-headline {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400; font-size: 109px; color: #fff;
+  margin: 0; white-space: nowrap;
+}
+.s11-pin-row {
+  display: flex; gap: 30px; align-items: center; justify-content: center;
+  width: 411px;
+}
+.s11-dot {
+  width: 75px; height: 75px; border-radius: 50%; flex-shrink: 0;
+}
+.s11-dot-filled { background: #cdc4d6; }
+.s11-dot-empty  { background: transparent; border: 4px solid #cdc4d6; box-sizing: border-box; }
+.s11-scroll-hint { left: 1661px; }
+.s11-animate .s11-center {
+  animation: s11FadeIn 0.7s ease forwards;
+}
+@keyframes s11FadeIn {
+  from { opacity: 0; transform: translate(-50%, calc(-50% + 20px)); }
+  to   { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+/* ════════════════════════════════════════════════════════════════════
+ *  SCREEN 12 — Step 4 Extractions (intro)
+ * ════════════════════════════════════════════════════════════════════ */
+#screen-12 { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; }
+
+.s12-step-header {
+  position: absolute;
+  left: 636px; top: 452px;
+  opacity: 0;
+}
+.s12-step-label {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400; font-size: 0; color: #fff; margin: 0 0 12px;
+}
+.s12-step-sm { font-size: 20px; }
+.s12-step-num { font-size: 32px; }
+.s12-step-title {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 600; font-style: italic;
+  font-size: 60.615px; color: #d91cff;
+  margin: 0; white-space: nowrap;
+  background: #1b2191; display: inline-block;
+}
+.s12-money {
+  position: absolute;
+  left: 1015px; top: 408px;
+  width: 214px; height: 214px;
+  object-fit: contain;
+  transform: rotate(-75deg) scaleY(-1);
+  opacity: 0;
+}
+.s12-emotion-pill {
+  position: absolute;
+  left: 645px; top: 938px;
+  background: #ede3e2;
+  padding: 11px 21px; border-radius: 24px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-size: 24px; color: #211d07;
+  white-space: nowrap;
+  opacity: 0;
+}
+/* Time bar frozen at 7:12 (progress 1231px, clock 1204px) */
+.s12-time-bar {
+  position: absolute;
+  left: 0; top: 812px;
+  width: 1920px; height: 60px;
+  opacity: 0;
+}
+.s12-time-strip {
+  position: absolute;
+  left: 0; top: 16px;
+  width: 1920px; height: 16px;
+  background: rgba(255,255,255,0.06);
+}
+.s12-time-progress {
+  position: absolute;
+  left: 0; top: 0;
+  width: 1231px; height: 16px;
+  background: #d9d9d9;
+  display: flex; align-items: center;
+  padding-left: 75px; box-sizing: border-box; overflow: hidden;
+}
+.s12-time-text {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400; font-size: 13px; color: #141d45;
+  white-space: nowrap; margin: 0; flex-shrink: 0;
+}
+.s12-clock {
+  position: absolute;
+  left: 1204px; top: 0;
+  width: 47px; height: 47px;
+}
+.s12-clock img { width: 100%; height: 100%; object-fit: contain; }
+.s12-scroll-hint { left: 1661px; }
+
+.s12-animate .s12-step-header,
+.s12-animate .s12-money,
+.s12-animate .s12-emotion-pill,
+.s12-animate .s12-time-bar {
+  animation: s12FadeIn 0.5s ease forwards;
+}
+.s12-animate .s12-money        { animation-delay: 0.15s; }
+.s12-animate .s12-emotion-pill { animation-delay: 0.2s; }
+.s12-animate .s12-time-bar     { animation-delay: 0.3s; }
+@keyframes s12FadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ════════════════════════════════════════════════════════════════════
+ *  SCREEN 13 — Step 4 Extractions (detail)
+ * ════════════════════════════════════════════════════════════════════ */
+#screen-13 { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; }
+
+.s13-step-content {
+  position: absolute;
+  left: 240px; top: 333px;
+  width: 668px;
+  opacity: 0;
+}
+.s13-step-label {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400; font-size: 0; color: #fff; margin: 0 0 12px;
+}
+.s13-step-sm { font-size: 20px; }
+.s13-step-num { font-size: 32px; }
+.s13-step-title {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 600; font-style: italic;
+  font-size: 60.615px; color: #d91cff;
+  margin: 0 0 46px; white-space: nowrap;
+  background: #1b2191; display: inline-block;
+}
+.s13-description {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400; font-size: 28.591px; color: #fff;
+  line-height: 1.3;
+}
+.s13-description p { margin: 0; }
+.s13-description ul {
+  margin: 0; padding-left: 40px;
+  list-style: disc;
+}
+.s13-description li { margin-bottom: 2px; }
+.s13-ai-card {
+  position: absolute;
+  left: 922px; top: 483px;
+  width: 867px;
+  background: #f4dfc1;
+  padding: 29px 38px;
+  box-sizing: border-box;
+  opacity: 0;
+}
+.s13-ai-bold {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 500; font-size: 30.192px; color: #262626;
+  margin: 0 0 8px;
+}
+.s13-ai-reg {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400; font-size: 30.192px; color: #262626;
+  margin: 0;
+}
+.s13-robot {
+  position: absolute;
+  left: 869px; top: 433px;
+  width: 85px; height: 85px;
+  object-fit: contain; transform: rotate(-28.05deg); opacity: 0;
+}
+.s13-alien {
+  position: absolute;
+  left: 1724px; top: 639px;
+  width: 94px; height: 94px;
+  object-fit: contain; transform: rotate(16.5deg); opacity: 0;
+}
+.s13-money-small {
+  position: absolute;
+  left: 1190px; top: 16px;
+  width: 135px; height: 135px;
+  object-fit: contain;
+  transform: rotate(-75deg) scaleY(-1);
+  opacity: 0;
+}
+.s13-emotion-pill {
+  position: absolute;
+  left: 645px; top: 938px;
+  background: #ede3e2;
+  padding: 11px 21px; border-radius: 24px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-size: 24px; color: #211d07; white-space: nowrap;
+  opacity: 0;
+}
+/* Time bar frozen at 7:12 */
+.s13-time-bar {
+  position: absolute;
+  left: 0; top: 812px;
+  width: 1920px; height: 60px; opacity: 0;
+}
+.s13-time-strip {
+  position: absolute;
+  left: 0; top: 16px;
+  width: 1920px; height: 16px;
+  background: rgba(255,255,255,0.06);
+}
+.s13-time-progress {
+  position: absolute;
+  left: 0; top: 0;
+  width: 1231px; height: 16px;
+  background: #d9d9d9;
+  display: flex; align-items: center;
+  padding-left: 75px; box-sizing: border-box; overflow: hidden;
+}
+.s13-time-text {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400; font-size: 13px; color: #141d45;
+  white-space: nowrap; margin: 0; flex-shrink: 0;
+}
+.s13-clock {
+  position: absolute;
+  left: 1204px; top: 0;
+  width: 47px; height: 47px;
+}
+.s13-clock img { width: 100%; height: 100%; object-fit: contain; }
+.s13-scroll-hint { left: 1661px; }
+
+.s13-animate .s13-step-content,
+.s13-animate .s13-ai-card,
+.s13-animate .s13-robot,
+.s13-animate .s13-alien,
+.s13-animate .s13-money-small,
+.s13-animate .s13-emotion-pill,
+.s13-animate .s13-time-bar {
+  animation: s13FadeIn 0.5s ease forwards;
+}
+.s13-animate .s13-ai-card      { animation-delay: 0.15s; }
+.s13-animate .s13-robot        { animation-delay: 0.15s; }
+.s13-animate .s13-alien        { animation-delay: 0.25s; }
+.s13-animate .s13-money-small  { animation-delay: 0.1s; }
+.s13-animate .s13-emotion-pill { animation-delay: 0.2s; }
+.s13-animate .s13-time-bar     { animation-delay: 0.3s; }
+@keyframes s13FadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ════════════════════════════════════════════════════════════════════
+ *  SCREEN 14 — Step 5 Ghosting
+ * ════════════════════════════════════════════════════════════════════ */
+#screen-14 { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; }
+.s14-bg {
+  position: absolute; inset: 0;
+  background: #1b2191;
+}
+.s14-ghost {
+  position: absolute;
+  left: 800px; top: 305px;
+  width: 394px; height: 394px;
+  object-fit: contain;
+  transform: rotate(180deg) scaleY(-1);
+  opacity: 0;
+}
+.s14-step-block {
+  position: absolute;
+  left: 858px; top: 699px;
+  opacity: 0;
+}
+.s14-step-label {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400; font-size: 0; color: #fff; margin: 0 0 12px;
+}
+.s14-step-sm { font-size: 20px; }
+.s14-step-num { font-size: 32px; }
+.s14-step-title {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 600; font-style: italic;
+  font-size: 60.615px; color: #d91cff;
+  margin: 0; white-space: nowrap;
+  background: #1b2191; display: inline-block;
+}
+.s14-scroll-hint { left: 1661px; }
+.s14-animate .s14-ghost { animation: s14GhostIn 0.9s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+.s14-animate .s14-step-block { animation: s14FadeIn 0.5s ease 0.4s forwards; }
+@keyframes s14GhostIn {
+  from { opacity: 0; transform: rotate(180deg) scaleY(-1) translateY(30px); }
+  to   { opacity: 1; transform: rotate(180deg) scaleY(-1) translateY(0); }
+}
+@keyframes s14FadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
