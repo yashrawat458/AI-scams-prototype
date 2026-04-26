@@ -796,28 +796,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const timerEl = $('#s8-timer');
         const progressEl = $('.s8-time-progress');
         const clockEl = $('#s8-clock');
-        timerEl.textContent = '0:00';
+        timerEl.textContent = '0';
         progressEl.style.width = '0';
         clockEl.style.left = '0px';
 
         if (s8TimerInterval) clearInterval(s8TimerInterval);
         s8TimerInterval = setInterval(() => {
           s8Elapsed++;
-          const mins = Math.floor(s8Elapsed / 60);
-          const secs = (s8Elapsed % 60).toString().padStart(2, '0');
-          timerEl.textContent = `${mins}:${secs}`;
-          // Progress bar: 546px over ~4 mins (240s)
-          const pct = Math.min(s8Elapsed / 240, 1);
+          timerEl.textContent = `${s8Elapsed}`;
+          // Progress bar: 546px over 30 fake-seconds (10 real seconds)
+          const pct = Math.min(s8Elapsed / 30, 1);
           progressEl.style.width = (546 * pct) + 'px';
           // Clock drifts with the progress bar
           clockEl.style.left = (546 * pct) + 'px';
 
-          // Auto-transition to Screen 9 at 30 seconds
+          // Auto-transition to Screen 9 at 30 fake-seconds
           if (s8Elapsed >= 30 && !transitioning && currentScreen === 8) {
             transitioning = true;
             transitionToScreen9();
           }
-        }, 1000);
+        }, 333);
       }, 2000);
 
       // Scroll hint + ready
@@ -869,7 +867,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       // Reset timer & clock
-      $('#s8-timer').textContent = '0:00';
+      $('#s8-timer').textContent = '0';
       $('.s8-time-progress').style.width = '0';
       $('#s8-clock').style.left = '0px';
       s8Elapsed = 0;
@@ -960,7 +958,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       $$('.s8-tactic-card').forEach(card => { card.style.opacity = ''; card.style.transform = ''; });
       $$('#screen-8 .s8-emo').forEach(emo => { emo.style.transition = ''; emo.style.opacity = ''; });
-      $('#s8-timer').textContent = '0:00';
+      $('#s8-timer').textContent = '0';
       $('.s8-time-progress').style.width = '0';
       $('#s8-clock').style.left = '0px';
       s8Elapsed = 0;
@@ -990,17 +988,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const timerEl = $('#s8-timer');
         const progressEl = $('.s8-time-progress');
         const clockEl = $('#s8-clock');
-        timerEl.textContent = '0:00';
+        timerEl.textContent = '0';
         progressEl.style.width = '0';
         clockEl.style.left = '0px';
 
         if (s8TimerInterval) clearInterval(s8TimerInterval);
         s8TimerInterval = setInterval(() => {
           s8Elapsed++;
-          const mins = Math.floor(s8Elapsed / 60);
-          const secs = (s8Elapsed % 60).toString().padStart(2, '0');
-          timerEl.textContent = `${mins}:${secs}`;
-          const pct = Math.min(s8Elapsed / 240, 1);
+          timerEl.textContent = `${s8Elapsed}`;
+          const pct = Math.min(s8Elapsed / 30, 1);
           progressEl.style.width = (546 * pct) + 'px';
           clockEl.style.left = (546 * pct) + 'px';
 
@@ -1008,7 +1004,7 @@ document.addEventListener('DOMContentLoaded', () => {
             transitioning = true;
             transitionToScreen9();
           }
-        }, 1000);
+        }, 333);
       }, 2000);
 
       setTimeout(() => {
