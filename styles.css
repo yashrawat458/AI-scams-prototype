@@ -1,6 +1,35 @@
-/* ========================================
-   RESET & BASE
-   ======================================== */
+/* ════════════════════════════════════════════════════════════════════
+ *  AI SCAMS PROTOTYPE — STYLES
+ *  ────────────────────────────────────────────────────────────────────
+ *  Table of Contents
+ *  ────────────────────────────────────────────────────────────────────
+ *    GLOBAL
+ *      • Reset & base
+ *      • Viewport (1920×1080 scaling)
+ *      • Screen primitives
+ *      • Background layers
+ *      • Screen visibility helpers
+ *      • Shared scroll hint
+ *
+ *    SCREEN 1  — "Who are you?"  (clipboard, chips, continue)
+ *    SCREEN 2  — "You've been PWNED!!"
+ *    SCREEN 3  — Step 1. Data Harvesting
+ *    SCREEN 4  — Character Profile Card  (horizontal scroll w/ S3)
+ *    SCREEN 5  — Step 2. Synthesis  (mind-map of tactics)
+ *    SCREEN 6  — Step 2. Synthesis  (detail w/ scammer card)
+ *    SCREEN 7  — "Contact established."
+ *    SCREEN 8  — Step 3. Emotional triggers
+ *    SCREEN 9  — "An average phone call lasts 30s."
+ *
+ *  Convention
+ *    ═══   = major section banner (one screen)
+ *    ───   = subsection inside a screen
+ * ════════════════════════════════════════════════════════════════════ */
+
+
+/* ════════════════════════════════════════════════════════════════════
+ *  GLOBAL — Reset & base
+ * ════════════════════════════════════════════════════════════════════ */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -25,9 +54,9 @@ button {
   outline: none;
 }
 
-/* ========================================
-   VIEWPORT — fixed 1920×1080, no scaling
-   ======================================== */
+/* ════════════════════════════════════════════════════════════════════
+ *  GLOBAL — Viewport (fixed 1920×1080, JS scales to fit window)
+ * ════════════════════════════════════════════════════════════════════ */
 .viewport {
   width: 1920px;
   height: 1080px;
@@ -37,9 +66,9 @@ button {
   /* JS sets transform: scale(...) */
 }
 
-/* ========================================
-   SCREEN — fixed 1920×1080 canvas
-   ======================================== */
+/* ════════════════════════════════════════════════════════════════════
+ *  GLOBAL — Screen primitive (1920×1080 canvas)
+ * ════════════════════════════════════════════════════════════════════ */
 .screen {
   position: relative;
   width: 1920px;
@@ -48,9 +77,9 @@ button {
   background: #000;
 }
 
-/* ========================================
-   BACKGROUND LAYERS
-   ======================================== */
+/* ════════════════════════════════════════════════════════════════════
+ *  GLOBAL — Background layers (grid + blue panels, used by many screens)
+ * ════════════════════════════════════════════════════════════════════ */
 .background {
   position: absolute;
   inset: 0;
@@ -85,11 +114,16 @@ button {
   z-index: 1;
 }
 
-/* ========================================
-   CLIPBOARD ILLUSTRATION
+/* ════════════════════════════════════════════════════════════════════
+ *  SCREEN 1 — "Who are you?"
+ *  ────────────────────────────────────────────────────────────────────
+ *  Onboarding screen: clipboard illustration + chip selectors for
+ *  Age / Sex / Occupation and "Do you have?" + Continue button.
+ * ════════════════════════════════════════════════════════════════════ */
+
+/* ──── Clipboard illustration ────
    Figma: left 1632, top 95, container 396×396
-          inner image 324×324, rotated -15°
-   ======================================== */
+          inner image 324×324, rotated -15° */
 .clipboard-wrapper {
   position: absolute;
   left: 1552px;
@@ -141,11 +175,8 @@ button {
   50% { transform: rotate(-15deg) translateY(-12px); }
 }
 
-/* ========================================
-   SECTION 1 — "Who are you?"
-   Figma: left 76, top 288, width 1470
-   Inner gap: 18px (title to content)
-   ======================================== */
+/* ──── Section 1 — "Who are you?" ────
+   Figma: left 76, top 288, width 1470, gap 18px (title→content) */
 .section-who {
   position: absolute;
   left: 76px;
@@ -161,11 +192,8 @@ button {
   animation: sectionFadeIn 0.7s ease-out 0.1s forwards;
 }
 
-/* ========================================
-   SECTION 2 — "Do you have?"
-   Figma: left 76, top 557, width 825
-   Inner gap: 36px (title to chips)
-   ======================================== */
+/* ──── Section 2 — "Do you have?" ────
+   Figma: left 76, top 557, width 825, gap 36px (title→chips) */
 .section-have {
   position: absolute;
   left: 76px;
@@ -188,9 +216,7 @@ button {
   }
 }
 
-/* ========================================
-   SECTION TITLES — 40px Rethink Sans Regular
-   ======================================== */
+/* ──── Section titles (shared by both sections) — 40px Rethink Sans ──── */
 .section-title {
   font-size: 40px;
   font-weight: 400;
@@ -198,10 +224,7 @@ button {
   color: #fff;
 }
 
-/* ========================================
-   BIO GRID (Age / Sex / Occupation)
-   Figma: flex row, gap 62px
-   ======================================== */
+/* ──── Bio grid (Age / Sex / Occupation) — flex row, gap 62px ──── */
 .bio-grid {
   display: flex;
   gap: 62px;
@@ -237,9 +260,7 @@ button {
   color: #d4d4d4;
 }
 
-/* ========================================
-   CHIPS — flex wrap, gap 8px
-   ======================================== */
+/* ──── Chips — flex wrap, gap 8px (shared by S1 selectors) ──── */
 .chips {
   display: flex;
   flex-wrap: wrap;
@@ -342,9 +363,7 @@ button {
   }
 }
 
-/* ========================================
-   CONTINUE BUTTON — below "Do you have?"
-   ======================================== */
+/* ──── Continue button — below "Do you have?" ──── */
 /* Blue panel: top 209, bottom 871. Keep button inside. */
 .continue-wrapper {
   position: absolute;
@@ -401,9 +420,7 @@ button {
   transform: scale(0.97);
 }
 
-/* ========================================
-   SELECTION FEEDBACK FLASH
-   ======================================== */
+/* ──── Selection feedback flash (chip pulse on select) ──── */
 /* Pulse ring on select — uses box-shadow transition, no animation override */
 .chip.just-selected {
   box-shadow:
@@ -419,9 +436,9 @@ button {
   transition: box-shadow 0.4s ease-out;
 }
 
-/* ========================================
-   SCREEN VISIBILITY
-   ======================================== */
+/* ════════════════════════════════════════════════════════════════════
+ *  GLOBAL — Screen visibility helpers
+ * ════════════════════════════════════════════════════════════════════ */
 .screen-hidden {
   display: none;
 }
@@ -430,11 +447,13 @@ button {
   display: block;
 }
 
-/* ========================================
-   SCREEN 2 — "You've been PWNED!!"
-   ======================================== */
+/* ════════════════════════════════════════════════════════════════════
+ *  SCREEN 2 — "You've been PWNED!!"
+ *  ────────────────────────────────────────────────────────────────────
+ *  Full-bleed blue, big devil emoji, scattered emojis, headline + link.
+ * ════════════════════════════════════════════════════════════════════ */
 
-/* Full blue background */
+/* ──── Full blue background ──── */
 .blue-panel-full {
   position: absolute;
   left: 0;
@@ -450,10 +469,7 @@ button {
   left: 0;
 }
 
-/* ========================================
-   CENTER DEVIL EMOJI
-   Figma: left 898, top 300, 165×165
-   ======================================== */
+/* ──── Center devil emoji — Figma: left 898, top 300, 165×165 ──── */
 .center-devil {
   position: absolute;
   left: 898px;
@@ -482,10 +498,7 @@ button {
   100% { opacity: 1; transform: scale(1) rotate(0deg); }
 }
 
-/* ========================================
-   PWNED TEXT
-   Figma: left 472, top 465, font 109.231px
-   ======================================== */
+/* ──── PWNED text — Figma: left 472, top 465, font 109.231px ──── */
 .pwned-text {
   position: absolute;
   left: 472px;
@@ -537,10 +550,7 @@ button {
   70% { transform: translateX(-1px); }
 }
 
-/* ========================================
-   PWNED LINK
-   Figma: left 914, top 804, 13px, color #cccfff
-   ======================================== */
+/* ──── PWNED link — Figma: left 914, top 804, 13px, color #cccfff ──── */
 .pwned-link {
   position: absolute;
   left: 914px;
@@ -562,10 +572,7 @@ button {
   to { opacity: 1; }
 }
 
-/* ========================================
-   SCATTERED DEVIL EMOJIS (background)
-   Exact Figma positions & rotations
-   ======================================== */
+/* ──── Scattered devil emojis (background) — exact Figma positions ──── */
 .emoji {
   position: absolute;
   z-index: 3;
@@ -650,9 +657,13 @@ button {
 }
 .emoji-7.animate { animation-delay: 0.35s; }
 
-/* ========================================
-   SCREEN 3 — "Step 1. Data Harvesting"
-   ======================================== */
+/* ════════════════════════════════════════════════════════════════════
+ *  SCREEN 3 — "Step 1. Data Harvesting"
+ *  ────────────────────────────────────────────────────────────────────
+ *  Two columns: step description (left) + AI card with crawling
+ *  virus emojis (right). Lives inside a horizontal scroll container
+ *  shared with Screen 4.
+ * ════════════════════════════════════════════════════════════════════ */
 
 /* ── AI Amplification Pills ──
    Figma: centered, top 230, width 406 */
@@ -933,10 +944,9 @@ button {
   to   { opacity: 1; transform: translateX(0); }
 }
 
-/* ========================================
-   HORIZONTAL SCROLL CONTAINER
-   Wraps screens 3 & 4 for scroll transition
-   ======================================== */
+/* ════════════════════════════════════════════════════════════════════
+ *  GLOBAL — Horizontal scroll container (wraps Screens 3 & 4)
+ * ════════════════════════════════════════════════════════════════════ */
 .scroll-container {
   position: relative;
   width: 3840px; /* 2 screens side-by-side */
@@ -953,9 +963,12 @@ button {
   transform: translateX(-1920px);
 }
 
-/* ========================================
-   SCREEN 4 — Character Profile Card
-   ======================================== */
+/* ════════════════════════════════════════════════════════════════════
+ *  SCREEN 4 — Character Profile Card
+ *  ────────────────────────────────────────────────────────────────────
+ *  Reveals the generated victim persona. Tilted ID card slides from
+ *  the left, profile card slides from the right.
+ * ════════════════════════════════════════════════════════════════════ */
 
 /* ID card (tilted) — overlaps card from left, rotate 15deg */
 /* ID card — Figma: 318px container, 260px inner image, rotated 15deg */
@@ -1069,9 +1082,12 @@ button {
   margin: 0;
 }
 
-/* ========================================
-   SCREEN 5 — "Step 2. Synthesis"
-   ======================================== */
+/* ════════════════════════════════════════════════════════════════════
+ *  SCREEN 5 — "Step 2. Synthesis"
+ *  ────────────────────────────────────────────────────────────────────
+ *  Mind-map: scammer at center, 4 tactic cards at the corners,
+ *  victim mini-card flies in to the bottom-left.
+ * ════════════════════════════════════════════════════════════════════ */
 #screen-5 {
   position: absolute;
   left: 0;
@@ -1376,9 +1392,9 @@ button {
   width: 106px;
 }
 
-/* ========================================
-   SHARED SCROLL HINT — bottom-right of screen
-   ======================================== */
+/* ════════════════════════════════════════════════════════════════════
+ *  GLOBAL — Shared scroll hint (bottom-right "scroll to continue")
+ * ════════════════════════════════════════════════════════════════════ */
 .scroll-hint {
   position: absolute;
   left: 1467px;
@@ -1429,9 +1445,12 @@ button {
   50%      { opacity: 0.3; transform: translateX(-50%) translateY(6px); }
 }
 
-/* ========================================
-   SCREEN 6 — "Step 2. Synthesis" (detail)
-   ======================================== */
+/* ════════════════════════════════════════════════════════════════════
+ *  SCREEN 6 — "Step 2. Synthesis" (detail)
+ *  ────────────────────────────────────────────────────────────────────
+ *  Picks up from S5: scammer card top, victim card bottom, AI card
+ *  on the right with crawling virus emojis (re-uses S3 keyframes).
+ * ════════════════════════════════════════════════════════════════════ */
 #screen-6 {
   position: absolute;
   left: 0;
@@ -1455,10 +1474,11 @@ button {
   animation: fadeIn 0.5s ease-out 0.3s forwards;
 }
 
-/* ── Scammer persona card (pink border) ── */
+/* ── Scammer persona card (pink border) ──
+   Figma: left calc(50% - 594.5px) + translateX(-50%) → left edge 198px on a 1920 canvas */
 .s6-scammer-card {
   position: absolute;
-  left: 366px;
+  left: 198px;
   top: 24px;
   width: 335px;
   height: 154px;
@@ -1721,11 +1741,11 @@ button {
   animation: crawlWander 15s ease-in-out 0.5s infinite;
 }
 
-/* ── S6 Victim label ── */
+/* ── S6 Victim label ── Figma: left 29, top 945 */
 .s6-victim-label {
   position: absolute;
   left: 29px;
-  top: 955px;
+  top: 945px;
   z-index: 5;
   font-size: 32px;
   font-weight: 400;
@@ -1738,11 +1758,12 @@ button {
   animation: fadeIn 0.5s ease-out forwards;
 }
 
-/* ── S6 Mini victim ID card (same layout as S5) ── */
+/* ── S6 Mini victim ID card (same layout as S5) ──
+   Figma: aligned with scammer card (same horizontal anchor); top 889px */
 .s6-victim-card {
   position: absolute;
-  left: 190px;
-  top: 899px;
+  left: 198px;
+  top: 889px;
   width: 335px;
   height: 154px;
   z-index: 6;
@@ -1807,10 +1828,12 @@ button {
   width: 106px;
 }
 
-/* ========================================
-   SCREEN 7 — "Contact established."
-   Full-bleed blue, scammer ↔ victim
-   ======================================== */
+/* ════════════════════════════════════════════════════════════════════
+ *  SCREEN 7 — "Contact established."
+ *  ────────────────────────────────────────────────────────────────────
+ *  Full-bleed blue. Scammer + dots + victim slide in, then headline
+ *  bams and the contact mode icons appear.
+ * ════════════════════════════════════════════════════════════════════ */
 #screen-7 {
   position: absolute;
   left: 0;
@@ -2000,9 +2023,14 @@ button {
   left: 1661px;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   SCREEN 8 — "Step 3. Emotional triggers"  (Figma-matched)
-   ═══════════════════════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════════════════════
+ *  SCREEN 8 — "Step 3. Emotional triggers"
+ *  ────────────────────────────────────────────────────────────────────
+ *  Scammer row top, victim row bottom, isolation lines around the
+ *  edges, 5 trigger tactic cards (Fear / Desperation / FOMO /
+ *  Obligation / Curiosity), bouncing emotion emojis, time bar.
+ *  Auto-advances to S9 at 30 seconds elapsed.
+ * ════════════════════════════════════════════════════════════════════ */
 #screen-8 {
   position: absolute;
   left: 0; top: 0;
@@ -2445,9 +2473,12 @@ button {
   to   { opacity: 1; transform: scale(1); }
 }
 
-/* ═══════════════════════════════════════════════════════════
-   SCREEN 9 — "An average phone call lasts 30s."
-   ═══════════════════════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════════════════════
+ *  SCREEN 9 — "An average phone call lasts 30s."
+ *  ────────────────────────────────────────────────────────────────────
+ *  Headline + body text + frozen time bar at 3:42, with a Back
+ *  button to return to S8.
+ * ════════════════════════════════════════════════════════════════════ */
 #screen-9 {
   position: absolute;
   left: 0; top: 0;

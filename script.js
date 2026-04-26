@@ -1,7 +1,32 @@
-/**
- * AI Scams Prototype — Interactive chip selection + multi-screen navigation
- */
+/* ════════════════════════════════════════════════════════════════════
+ *  AI SCAMS PROTOTYPE — SCRIPT
+ *  ────────────────────────────────────────────────────────────────────
+ *  Interactive chip selection + multi-screen narrative navigation.
+ *
+ *  Table of Contents
+ *  ────────────────────────────────────────────────────────────────────
+ *    SETUP        — viewport scaling, $/$$ helpers, state, common helpers
+ *    SCREEN 1     — chip entrance, single/multi selection, Continue → S2
+ *    NAV CORE     — scroll/transition state + wheel router
+ *    SCREEN 2→33  — PWNED → Data Harvesting
+ *    SCREEN 3→34  — horizontal scroll to profile card
+ *    SCREEN 4→35  — victim card flies into Synthesis mind-map
+ *    SHARED       — stripAnimate, scammer persona generator
+ *    SCREEN 5→36  — Synthesis detail w/ scammer card
+ *    SCREEN 6→37  — Contact established
+ *    SCREEN 7→38  — Emotional triggers + 30s timer
+ *    SCREEN 8→39  — Auto-advance to "phone call lasts 30s"
+ *    REVERSE NAV  — paired reverse transitions for back-scrolling
+ *    PERSONA GEN  — victim names, cities, IDs, bios for Screen 4
+ *
+ *  Naming convention
+ *    transitionToScreenN()  forward navigation handler
+ *    reverseToScreenN()     back navigation handler
+ *    populate*()            DOM data injection (called before show)
+ * ════════════════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
+
+  /* ════ SETUP — viewport, helpers, state ════ */
 
   // ── Viewport scaling ──
   function scaleViewport() {
@@ -38,6 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
       el.style.transform = `translate${dir}(${dist}px)`;
     });
   }
+
+  /* ════ SCREEN 1 — chip selection + Continue ════ */
 
   // ── Stagger chip entrance ──
   const allChips = $$('.chip');
@@ -123,6 +150,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 600);
   });
 
+  /* ════ NAV CORE — transition state + wheel router ════ */
+
   // ── Navigation state ──
   let currentScreen = 1, s2Ready = false, s3Ready = false, s4Ready = false, s5Ready = false, s6Ready = false, s7Ready = false, s8Ready = false, s9Ready = false, transitioning = false;
   let chosenTactic = 'authority'; // stored when populating scammer card
@@ -149,6 +178,8 @@ document.addEventListener('DOMContentLoaded', () => {
       else if (currentScreen === 3 && s3Ready) { transitioning = true; reverseToScreen2(); }
     }
   });
+
+  /* ════ SCREEN 2 → SCREEN 3 (PWNED → Data Harvesting) ════ */
 
   // ── Screen 2 → 3 ──
   function transitionToScreen3() {
@@ -179,6 +210,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 600);
   }
 
+  /* ════ SCREEN 3 → SCREEN 4 (horizontal scroll to profile card) ════ */
+
   // ── Screen 3 → 4 (horizontal scroll) ──
   function scrollToScreen4() {
     populatePersona();
@@ -197,6 +230,8 @@ document.addEventListener('DOMContentLoaded', () => {
       transitioning = false;
     }, 1000);
   }
+
+  /* ════ SCREEN 4 → SCREEN 5 (victim card flies into Synthesis) ════ */
 
   // ── Screen 4 → 5 ──
   function transitionToScreen5() {
@@ -280,6 +315,8 @@ document.addEventListener('DOMContentLoaded', () => {
       ids.appendChild(p);
     });
   }
+
+  /* ════ SHARED — stripAnimate helper + scammer persona generator ════ */
 
   // ── Helper: strip animate class from all children ──
   function stripAnimate(selector) {
@@ -394,6 +431,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ════ SCREEN 5 → SCREEN 6 (Synthesis detail w/ scammer card) ════ */
+
   // ── Screen 5 → 6 ──
   function transitionToScreen6() {
     // Fade out S5 unique elements (tactics, lines, center scammer)
@@ -449,6 +488,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 500);
   }
 
+  /* ════ SCREEN 6 → SCREEN 5 (reverse) ════ */
+
   // ── Screen 6 → 5 (reverse) ──
   function reverseToScreen5() {
     fadeOut($$('#screen-6 .s6-scammer-label, #screen-6 .s6-scammer-card, #screen-6 .s6-left, #screen-6 .s6-right, #screen-6 .s6-pills, #screen-6 .s6-victim-label, #screen-6 .s6-victim-card, #screen-6 .scroll-hint'), 'Y', 30);
@@ -482,6 +523,8 @@ document.addEventListener('DOMContentLoaded', () => {
       transitioning = false;
     }, 500);
   }
+
+  /* ════ SCREEN 6 → SCREEN 7 (Contact established) ════ */
 
   // ── Screen 6 → 7 (Contact established) ──
   function transitionToScreen7() {
@@ -544,6 +587,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 500);
   }
 
+  /* ════ SCREEN 7 → SCREEN 6 (reverse) ════ */
+
   // ── Screen 7 → 6 (reverse) ──
   function reverseToScreen6() {
     fadeOut($$('#screen-7 .s7-scammer-figure, #screen-7 .s7-dots, #screen-7 .s7-victim-figure, #screen-7 .s7-text, #screen-7 .s7-modes, #screen-7 .scroll-hint'), 'Y', 30);
@@ -581,6 +626,8 @@ document.addEventListener('DOMContentLoaded', () => {
       transitioning = false;
     }, 500);
   }
+
+  /* ════ REVERSE NAV CLUSTER — S5→4, S4→3, S3→2 (contiguous block) ════ */
 
   // ── Screen 5 → 4 (reverse) ──
   function reverseToScreen4() {
@@ -655,6 +702,8 @@ document.addEventListener('DOMContentLoaded', () => {
       transitioning = false;
     }, 500);
   }
+
+  /* ════ SCREEN 7 → SCREEN 8 (Emotional triggers + 30s timer) ════ */
 
   // ── Screen 7 → 8 (Emotional triggers) ──
   const TACTIC_LABELS = {
@@ -847,6 +896,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 500);
   }
 
+  /* ════ SCREEN 8 → SCREEN 9 (auto-advance at 30s) + Back button ════ */
+
   // ── Screen 8 → 9 (auto at 30s) ──
   function transitionToScreen9() {
     // Stop timer
@@ -985,6 +1036,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); chip.click(); }
     });
   });
+
+  /* ════ PERSONA GEN — victim data for Screen 4 (names, cities, IDs, bios) ════ */
 
   // ── Persona Generator ──
   const NAMES = {
