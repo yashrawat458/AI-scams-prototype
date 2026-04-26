@@ -2327,26 +2327,45 @@ button {
   width: 0;
   height: 16px;
   background: #d9d9d9;
+  display: flex;
+  align-items: center;
+  padding-left: 75px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 .s8-time-text {
-  position: absolute;
-  left: 82px; top: 3px;
   font-family: 'Rethink Sans', sans-serif;
   font-weight: 400;
   font-size: 13px;
   color: #141d45;
   white-space: nowrap;
   margin: 0;
-  z-index: 1;
+  flex-shrink: 0;
 }
 .s8-clock {
   position: absolute;
-  left: 522px; top: 0;
+  left: 0px; top: 0;
   width: 47px; height: 47px;
+  transform-origin: center bottom;
 }
 .s8-clock img {
   width: 100%; height: 100%;
   object-fit: contain;
+}
+
+/* Times-up shake animation */
+@keyframes s8TimesUp {
+  0%   { transform: scale(1)   rotate(0deg); }
+  15%  { transform: scale(1.5) rotate(-22deg); }
+  30%  { transform: scale(1.6) rotate(18deg); }
+  45%  { transform: scale(1.5) rotate(-14deg); }
+  60%  { transform: scale(1.4) rotate(10deg); }
+  75%  { transform: scale(1.2) rotate(-5deg); }
+  100% { transform: scale(1.1) rotate(0deg); }
+}
+.s8-clock.times-up img {
+  animation: s8TimesUp 0.9s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
+  filter: drop-shadow(0 0 14px rgba(255, 80, 0, 0.9));
 }
 
 /* ── Victim flex row ───────────────── */
@@ -2531,24 +2550,27 @@ button {
 .s9-time-progress {
   position: absolute;
   left: 0; top: 0;
-  width: 546px;
+  width: 442px;
   height: 16px;
   background: #d9d9d9;
+  display: flex;
+  align-items: center;
+  padding-left: 75px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 .s9-time-text {
-  position: absolute;
-  left: 89px; top: 3px;
   font-family: 'Rethink Sans', sans-serif;
   font-weight: 800;
   font-size: 13px;
   color: #141d45;
   white-space: nowrap;
   margin: 0;
-  z-index: 1;
+  flex-shrink: 0;
 }
 .s9-clock {
   position: absolute;
-  left: 522px; top: 0;
+  left: 425px; top: 0;
   width: 47px; height: 47px;
 }
 .s9-clock img {

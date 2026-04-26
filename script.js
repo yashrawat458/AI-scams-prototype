@@ -168,6 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
       else if (currentScreen === 5 && s5Ready) { transitioning = true; transitionToScreen6(); }
       else if (currentScreen === 6 && s6Ready) { transitioning = true; transitionToScreen7(); }
       else if (currentScreen === 7 && s7Ready) { transitioning = true; transitionToScreen8(); }
+      else if (currentScreen === 8 && s8Ready && s8ReturnedFromS9) { transitioning = true; transitionToScreen9(); }
     } else if (backward) {
       if (currentScreen === 9 && s9Ready) { transitioning = true; reverseToScreen8(); }
       else if (currentScreen === 8 && s8Ready) { transitioning = true; reverseToScreen7(); }
@@ -749,8 +750,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let s8TimerInterval = null;
   let s8Elapsed = 0;
+  let s8ReturnedFromS9 = false;
 
   function transitionToScreen8() {
+    s8ReturnedFromS9 = false;
+
     // Fade out S7 elements
     fadeOut($$('#screen-7 .s7-scammer-figure, #screen-7 .s7-dots, #screen-7 .s7-victim-figure, #screen-7 .s7-text, #screen-7 .s7-modes, #screen-7 .scroll-hint'), 'Y', 30);
 
@@ -799,21 +803,30 @@ document.addEventListener('DOMContentLoaded', () => {
         timerEl.textContent = '0';
         progressEl.style.width = '0';
         clockEl.style.left = '0px';
+        clockEl.classList.remove('times-up');
 
         if (s8TimerInterval) clearInterval(s8TimerInterval);
         s8TimerInterval = setInterval(() => {
           s8Elapsed++;
           timerEl.textContent = `${s8Elapsed}`;
-          // Progress bar: 546px over 30 fake-seconds (10 real seconds)
+          // Progress bar: 442px over 30 fake-seconds (10 real seconds)
           const pct = Math.min(s8Elapsed / 30, 1);
-          progressEl.style.width = (546 * pct) + 'px';
-          // Clock drifts with the progress bar
-          clockEl.style.left = (546 * pct) + 'px';
+          progressEl.style.width = (442 * pct) + 'px';
+          // Clock drifts with the progress bar (425px at full width)
+          clockEl.style.left = (425 * pct) + 'px';
 
-          // Auto-transition to Screen 9 at 30 fake-seconds
-          if (s8Elapsed >= 30 && !transitioning && currentScreen === 8) {
-            transitioning = true;
-            transitionToScreen9();
+          // At 30 fake-seconds: play times-up animation, then auto-transition
+          if (s8Elapsed >= 30) {
+            clearInterval(s8TimerInterval);
+            s8TimerInterval = null;
+            clockEl.classList.add('times-up');
+            // Wait for animation to finish, then auto-advance (only if not returned from S9)
+            setTimeout(() => {
+              if (!transitioning && currentScreen === 8 && !s8ReturnedFromS9) {
+                transitioning = true;
+                transitionToScreen9();
+              }
+            }, 1200);
           }
         }, 333);
       }, 2000);
@@ -870,7 +883,9 @@ document.addEventListener('DOMContentLoaded', () => {
       $('#s8-timer').textContent = '0';
       $('.s8-time-progress').style.width = '0';
       $('#s8-clock').style.left = '0px';
+      $('#s8-clock').classList.remove('times-up');
       s8Elapsed = 0;
+      s8ReturnedFromS9 = false;
 
       // Restore S7
       const screen7 = $('#screen-7');
@@ -942,70 +957,42 @@ document.addEventListener('DOMContentLoaded', () => {
       screen9.classList.remove('screen-visible');
       screen9.classList.remove('s9-animate');
 
-      // Reset S9 elements
+      // Reset S9 elements for next visit
       $$('#screen-9 .s9-headline, #screen-9 .s9-body, #screen-9 .s9-time-bar, #screen-9 .scroll-hint, #screen-9 .s9-back-btn').forEach(el => {
         el.style.transition = '';
         el.style.opacity = '';
         el.style.transform = '';
       });
 
-      // Restore S8 (re-trigger its build)
-      // Reset all S8 elements first
-      $$('#screen-8 .s8-scammer-row, #screen-8 .s8-isolation-lines, #screen-8 .s8-isolation-label, #screen-8 .s8-pills, #screen-8 .s8-step-content, #screen-8 .s8-tactics-row, #screen-8 .s8-time-bar, #screen-8 .s8-victim-row, #screen-8 .scroll-hint').forEach(el => {
-        el.style.transition = '';
-        el.style.opacity = '';
-        el.style.transform = '';
-      });
-      $$('.s8-tactic-card').forEach(card => { card.style.opacity = ''; card.style.transform = ''; });
-      $$('#screen-8 .s8-emo').forEach(emo => { emo.style.transition = ''; emo.style.opacity = ''; });
-      $('#s8-timer').textContent = '0';
-      $('.s8-time-progress').style.width = '0';
-      $('#s8-clock').style.left = '0px';
-      s8Elapsed = 0;
-
+      // Restore S8 — fade elements back in without re-running the build animation
       const screen8 = $('#screen-8');
       screen8.classList.remove('screen-hidden');
       screen8.classList.add('screen-visible');
-      screen8.classList.add('s8-animate');
 
-      // Re-stagger tactic cards
-      setTimeout(() => {
-        $$('.s8-tactic-card').forEach((card, i) => {
-          setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; }, i * 120);
-        });
-      }, 900);
+      // Fade all S8 elements back in
+      const s8Els = $$('#screen-8 .s8-scammer-row, #screen-8 .s8-isolation-lines, #screen-8 .s8-isolation-label, #screen-8 .s8-pills, #screen-8 .s8-step-content, #screen-8 .s8-tactics-row, #screen-8 .s8-time-bar, #screen-8 .s8-victim-row, #screen-8 .scroll-hint');
+      s8Els.forEach(el => {
+        el.style.transition = 'opacity 0.4s ease';
+        el.style.opacity = '1';
+        el.style.transform = '';
+      });
+      $$('#screen-8 .s8-emo').forEach(emo => {
+        emo.style.transition = 'opacity 0.4s ease';
+        emo.style.opacity = '1';
+      });
+      $$('.s8-tactic-card').forEach(card => {
+        card.style.transition = 'opacity 0.4s ease';
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      });
 
-      // Re-stagger emojis
-      setTimeout(() => {
-        $$('#screen-8 .s8-emo').forEach((emo, i) => {
-          setTimeout(() => { emo.style.opacity = '1'; }, i * 80);
-        });
-      }, 700);
+      // Keep time bar frozen at 30 sec
+      $('#s8-timer').textContent = '30';
+      $('.s8-time-progress').style.width = '442px';
+      $('#s8-clock').style.left = '425px';
 
-      // Restart timer
-      setTimeout(() => {
-        s8Elapsed = 0;
-        const timerEl = $('#s8-timer');
-        const progressEl = $('.s8-time-progress');
-        const clockEl = $('#s8-clock');
-        timerEl.textContent = '0';
-        progressEl.style.width = '0';
-        clockEl.style.left = '0px';
-
-        if (s8TimerInterval) clearInterval(s8TimerInterval);
-        s8TimerInterval = setInterval(() => {
-          s8Elapsed++;
-          timerEl.textContent = `${s8Elapsed}`;
-          const pct = Math.min(s8Elapsed / 30, 1);
-          progressEl.style.width = (546 * pct) + 'px';
-          clockEl.style.left = (546 * pct) + 'px';
-
-          if (s8Elapsed >= 30 && !transitioning && currentScreen === 8) {
-            transitioning = true;
-            transitionToScreen9();
-          }
-        }, 333);
-      }, 2000);
+      // Mark as returned — timer won't auto-advance; user scrolls forward
+      s8ReturnedFromS9 = true;
 
       setTimeout(() => {
         $('#s8-scroll-hint').classList.add('animate');
@@ -1013,7 +1000,7 @@ document.addEventListener('DOMContentLoaded', () => {
         s8Ready = true;
         s9Ready = false;
         transitioning = false;
-      }, 2000);
+      }, 500);
     }, 500);
   }
 
