@@ -1112,10 +1112,13 @@ document.addEventListener('DOMContentLoaded', () => {
       s11.classList.remove('screen-hidden'); s11.classList.add('screen-visible');
       s11.classList.add('s11-animate');
 
+      // Dot-4 pops in at ~1.76s — start blinking cursor shortly after
+      setTimeout(() => { $('#s11-dot-4').classList.add('s11-dot-blinking'); }, 1800);
+
       setTimeout(() => {
         $('#s11-scroll-hint').classList.add('animate');
         currentScreen = 11; s11Ready = true; transitioning = false;
-      }, 800);
+      }, 1950);
     }, 500);
   }
 
@@ -1123,7 +1126,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const s11 = $('#screen-11');
     s11.classList.add('screen-hidden'); s11.classList.remove('screen-visible');
     s11.classList.remove('s11-animate');
-    $('.s11-center').style.opacity = '0';
+    $('#s11-dot-4').classList.remove('s11-dot-blinking');
+    $('.s11-center').style.opacity = '';
 
     populateCallCards('s10');
     const s10 = $('#screen-10');
@@ -1169,13 +1173,20 @@ document.addEventListener('DOMContentLoaded', () => {
       s12.classList.remove('s12-animate');
 
       const s11 = $('#screen-11');
+      // Reset animation state before re-triggering
+      $('#s11-dot-4').classList.remove('s11-dot-blinking');
+      s11.classList.remove('s11-animate');
+      $('.s11-center').style.opacity = '';
+      void s11.offsetHeight; // force reflow so animations restart cleanly
       s11.classList.remove('screen-hidden'); s11.classList.add('screen-visible');
       s11.classList.add('s11-animate');
-      $('.s11-center').style.opacity = '0';
+
+      // Restart blinking cursor after dot-4 pops in
+      setTimeout(() => { $('#s11-dot-4').classList.add('s11-dot-blinking'); }, 1800);
 
       setTimeout(() => {
         currentScreen = 11; s11Ready = true; s12Ready = false; transitioning = false;
-      }, 700);
+      }, 1950);
     }, 500);
   }
 
@@ -1186,7 +1197,8 @@ document.addEventListener('DOMContentLoaded', () => {
     populateCallCards('s13');
 
     const s12 = $('#screen-12');
-    fadeOut($$('#screen-12 .s12-step-header, #screen-12 .s12-money, #screen-12 .s12-emotion-pill, #screen-12 .s12-time-bar, #screen-12 .scroll-hint'));
+    // Fade out everything EXCEPT money — it stays visible for the cross-screen fly illusion
+    fadeOut($$('#screen-12 .s12-step-header, #screen-12 .s12-emotion-pill, #screen-12 .s12-time-bar, #screen-12 .scroll-hint'));
 
     setTimeout(() => {
       s12.classList.add('screen-hidden'); s12.classList.remove('screen-visible');
@@ -1195,10 +1207,22 @@ document.addEventListener('DOMContentLoaded', () => {
       s13.classList.remove('screen-hidden'); s13.classList.add('screen-visible');
       s13.classList.add('s13-animate');
 
+      // Cross-screen money: appear at S12 money position, then fly+shrink to S13 corner
+      const moneyEl = document.querySelector('.s13-money-small');
+      moneyEl.style.cssText = 'position:absolute; left:1015px; top:408px; width:214px; height:214px; opacity:1; transform:rotate(-75deg) scaleY(-1); transition:none; object-fit:contain;';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        moneyEl.style.transition = 'left 0.8s cubic-bezier(0.4,0,0.2,1), top 0.8s cubic-bezier(0.4,0,0.2,1), width 0.8s cubic-bezier(0.4,0,0.2,1), height 0.8s cubic-bezier(0.4,0,0.2,1)';
+        moneyEl.style.left   = '1190px';
+        moneyEl.style.top    = '16px';
+        moneyEl.style.width  = '135px';
+        moneyEl.style.height = '135px';
+      }));
+
       setTimeout(() => {
+        moneyEl.style.transition = '';
         $('#s13-scroll-hint').classList.add('animate');
         currentScreen = 13; s13Ready = true; transitioning = false;
-      }, 900);
+      }, 950);
     }, 500);
   }
 
@@ -1209,6 +1233,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       s13.classList.add('screen-hidden'); s13.classList.remove('screen-visible');
       s13.classList.remove('s13-animate');
+      // Clear inline styles set by cross-screen money animation
+      document.querySelector('.s13-money-small').style.cssText = '';
 
       populateCallCards('s12');
       const s12 = $('#screen-12');
@@ -1254,8 +1280,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
       populateCallCards('s13');
       const s13 = $('#screen-13');
+      // Reset any inline styles left by the cross-screen forward animation
+      document.querySelector('.s13-money-small').style.cssText = '';
       s13.classList.remove('screen-hidden'); s13.classList.add('screen-visible');
       s13.classList.add('s13-animate');
+      // Money is handled in JS (removed from s13-animate CSS block) — fade it in
+      setTimeout(() => {
+        const m = document.querySelector('.s13-money-small');
+        m.style.transition = 'opacity 0.4s ease';
+        m.style.opacity = '1';
+        m.style.transform = 'rotate(-75deg) scaleY(-1)';
+      }, 200);
 
       setTimeout(() => {
         currentScreen = 13; s13Ready = true; s14Ready = false; transitioning = false;
