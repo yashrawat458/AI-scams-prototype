@@ -27,14 +27,15 @@
       </div>
     </div>
 
-    <!-- Content -->
-    <!-- Section 1: Who are you? -->
-    <section class="section section-who" data-section="who">
-      <h2 class="section-title">Who are you?</h2>
-      <div class="bio-grid">
+    <!-- Form container (centered) -->
+    <div class="s1-form">
+      <!-- Section 1: Who are you? -->
+      <div class="s1-section" data-section="who">
+        <p class="s1-title">Who are you?</p>
+        <div class="bio-grid">
           <!-- Age -->
           <div class="bio-group" data-group="age">
-            <h3 class="bio-label">Age</h3>
+            <p class="bio-label">Age</p>
             <div class="chips">
               <button class="chip" data-value="<18">&lt;18</button>
               <button class="chip" data-value="18-24">18-24</button>
@@ -48,7 +49,7 @@
 
           <!-- Sex -->
           <div class="bio-group" data-group="sex">
-            <h3 class="bio-label">Sex</h3>
+            <p class="bio-label">Sex</p>
             <div class="chips">
               <button class="chip" data-value="male">Male</button>
               <button class="chip" data-value="female">Female</button>
@@ -58,7 +59,7 @@
 
           <!-- Occupation -->
           <div class="bio-group" data-group="occupation">
-            <h3 class="bio-label">Occupation</h3>
+            <p class="bio-label">Occupation</p>
             <div class="chips">
               <button class="chip" data-value="student">Student</button>
               <button class="chip" data-value="salaried">Salaried</button>
@@ -67,12 +68,12 @@
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-    <!-- Section 2: Do you have? -->
-    <section class="section section-have" data-section="have">
-      <h2 class="section-title">Do you have?</h2>
-      <div class="chips chips-wide" data-group="have">
+      <!-- Section 2: Do you have? -->
+      <div class="s1-section s1-section-have" data-section="have">
+        <p class="s1-title">Do you have?</p>
+        <div class="chips chips-wide" data-group="have">
           <button class="chip" data-value="mobile-number">Mobile number</button>
           <button class="chip" data-value="bank-account">Bank account</button>
           <button class="chip" data-value="pan-number">PAN number</button>
@@ -83,15 +84,13 @@
           <button class="chip" data-value="facebook">Facebook</button>
           <button class="chip" data-value="whatsapp">Whatsapp</button>
           <button class="chip" data-value="gmail">Gmail</button>
-        <button class="chip" data-value="telegram">Telegram</button>
+          <button class="chip" data-value="telegram">Telegram</button>
+        </div>
       </div>
-    </section>
 
-    <!-- Continue button -->
-    <div class="continue-wrapper">
+      <!-- Continue button -->
       <button class="continue-btn" id="continue-btn" disabled>
-        Continue
-        <span class="arrow">→</span>
+        Continue <span class="arrow">→</span>
       </button>
     </div>
   </div><!-- end screen-1 -->

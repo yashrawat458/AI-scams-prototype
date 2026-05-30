@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
   continueBtn.addEventListener('click', () => {
     if (continueBtn.disabled) return;
 
-    fadeOut($$('#screen-1 .section, #screen-1 .continue-wrapper'));
+    fadeOut($$('#screen-1 .s1-form'));
     fadeOut([$('.clipboard-wrapper')], 'X', 80);
 
     setTimeout(() => {

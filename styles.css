@@ -129,7 +129,7 @@ button {
           inner image 324×324, rotated -15° */
 .clipboard-wrapper {
   position: absolute;
-  left: 1552px;
+  left: 1632px;
   top: 95px;
   width: 396px;
   height: 396px;
@@ -137,11 +137,9 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Entry animation */
   animation: clipboardEnter 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s both;
 }
 
-/* Float applied to inner element to avoid transform conflict */
 .clipboard {
   width: 324px;
   height: 324px;
@@ -163,68 +161,55 @@ button {
 }
 
 @keyframes clipboardEnter {
-  from {
-    opacity: 0;
-    transform: translateX(120px) translateY(-60px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0) translateY(0);
-  }
+  from { opacity: 0; transform: translateX(120px) translateY(-60px); }
+  to   { opacity: 1; transform: translateX(0) translateY(0); }
 }
 
 @keyframes clipboardFloat {
   0%, 100% { transform: rotate(-15deg) translateY(0); }
-  50% { transform: rotate(-15deg) translateY(-12px); }
+  50%      { transform: rotate(-15deg) translateY(-12px); }
 }
 
-/* ──── Section 1 — "Who are you?" ────
-   Figma: left 76, top 288, width 1470, gap 18px (title→content) */
-.section-who {
+/* ──── Form container (centered vertically & offset horizontally per Figma) ── */
+.s1-form {
   position: absolute;
-  left: 76px;
-  top: 288px;
+  left: calc(50% - 149px);
+  top: 50%;
+  transform: translate(-50%, -50%) translateY(30px);
   width: 1470px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: flex-start;
   z-index: 5;
+  opacity: 0;
+  animation: s1FormIn 0.7s ease-out 0.1s forwards;
+}
+
+@keyframes s1FormIn {
+  to { opacity: 1; transform: translate(-50%, -50%) translateY(0); }
+}
+
+/* ──── Sections ── */
+.s1-section {
   display: flex;
   flex-direction: column;
   gap: 18px;
-  /* Entrance animation */
-  opacity: 0;
-  transform: translateY(30px);
-  animation: sectionFadeIn 0.7s ease-out 0.1s forwards;
+  width: 100%;
 }
 
-/* ──── Section 2 — "Do you have?" ────
-   Figma: left 76, top 557, width 825, gap 36px (title→chips) */
-.section-have {
-  position: absolute;
-  left: 76px;
-  top: 557px;
-  width: 825px;
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
+.s1-section-have {
   gap: 36px;
-  /* Entrance animation */
-  opacity: 0;
-  transform: translateY(30px);
-  animation: sectionFadeIn 0.7s ease-out 0.35s forwards;
+  width: 825px;
 }
 
-@keyframes sectionFadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ──── Section titles (shared by both sections) — 40px Rethink Sans ──── */
-.section-title {
+/* ──── Section titles — 40px Rethink Sans ──── */
+.s1-title {
   font-size: 40px;
   font-weight: 400;
   line-height: normal;
   color: #fff;
+  margin: 0;
 }
 
 /* ──── Bio grid (Age / Sex / Occupation) — flex row, gap 62px ──── */
@@ -234,7 +219,6 @@ button {
   align-items: flex-start;
 }
 
-/* Each bio-group: flex column, gap 16px */
 .bio-group {
   display: flex;
   flex-direction: column;
@@ -242,18 +226,9 @@ button {
   flex-shrink: 0;
 }
 
-/* Figma widths */
-.bio-group[data-group="age"] {
-  width: 454px;
-}
-
-.bio-group[data-group="sex"] {
-  width: 336px;
-}
-
-.bio-group[data-group="occupation"] {
-  width: 556px;
-}
+.bio-group[data-group="age"] { width: 454px; }
+.bio-group[data-group="sex"] { width: 336px; }
+.bio-group[data-group="occupation"] { width: 556px; }
 
 /* Label: 32px, color #d4d4d4 */
 .bio-label {
@@ -261,9 +236,10 @@ button {
   font-weight: 400;
   line-height: normal;
   color: #d4d4d4;
+  margin: 0;
 }
 
-/* ──── Chips — flex wrap, gap 8px (shared by S1 selectors) ──── */
+/* ──── Chips — flex wrap, gap 8px ──── */
 .chips {
   display: flex;
   flex-wrap: wrap;
@@ -271,18 +247,12 @@ button {
   align-items: flex-start;
 }
 
-.chips-wide {
-  width: 100%;
-}
+.chips-wide { width: 100%; }
 
 .bio-group[data-group="age"] .chips,
-.bio-group[data-group="sex"] .chips {
-  width: 454px;
-}
+.bio-group[data-group="sex"] .chips { width: 454px; }
 
-.bio-group[data-group="occupation"] .chips {
-  width: 556px;
-}
+.bio-group[data-group="occupation"] .chips { width: 556px; }
 
 /* Chip: padding 8 15, radius 36, font 20, color #211d07 */
 .chip {
@@ -307,7 +277,6 @@ button {
   flex-shrink: 0;
 }
 
-/* Ripple overlay */
 .chip::after {
   content: '';
   position: absolute;
@@ -325,9 +294,7 @@ button {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
-.chip:active {
-  transform: scale(0.96);
-}
+.chip:active { transform: scale(0.96); }
 
 .chip:active::after {
   opacity: 1;
@@ -335,12 +302,9 @@ button {
   transition: opacity 0s, transform 0s;
 }
 
-/* Selected = opaque white bg (0.98 alpha) */
 .chip.selected {
   background: rgba(237, 227, 226, 0.98);
-  box-shadow:
-    0 2px 10px rgba(0, 0, 0, 0.15),
-    0 0 0 2px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15), 0 0 0 2px rgba(255, 255, 255, 0.15);
   transform: scale(1.02);
 }
 
@@ -349,35 +313,17 @@ button {
   transform: scale(1.06);
 }
 
-/* Staggered entrance — uses a one-shot class removed after play */
 .chip.entering {
   opacity: 0;
   animation: chipEnter 0.4s ease-out forwards;
 }
 
 @keyframes chipEnter {
-  from {
-    opacity: 0;
-    transform: translateY(10px) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(10px) scale(0.9); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* ──── Continue button — below "Do you have?" ──── */
-/* Blue panel: top 209, bottom 871. Keep button inside. */
-.continue-wrapper {
-  position: absolute;
-  left: 76px;
-  top: 810px;
-  z-index: 5;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: sectionFadeIn 0.7s ease-out 0.55s forwards;
-}
-
+/* ──── Continue button ──── */
 .continue-btn {
   display: inline-flex;
   align-items: center;
@@ -423,19 +369,14 @@ button {
   transform: scale(0.97);
 }
 
-/* ──── Selection feedback flash (chip pulse on select) ──── */
-/* Pulse ring on select — uses box-shadow transition, no animation override */
+/* ──── Selection feedback flash ──── */
 .chip.just-selected {
-  box-shadow:
-    0 0 0 0 rgba(237, 227, 226, 0.5),
-    0 2px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 0 0 rgba(237, 227, 226, 0.5), 0 2px 10px rgba(0, 0, 0, 0.15);
   transition: box-shadow 0s;
 }
 
 .chip.just-selected.pulse-out {
-  box-shadow:
-    0 0 0 10px rgba(237, 227, 226, 0),
-    0 2px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 0 10px rgba(237, 227, 226, 0), 0 2px 10px rgba(0, 0, 0, 0.15);
   transition: box-shadow 0.4s ease-out;
 }
 
