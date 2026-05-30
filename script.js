@@ -36,6 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const scaleY = window.innerHeight / 1080;
     const scale = Math.min(scaleX, scaleY);
     vp.style.transform = `scale(${scale})`;
+    // Center the viewport
+    const scaledW = 1920 * scale;
+    const scaledH = 1080 * scale;
+    vp.style.left = ((window.innerWidth - scaledW) / 2) + 'px';
+    vp.style.top = ((window.innerHeight - scaledH) / 2) + 'px';
+    vp.style.marginLeft = '0';
+    vp.style.marginTop = '0';
   }
   scaleViewport();
   window.addEventListener('resize', scaleViewport);

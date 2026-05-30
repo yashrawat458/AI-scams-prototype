@@ -60,10 +60,11 @@ button {
 .viewport {
   width: 1920px;
   height: 1080px;
-  overflow: hidden;
+  overflow: visible;
   background: #000;
   transform-origin: top left;
-  /* JS sets transform: scale(...) */
+  position: absolute;
+  /* JS sets left, top, transform: scale(...) */
 }
 
 /* ════════════════════════════════════════════════════════════════════
@@ -73,7 +74,8 @@ button {
   position: relative;
   width: 1920px;
   height: 1080px;
-  overflow: hidden;
+  overflow-x: visible;
+  overflow-y: hidden;
   background: #000;
 }
 
@@ -102,13 +104,14 @@ button {
   object-fit: cover;
 }
 
-/* Figma: centered, 1920×662, color #1b2191 */
+/* Figma: centered, 1920×662, color #1b2191
+   Overflows to 6000px so it always fills browser width */
 .blue-panel {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 1920px;
+  width: 6000px;
   height: 662px;
   background: #1b2191;
   z-index: 1;
@@ -456,9 +459,10 @@ button {
 /* ──── Full blue background ──── */
 .blue-panel-full {
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 1920px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 6000px;
   height: 1080px;
   background: #1b2191;
   z-index: 1;
@@ -2035,7 +2039,7 @@ button {
   position: absolute;
   left: 0; top: 0;
   width: 1920px; height: 1080px;
-  overflow: hidden;
+  overflow-x: visible; overflow-y: hidden;
 }
 
 /* ── Scammer flex row ─────────────────── */
@@ -2502,7 +2506,7 @@ button {
   position: absolute;
   left: 0; top: 0;
   width: 1920px; height: 1080px;
-  overflow: hidden;
+  overflow-x: visible; overflow-y: hidden;
 }
 
 .s9-headline {
@@ -2772,7 +2776,7 @@ button {
 /* ════════════════════════════════════════════════════════════════════
  *  SCREEN 10 — Step 3 Emotional Triggers (detail)
  * ════════════════════════════════════════════════════════════════════ */
-#screen-10 { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; }
+#screen-10 { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow-x: visible; overflow-y: hidden; }
 
 .s10-step-header {
   position: absolute;
@@ -2898,7 +2902,7 @@ button {
 /* ════════════════════════════════════════════════════════════════════
  *  SCREEN 11 — Enter your PIN
  * ════════════════════════════════════════════════════════════════════ */
-#screen-11 { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; }
+#screen-11 { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow-x: visible; overflow-y: hidden; }
 .s11-bg {
   position: absolute; inset: 0;
   background: #1b2191;
@@ -2964,7 +2968,7 @@ button {
 /* ════════════════════════════════════════════════════════════════════
  *  SCREEN 12 — Step 4 Extractions (intro)
  * ════════════════════════════════════════════════════════════════════ */
-#screen-12 { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; }
+#screen-12 { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow-x: visible; overflow-y: hidden; }
 
 .s12-step-header {
   position: absolute;
@@ -3067,7 +3071,7 @@ button {
 /* ════════════════════════════════════════════════════════════════════
  *  SCREEN 13 — Step 4 Extractions (detail)
  * ════════════════════════════════════════════════════════════════════ */
-#screen-13 { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; }
+#screen-13 { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow-x: visible; overflow-y: hidden; }
 
 .s13-step-content {
   position: absolute;
