@@ -4908,6 +4908,18 @@
             }
           }
         }
+      } else if (e.deltaY < 0) {
+        // Scroll up — go backward. Only past the form screen.
+        syncCurrentScreenIdxFromDom();
+        if (currentScreenIdx >= 2) {
+          const now = Date.now();
+          if (now - lastScrollAdvance > 800) {
+            lastScrollAdvance = now;
+            // Reset any forward-ready flags so re-scrolling-down still works
+            s2Ready = s3Ready = s4Ready = s5Ready = s6Ready = s7Ready = s8Ready = false;
+            jumpBackward();
+          }
+        }
       }
     });
 
