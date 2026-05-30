@@ -76,7 +76,6 @@ button {
   height: 1080px;
   overflow-x: visible;
   overflow-y: hidden;
-  background: #000;
 }
 
 /* ════════════════════════════════════════════════════════════════════
@@ -2904,7 +2903,10 @@ button {
  * ════════════════════════════════════════════════════════════════════ */
 #screen-11 { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow-x: visible; overflow-y: hidden; }
 .s11-bg {
-  position: absolute; inset: 0;
+  position: absolute;
+  left: 50%; top: 0;
+  transform: translateX(-50%);
+  width: 6000px; height: 1080px;
   background: #1b2191;
 }
 .s11-center {
