@@ -4540,15 +4540,8 @@
 
   </div><!-- end viewport -->
 
-  <!-- Test Navigation Controls -->
-  <div id="test-nav" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:99999;display:flex;align-items:center;gap:12px;background:rgba(0,0,0,0.85);padding:8px 16px;border-radius:30px;font-family:sans-serif;user-select:none;">
-    <button id="nav-prev" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer;padding:4px 10px;opacity:0.8;">←</button>
-    <span id="nav-label" style="color:#fff;font-size:14px;min-width:90px;text-align:center;">Screen 0</span>
-    <button id="nav-next" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer;padding:4px 10px;opacity:0.8;">→</button>
-  </div>
-
   <script>
-    /* ═══ TEST NAV — Arrow navigation between screens ═══ */
+    /* ═══ Screen progression bookkeeping ═══ */
     let currentScreenIdx = 0;
     const SCREEN_IDS = ['screen-0','screen-1','screen-2','screen-3','screen-4','screen-5','screen-6','screen-7','screen-8','screen-9','screen-10','screen-11','screen-12','screen-13','screen-14','screen-15'];
 
@@ -4560,7 +4553,6 @@
       const target = document.querySelector('#' + SCREEN_IDS[idx]);
       if (target) target.classList.add('active');
       currentScreenIdx = idx;
-      document.querySelector('#nav-label').textContent = 'Screen ' + idx;
     }
 
     function ensureState() {
@@ -4736,17 +4728,8 @@
       showScreen(currentScreenIdx - 1);
     }
 
-    document.querySelector('#nav-prev').addEventListener('click', jumpBackward);
-    document.querySelector('#nav-next').addEventListener('click', jumpForward);
-
     // S9 Back button
     document.querySelector('#s9-back-btn').addEventListener('click', jumpBackward);
-
-    // Keyboard arrows
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') jumpForward();
-      else if (e.key === 'ArrowLeft') jumpBackward();
-    });
 
     /* ── Viewport scaling — fits any screen ratio with centered letterboxing ── */
     function scaleViewport() {
