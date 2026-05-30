@@ -4888,6 +4888,7 @@
     /* ═══ SCREEN 2 — scroll to transition to Screen 3 ═══ */
     let s2Ready = false, s3Ready = false, s4Ready = false, s5Ready = false, s6Ready = false, s7Ready = false, s8Ready = false;
 
+    let lastScrollAdvance = 0;
     document.addEventListener('wheel', (e) => {
       if (e.deltaY > 0) {
         if (s2Ready) { s2Ready = false; transitionToScreen3(); }
@@ -4896,6 +4897,17 @@
         else if (s5Ready) { s5Ready = false; transitionToScreen6(); }
         else if (s6Ready) { s6Ready = false; transitionToScreen7(); }
         else if (s7Ready) { s7Ready = false; transitionToScreen8(); }
+        else {
+          // Screens 9+ have no per-screen transition fn — fall through to jumpForward
+          syncCurrentScreenIdxFromDom();
+          if (currentScreenIdx >= 9 && currentScreenIdx < SCREEN_IDS.length - 1) {
+            const now = Date.now();
+            if (now - lastScrollAdvance > 800) {
+              lastScrollAdvance = now;
+              jumpForward();
+            }
+          }
+        }
       }
     });
 
