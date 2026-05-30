@@ -4885,42 +4885,21 @@
       }, 600);
     });
 
-    /* ═══ SCREEN 2 — scroll to transition to Screen 3 ═══ */
-    let s2Ready = false, s3Ready = false, s4Ready = false, s5Ready = false, s6Ready = false, s7Ready = false, s8Ready = false;
+    /* ═══ Unified scroll navigation — one scroll = one screen (fwd/back) ═══ */
+    let s2Ready = false, s3Ready = false, s4Ready = false, s5Ready = false, s6Ready = false, s7Ready = false, s8Ready = false; // (legacy flags, unused)
 
     let lastScrollAdvance = 0;
     document.addEventListener('wheel', (e) => {
-      if (e.deltaY > 0) {
-        if (s2Ready) { s2Ready = false; transitionToScreen3(); }
-        else if (s3Ready) { s3Ready = false; transitionToScreen4(); }
-        else if (s4Ready) { s4Ready = false; transitionToScreen5(); }
-        else if (s5Ready) { s5Ready = false; transitionToScreen6(); }
-        else if (s6Ready) { s6Ready = false; transitionToScreen7(); }
-        else if (s7Ready) { s7Ready = false; transitionToScreen8(); }
-        else {
-          // Screens 9+ have no per-screen transition fn — fall through to jumpForward
-          syncCurrentScreenIdxFromDom();
-          if (currentScreenIdx >= 9 && currentScreenIdx < SCREEN_IDS.length - 1) {
-            const now = Date.now();
-            if (now - lastScrollAdvance > 800) {
-              lastScrollAdvance = now;
-              jumpForward();
-            }
-          }
-        }
-      } else if (e.deltaY < 0) {
-        // Scroll up — go backward. Only past the form screen.
-        syncCurrentScreenIdxFromDom();
-        if (currentScreenIdx >= 2) {
-          const now = Date.now();
-          if (now - lastScrollAdvance > 800) {
-            lastScrollAdvance = now;
-            // Reset any forward-ready flags so re-scrolling-down still works
-            s2Ready = s3Ready = s4Ready = s5Ready = s6Ready = s7Ready = s8Ready = false;
-            jumpBackward();
-          }
-        }
-      }
+      // Ignore tiny inertial residue
+      if (Math.abs(e.deltaY) < 4) return;
+      const now = Date.now();
+      if (now - lastScrollAdvance < 800) return;
+      syncCurrentScreenIdxFromDom();
+      // Don't hijack scroll while the user is still filling Screen 1 (the form)
+      if (currentScreenIdx <= 1) return;
+      lastScrollAdvance = now;
+      if (e.deltaY > 0) jumpForward();
+      else if (e.deltaY < 0 && currentScreenIdx >= 3) jumpBackward();
     });
 
     function transitionToScreen3() {
