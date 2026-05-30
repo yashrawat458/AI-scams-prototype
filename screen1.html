@@ -4576,7 +4576,17 @@
       }
     }
 
+    function syncCurrentScreenIdxFromDom() {
+      // Scroll-driven transitions toggle .active manually without updating currentScreenIdx.
+      // Resync from whichever screen is currently visible so nav moves to the correct neighbor.
+      const active = document.querySelector('.screen.active');
+      if (!active) return;
+      const idx = SCREEN_IDS.indexOf(active.id);
+      if (idx >= 0) currentScreenIdx = idx;
+    }
+
     function jumpForward() {
+      syncCurrentScreenIdxFromDom();
       if (currentScreenIdx >= SCREEN_IDS.length - 1) return;
       const next = currentScreenIdx + 1;
 
@@ -4703,6 +4713,7 @@
     }
 
     function jumpBackward() {
+      syncCurrentScreenIdxFromDom();
       if (currentScreenIdx <= 0) return;
       // If leaving Screen 9 back to 8, mark as returned so timer won't re-auto-advance
       if (currentScreenIdx === 9) {
