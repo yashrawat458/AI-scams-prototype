@@ -250,6 +250,116 @@
       opacity: 0.85;
     }
 
+    /* ═══════════════ Shared step header ═══════════════ */
+    .step-head { display:flex; flex-direction:column; gap:4px; margin-bottom:14px; }
+    .step-head .step-num { font-size:18px; font-style:italic; color:#FF61E1; font-weight:600; }
+    .step-head .step-name { font-size:32px; font-style:italic; color:#FF61E1; font-weight:800; letter-spacing:-0.5px; line-height:1.05; }
+
+    /* AI factor pills row */
+    .factor-pills { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:6px; }
+    .factor-pills .pill { background:#6767ae; opacity:0.45; font-size:11px; padding:5px 11px; }
+    .factor-pills .pill.active { opacity:1; background:#FF61E1; color:#1b2191; font-weight:700; }
+    .factor-pills .caption { width:100%; font-size:11px; color:#efe8d4; opacity:0.6; margin-top:4px; }
+
+    .info-card {
+      background:#efe8d4; color:#1b2191; border-radius:14px;
+      padding:16px 18px; font-size:13px; line-height:1.45;
+    }
+    .info-card.dark { background:#2a319f; color:#efe8d4; }
+    .info-card p + p { margin-top:8px; }
+    .info-card strong { color:#1b2191; font-weight:700; }
+    .info-card.dark strong { color:#FF61E1; }
+    .info-card ul { padding-left:18px; margin-top:6px; }
+    .info-card ul li { margin-bottom:4px; }
+
+    /* ═══════════════ SCREEN 3 — Data Harvesting ═══════════════ */
+    #screen-3 { gap:14px; padding-top:24px; padding-bottom:80px; }
+    .s3-hero {
+      align-self:center; font-size:96px; line-height:1;
+      filter: drop-shadow(0 12px 24px rgba(0,0,0,0.3));
+      animation: floatY 3.5s ease-in-out infinite;
+    }
+    @keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .s3-crawlers { display:flex; justify-content:space-around; font-size:22px; opacity:0.55; margin-top:-8px; }
+    .s3-crawlers span { animation: crawl 2.5s ease-in-out infinite; }
+    .s3-crawlers span:nth-child(2) { animation-delay: 0.4s; }
+    .s3-crawlers span:nth-child(3) { animation-delay: 0.8s; }
+    .s3-crawlers span:nth-child(4) { animation-delay: 1.2s; }
+    .s3-crawlers span:nth-child(5) { animation-delay: 1.6s; }
+    @keyframes crawl { 0%,100%{transform:translateX(0)} 50%{transform:translateX(8px)} }
+
+    /* ═══════════════ SCREEN 4 — Profile Card ═══════════════ */
+    #screen-4 { justify-content:center; align-items:center; gap:14px; padding-top:40px; padding-bottom:80px; position:relative; }
+    .s4-id-bg {
+      position:absolute; top:30px; right:-10px;
+      font-size:80px; opacity:0.18; transform:rotate(-12deg);
+      pointer-events:none;
+    }
+    .s4-card {
+      width:100%; max-width:340px;
+      background:#efe8d4; color:#1b2191;
+      border-radius:18px; padding:22px 20px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+      display:flex; flex-direction:column; gap:12px;
+      z-index:1;
+    }
+    .s4-avatar {
+      width:88px; height:88px; border-radius:50%;
+      background:#FF61E1; align-self:center;
+      display:flex; align-items:center; justify-content:center;
+      font-size:54px; line-height:1;
+    }
+    .s4-name { font-size:24px; font-weight:800; text-align:center; }
+    .s4-details {
+      display:flex; flex-wrap:wrap; gap:6px; justify-content:center;
+    }
+    .s4-details span {
+      background:#1b2191; color:#efe8d4;
+      padding:4px 10px; border-radius:999px;
+      font-size:11px; font-weight:500;
+    }
+    .s4-ids { display:flex; flex-direction:column; gap:4px; font-size:12px; padding-top:8px; border-top:1px dashed rgba(27,33,145,0.25); }
+    .s4-ids span { display:block; }
+    .s4-bio {
+      font-size:12px; line-height:1.45; opacity:0.85;
+      padding-top:8px; border-top:1px dashed rgba(27,33,145,0.25);
+    }
+
+    /* ═══════════════ SCREEN 5 — Synthesis (4 tactics) ═══════════════ */
+    #screen-5 { gap:14px; padding-top:24px; padding-bottom:80px; }
+    .s5-scammer {
+      align-self:center; font-size:72px; line-height:1;
+      filter: drop-shadow(0 8px 18px rgba(255,97,225,0.35));
+      animation: floatY 3.5s ease-in-out infinite;
+    }
+    .s5-tactics { display:flex; flex-direction:column; gap:10px; }
+    .s5-tactic {
+      background:#2a319f; border:1px solid rgba(255,255,255,0.08);
+      border-radius:14px; padding:12px 14px;
+    }
+    .s5-tactic-pill {
+      display:inline-block; background:#FF61E1; color:#1b2191;
+      font-size:11px; font-weight:700;
+      padding:3px 10px; border-radius:999px; margin-bottom:8px;
+    }
+    .s5-tactic-text { font-size:12px; line-height:1.4; color:#efe8d4; }
+    .s5-tactic-text p + p { margin-top:6px; opacity:0.75; }
+    .s5-victim-mini {
+      margin-top:8px;
+      background:#efe8d4; color:#1b2191;
+      border-radius:12px; padding:10px 12px;
+      display:flex; align-items:center; gap:10px;
+    }
+    .s5-mini-avatar {
+      width:36px; height:36px; border-radius:50%;
+      background:#FF61E1; display:flex; align-items:center; justify-content:center;
+      font-size:22px; flex-shrink:0;
+    }
+    .s5-mini-info { flex:1; min-width:0; }
+    .s5-mini-name { font-size:13px; font-weight:700; }
+    .s5-mini-meta { font-size:10px; opacity:0.7; }
+    .s5-victim-label-mini { font-size:10px; opacity:0.6; letter-spacing:1px; text-transform:uppercase; margin-bottom:-4px; }
+
     /* ═══════════════ Rotation hint (landscape lock-out) ═══════════════ */
     .rotate-hint {
       position: fixed;
@@ -366,7 +476,127 @@
       </div>
     </section>
 
-    <!-- More screens (3..15) — to be built next iteration -->
+    <!-- ═══════════════ SCREEN 3 — Data Harvesting ═══════════════ -->
+    <section class="screen" id="screen-3">
+      <div class="factor-pills">
+        <span class="pill active">Scalability</span>
+        <span class="pill">Believability</span>
+        <span class="pill">Personalization</span>
+        <span class="caption">Factors amplified by AI.</span>
+      </div>
+
+      <div class="step-head">
+        <span class="step-num">Step 1.</span>
+        <span class="step-name">Data Harvesting</span>
+      </div>
+
+      <div class="s3-hero">🤖</div>
+      <div class="s3-crawlers">
+        <span>👾</span><span>👾</span><span>👾</span><span>👾</span><span>👾</span>
+      </div>
+
+      <div class="info-card">
+        <p><strong>Goal:</strong> Gather raw material to make the scam believable.</p>
+        <p>Scammers collect:</p>
+        <ul>
+          <li>Voice clips (social media videos, WhatsApp audios)</li>
+          <li>Photos/videos (Instagram, LinkedIn, Facebook)</li>
+          <li>Personal info (job, family, phone number)</li>
+          <li>Leaked data (emails, passwords, bank info)</li>
+          <li>Organizational details (who reports to whom)</li>
+        </ul>
+      </div>
+
+      <div class="info-card dark">
+        <p><strong>AI's role:</strong> Helps scrape, organize, and profile victims fast. Even tiny data points become powerful when AI stitches them together.</p>
+        <p>Without data, there is no personalization. Without personalization, AI scams lose power.</p>
+      </div>
+
+      <div class="scroll-hint">
+        <span>swipe up to continue</span>
+        <div class="chev"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SCREEN 4 — Profile Card ═══════════════ -->
+    <section class="screen" id="screen-4">
+      <div class="s4-id-bg">🪪</div>
+      <div class="s4-card">
+        <div class="s4-avatar" id="s4-avatar">🧑</div>
+        <p class="s4-name" id="s4-name">—</p>
+        <div class="s4-details" id="s4-details"></div>
+        <div class="s4-ids" id="s4-ids"></div>
+        <p class="s4-bio" id="s4-bio">—</p>
+      </div>
+      <div class="scroll-hint">
+        <span>swipe up to continue</span>
+        <div class="chev"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SCREEN 5 — Synthesis ═══════════════ -->
+    <section class="screen" id="screen-5">
+      <div class="factor-pills">
+        <span class="pill">Scalability</span>
+        <span class="pill active">Believability</span>
+        <span class="pill active">Personalization</span>
+        <span class="caption">Factors amplified by AI.</span>
+      </div>
+
+      <div class="step-head">
+        <span class="step-num">Step 2.</span>
+        <span class="step-name">Synthesis</span>
+      </div>
+
+      <div class="s5-scammer">🥷</div>
+
+      <div class="s5-tactics">
+        <div class="s5-tactic">
+          <div class="s5-tactic-pill">Authority Fabrication</div>
+          <div class="s5-tactic-text">
+            <p>Scammer claims institutional power.</p>
+            <p>Examples: police, bank official, tax officer, courier, telecom, HR.</p>
+          </div>
+        </div>
+        <div class="s5-tactic">
+          <div class="s5-tactic-pill">Distress Manipulation</div>
+          <div class="s5-tactic-text">
+            <p>Scammer performs vulnerability to trigger rescue instinct.</p>
+            <p>Examples: stranded traveler, medical emergency plea, charity fraud.</p>
+          </div>
+        </div>
+        <div class="s5-tactic">
+          <div class="s5-tactic-pill">Affinity Exploitation</div>
+          <div class="s5-tactic-text">
+            <p>Scammer builds perceived similarity or attraction.</p>
+            <p>Examples: romance scams, "insider" investment groups, shared community, alumni networks.</p>
+          </div>
+        </div>
+        <div class="s5-tactic">
+          <div class="s5-tactic-pill">Identity Hijacking</div>
+          <div class="s5-tactic-text">
+            <p>Scammer impersonates someone already trusted.</p>
+            <p>Examples: brother in emergency, CEO asking for transfer, friend requesting OTP.</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="s5-victim-label-mini">Victim</p>
+      <div class="s5-victim-mini" id="s5-victim-mini">
+        <div class="s5-mini-avatar" id="s5-mini-avatar">🧑</div>
+        <div class="s5-mini-info">
+          <div class="s5-mini-name" id="s5-mini-name">—</div>
+          <div class="s5-mini-meta" id="s5-mini-meta">—</div>
+        </div>
+      </div>
+
+      <div class="scroll-hint">
+        <span>swipe up to continue</span>
+        <div class="chev"></div>
+      </div>
+    </section>
+
+    <!-- More screens (6..15) — to be built next iteration -->
     <section class="screen" id="screen-placeholder">
       <div style="margin:auto;text-align:center;padding:40px;">
         <p class="step-label">Coming soon</p>
@@ -392,7 +622,7 @@
       have: new Set(),
     };
 
-    const SCREEN_IDS = ['screen-0', 'screen-1', 'screen-2', 'screen-placeholder'];
+    const SCREEN_IDS = ['screen-0', 'screen-1', 'screen-2', 'screen-3', 'screen-4', 'screen-5', 'screen-placeholder'];
     let currentScreenIdx = 0;
 
     function showScreen(idx) {
@@ -403,6 +633,9 @@
       if (next) next.classList.add('active');
       currentScreenIdx = idx;
       window.scrollTo(0, 0);
+      // Lazy populates
+      if (SCREEN_IDS[idx] === 'screen-4') populatePersona();
+      if (SCREEN_IDS[idx] === 'screen-5') populateVictimMini();
     }
 
     function jumpForward()  { showScreen(currentScreenIdx + 1); }
@@ -486,6 +719,95 @@
       const target = e.target.closest('.screen');
       if (!target) e.preventDefault();
     }, { passive: false });
+
+    /* ═══════════════ PERSONA GENERATOR ═══════════════ */
+    const NAMES = {
+      male: ['Chandu','Rahul','Arjun','Vikram','Sanjay','Amit','Ravi','Deepak','Manoj','Kiran'],
+      female: ['Priya','Anita','Sneha','Kavita','Meera','Pooja','Ritika','Swati','Neha','Divya'],
+      'non-binary': ['Amar','Kiran','Jaya','Preet','Sasha','Noor','Arin','Tara','Dev','Rishi']
+    };
+    const CITIES = ['Mumbai, MH','Delhi, DL','Bangalore, KA','Hyderabad, TG','Pune, MH','Chennai, TN','Kolkata, WB','Nagpur, MH','Jaipur, RJ','Lucknow, UP'];
+    const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+    const randDigits = n => Array.from({ length: n }, () => Math.floor(Math.random() * 10)).join('');
+
+    // Persona cache so S4/S5 stay consistent on re-entry
+    let personaCache = null;
+
+    function buildPersona() {
+      // Default fallbacks if form was skipped
+      if (!state.age) state.age = '25-34';
+      if (!state.sex) state.sex = 'male';
+      if (!state.occupation) state.occupation = 'salaried';
+      if (state.have.size === 0) {
+        ['mobile-number','aadhar-number','pan-number','bank-account'].forEach(x => state.have.add(x));
+      }
+
+      const sex = state.sex, age = state.age, occ = state.occupation;
+      let ageNum;
+      if (age === '<18') ageNum = 16;
+      else if (age === '>65') ageNum = 68;
+      else { const [lo, hi] = age.split('-').map(Number); ageNum = lo + Math.floor(Math.random() * (hi - lo + 1)); }
+
+      const name = pick(NAMES[sex] || NAMES.male);
+      const city = pick(CITIES);
+      const mob = '9' + randDigits(9);
+      const sexLabel = sex === 'male' ? 'M' : sex === 'female' ? 'F' : 'NB';
+      const marital = ageNum < 22 ? 'Unmarried' : pick(['Married','Unmarried']);
+      const avatarEmoji = sex === 'female' ? '👩‍🦰' : sex === 'non-binary' ? '🧑‍🦱' : '👨‍🦰';
+
+      const randPAN = () => Array.from({ length: 5 }, () => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[Math.floor(Math.random() * 26)]).join('') + randDigits(4) + 'A';
+      const idMap = {
+        'mobile-number': `Mob no. – ${mob}`,
+        'aadhar-number': `Aadhar – ${randDigits(12)}`,
+        'pan-number': `PAN – ${randPAN()}`,
+        'bank-account': `BANK – ${pick(['ICICI','SBI','HDFC','Axis','Kotak'])}`,
+        'demat-account': `Demat – ${pick(['Zerodha','Groww','Upstox'])}`,
+        'passport': `Passport – J${randDigits(7)}`,
+        'instagram': `IG – @${name.toLowerCase()}${randDigits(2)}`,
+        'facebook': `FB – ${name} ${pick(['Kumar','Sharma','Singh','Patel','Rao'])}`,
+        'whatsapp': `WhatsApp – ${mob}`,
+        'gmail': `Gmail – ${name.toLowerCase()}${randDigits(3)}@gmail.com`,
+        'telegram': `Telegram – @${name.toLowerCase()}_${randDigits(2)}`
+      };
+
+      const bios = {
+        student: `${name} spends hours scrolling through flashy ads and unbelievable offers with wide, trusting eyes. Believes messages that start with "Congratulations!" are surely meant just for them. Their hopeful heart clicks first and thinks later.`,
+        salaried: `${name} juggles work emails and personal messages on the same phone. After a long day, a convincing "urgent bank alert" feels real enough to click. Trusts official-looking logos. The fatigue of 9-to-5 makes every shortcut feel like a blessing.`,
+        'un-employed': `${name} spends hours online. Believes every "Congratulations!" message is meant just for them. Assumes everyone means well. Their hopeful heart always clicks first and thinks later.`,
+        'self-employed': `${name} is always looking for the next big opportunity. "10x returns" emails and "exclusive investment tips" feel like insider knowledge. Trusts people who talk business and moves fast without verifying.`
+      };
+
+      personaCache = {
+        name, ageNum, sexLabel, marital, occ, city, avatarEmoji,
+        ids: [...state.have].map(k => idMap[k]).filter(Boolean),
+        bio: bios[occ] || bios.student
+      };
+      return personaCache;
+    }
+
+    function populatePersona() {
+      const p = personaCache || buildPersona();
+      document.querySelector('#s4-avatar').textContent = p.avatarEmoji;
+      document.querySelector('#s4-name').textContent = p.name;
+      const occLabel = p.occ.charAt(0).toUpperCase() + p.occ.slice(1).replace('-', ' ');
+      const details = document.querySelector('#s4-details');
+      details.innerHTML = '';
+      [`${p.ageNum} ${p.sexLabel}`, p.marital, occLabel, p.city].forEach(t => {
+        const s = document.createElement('span'); s.textContent = t; details.appendChild(s);
+      });
+      const ids = document.querySelector('#s4-ids');
+      ids.innerHTML = '';
+      p.ids.forEach(t => { const s = document.createElement('span'); s.textContent = t; ids.appendChild(s); });
+      document.querySelector('#s4-bio').textContent = p.bio;
+    }
+
+    function populateVictimMini() {
+      const p = personaCache || buildPersona();
+      document.querySelector('#s5-mini-avatar').textContent = p.avatarEmoji;
+      document.querySelector('#s5-mini-name').textContent = p.name;
+      document.querySelector('#s5-mini-meta').textContent =
+        `${p.ageNum} ${p.sexLabel} · ${p.marital} · ${p.city}`;
+    }
   </script>
 </body>
 </html>
