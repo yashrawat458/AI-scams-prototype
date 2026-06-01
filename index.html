@@ -4,6 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Scams — Prototype</title>
+  <script>
+    // Redirect small/touch devices to the mobile build.
+    // Use a query flag to opt out (?desktop=1) for testing on small screens.
+    (function () {
+      try {
+        var qs = new URLSearchParams(window.location.search);
+        if (qs.get('desktop') === '1') return;
+        var isCoarse  = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+        var isNarrow  = Math.min(window.innerWidth, window.innerHeight) < 768;
+        if (isCoarse || isNarrow) {
+          window.location.replace('mobile.html' + window.location.search + window.location.hash);
+        }
+      } catch (e) { /* no-op */ }
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
