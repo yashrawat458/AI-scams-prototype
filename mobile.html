@@ -132,14 +132,16 @@
     }
 
     /* ═══════════════ SCREEN 0 — Intro ═══════════════ */
-    #screen-0 { justify-content: center; align-items: center; text-align: center; gap: 32px; }
+    #screen-0 { justify-content: center; align-items: flex-start; text-align: left; gap: 32px; padding-left: 20px; padding-right: 20px; }
     .s0-text {
       font-size: 17px;
       line-height: 1.55;
       font-weight: 400;
       color: #f5f3ec;
       max-width: 360px;
+      text-align: left;
     }
+    #screen-0 .continue-btn { align-self: flex-start; }
 
     /* ═══════════════ SCREEN 1 — Form ═══════════════ */
     #screen-1 {
@@ -250,16 +252,21 @@
       opacity: 0.85;
     }
 
-    /* ═══════════════ Shared step header ═══════════════ */
+    /* ═══════════════ Shared step header (desktop magenta) ═══════════════ */
     .step-head { display:flex; flex-direction:column; gap:4px; margin-bottom:14px; }
-    .step-head .step-num { font-size:18px; font-style:italic; color:#FF61E1; font-weight:600; }
-    .step-head .step-name { font-size:32px; font-style:italic; color:#FF61E1; font-weight:800; letter-spacing:-0.5px; line-height:1.05; }
+    .step-head .step-num { font-size:18px; color:#fff; font-weight:400; }
+    .step-head .step-name { font-size:36px; font-style:italic; color:#d91cff; font-weight:600; letter-spacing:-0.5px; line-height:1.05; }
 
-    /* AI factor pills row */
-    .factor-pills { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:6px; }
-    .factor-pills .pill { background:#6767ae; opacity:0.45; font-size:11px; padding:5px 11px; }
-    .factor-pills .pill.active { opacity:1; background:#FF61E1; color:#1b2191; font-weight:700; }
-    .factor-pills .caption { width:100%; font-size:11px; color:#efe8d4; opacity:0.6; margin-top:4px; }
+    /* AI factor pills row — desktop palette */
+    .factor-pills { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:6px; align-items:center; }
+    .factor-pills .pill {
+      background: rgba(237, 227, 226, 0.36);
+      color:#211d07;
+      font-size:12px; font-weight:400;
+      padding:5px 12px; border-radius:36px;
+    }
+    .factor-pills .pill.active { background:#7bf12c; color:#211d07; font-weight:500; }
+    .factor-pills .caption { width:100%; font-size:11px; color:rgba(255,255,255,0.4); margin-top:4px; }
 
     .info-card {
       background:#efe8d4; color:#1b2191; border-radius:14px;
@@ -275,26 +282,29 @@
     /* ═══════════════ SCREEN 3 — Data Harvesting ═══════════════ */
     #screen-3 { gap:14px; padding-top:24px; padding-bottom:80px; }
     .s3-hero {
-      align-self:center; font-size:96px; line-height:1;
+      align-self:center; width:120px; height:120px;
       filter: drop-shadow(0 12px 24px rgba(0,0,0,0.3));
       animation: floatY 3.5s ease-in-out infinite;
     }
+    .s3-hero img { width:100%; height:100%; object-fit:contain; }
     @keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-    .s3-crawlers { display:flex; justify-content:space-around; font-size:22px; opacity:0.55; margin-top:-8px; }
-    .s3-crawlers span { animation: crawl 2.5s ease-in-out infinite; }
-    .s3-crawlers span:nth-child(2) { animation-delay: 0.4s; }
-    .s3-crawlers span:nth-child(3) { animation-delay: 0.8s; }
-    .s3-crawlers span:nth-child(4) { animation-delay: 1.2s; }
-    .s3-crawlers span:nth-child(5) { animation-delay: 1.6s; }
+    .s3-crawlers { display:flex; justify-content:space-around; margin-top:-8px; }
+    .s3-crawlers img { width:26px; height:26px; object-fit:contain; opacity:0.85; animation: crawl 2.5s ease-in-out infinite, virusWobble 0.5s ease-in-out infinite; }
+    .s3-crawlers img:nth-child(2) { animation-delay: 0.4s, 0.1s; }
+    .s3-crawlers img:nth-child(3) { animation-delay: 0.8s, 0.2s; }
+    .s3-crawlers img:nth-child(4) { animation-delay: 1.2s, 0.3s; }
+    .s3-crawlers img:nth-child(5) { animation-delay: 1.6s, 0.4s; }
     @keyframes crawl { 0%,100%{transform:translateX(0)} 50%{transform:translateX(8px)} }
+    @keyframes virusWobble { 0%,100%{filter:hue-rotate(0)} 50%{filter:hue-rotate(15deg)} }
 
     /* ═══════════════ SCREEN 4 — Profile Card ═══════════════ */
     #screen-4 { justify-content:center; align-items:center; gap:14px; padding-top:40px; padding-bottom:80px; position:relative; }
     .s4-id-bg {
-      position:absolute; top:30px; right:-10px;
-      font-size:80px; opacity:0.18; transform:rotate(-12deg);
-      pointer-events:none;
+      position:absolute; top:50px; right:0;
+      width:140px; height:140px; opacity:0.6; transform:rotate(15deg);
+      pointer-events:none; z-index:0;
     }
+    .s4-id-bg img { width:100%; height:100%; object-fit:contain; }
     .s4-card {
       width:100%; max-width:340px;
       background:#efe8d4; color:#1b2191;
@@ -304,11 +314,12 @@
       z-index:1;
     }
     .s4-avatar {
-      width:88px; height:88px; border-radius:50%;
+      width:96px; height:96px; border-radius:50%;
       background:#FF61E1; align-self:center;
       display:flex; align-items:center; justify-content:center;
-      font-size:54px; line-height:1;
+      overflow:hidden;
     }
+    .s4-avatar img { width:100%; height:100%; object-fit:cover; }
     .s4-name { font-size:24px; font-weight:800; text-align:center; }
     .s4-details {
       display:flex; flex-wrap:wrap; gap:6px; justify-content:center;
@@ -328,22 +339,21 @@
     /* ═══════════════ SCREEN 5 — Synthesis (4 tactics) ═══════════════ */
     #screen-5 { gap:14px; padding-top:24px; padding-bottom:80px; }
     .s5-scammer {
-      align-self:center; font-size:72px; line-height:1;
+      align-self:center; width:130px; height:130px;
       filter: drop-shadow(0 8px 18px rgba(255,97,225,0.35));
       animation: floatY 3.5s ease-in-out infinite;
     }
-    .s5-tactics { display:flex; flex-direction:column; gap:10px; }
-    .s5-tactic {
-      background:#2a319f; border:1px solid rgba(255,255,255,0.08);
-      border-radius:14px; padding:12px 14px;
-    }
+    .s5-scammer img { width:100%; height:100%; object-fit:contain; }
+    .s5-tactics { display:flex; flex-direction:column; gap:14px; }
+    .s5-tactic { display:flex; flex-direction:column; gap:6px; }
     .s5-tactic-pill {
-      display:inline-block; background:#FF61E1; color:#1b2191;
-      font-size:11px; font-weight:700;
-      padding:3px 10px; border-radius:999px; margin-bottom:8px;
+      align-self:flex-start;
+      background:#ede3e2; color:#211d07;
+      font-size:13px; font-weight:400;
+      padding:6px 14px; border-radius:51px;
     }
-    .s5-tactic-text { font-size:12px; line-height:1.4; color:#efe8d4; }
-    .s5-tactic-text p + p { margin-top:6px; opacity:0.75; }
+    .s5-tactic-text { font-size:13px; line-height:1.45; color:#fff; padding-left:4px; }
+    .s5-tactic-text p + p { margin-top:4px; opacity:0.8; }
     .s5-victim-mini {
       margin-top:8px;
       background:#efe8d4; color:#1b2191;
@@ -351,10 +361,11 @@
       display:flex; align-items:center; gap:10px;
     }
     .s5-mini-avatar {
-      width:36px; height:36px; border-radius:50%;
+      width:40px; height:40px; border-radius:50%;
       background:#FF61E1; display:flex; align-items:center; justify-content:center;
-      font-size:22px; flex-shrink:0;
+      overflow:hidden; flex-shrink:0;
     }
+    .s5-mini-avatar img { width:100%; height:100%; object-fit:cover; }
     .s5-mini-info { flex:1; min-width:0; }
     .s5-mini-name { font-size:13px; font-weight:700; }
     .s5-mini-meta { font-size:10px; opacity:0.7; }
@@ -490,9 +501,13 @@
         <span class="step-name">Data Harvesting</span>
       </div>
 
-      <div class="s3-hero">🤖</div>
+      <div class="s3-hero"><img src="assets/robot-cool.png" alt=""></div>
       <div class="s3-crawlers">
-        <span>👾</span><span>👾</span><span>👾</span><span>👾</span><span>👾</span>
+        <img src="assets/alien-monster.png" alt="">
+        <img src="assets/alien-monster.png" alt="">
+        <img src="assets/alien-monster.png" alt="">
+        <img src="assets/alien-monster.png" alt="">
+        <img src="assets/alien-monster.png" alt="">
       </div>
 
       <div class="info-card">
@@ -520,9 +535,9 @@
 
     <!-- ═══════════════ SCREEN 4 — Profile Card ═══════════════ -->
     <section class="screen" id="screen-4">
-      <div class="s4-id-bg">🪪</div>
+      <div class="s4-id-bg"><img src="assets/id-card.png" alt=""></div>
       <div class="s4-card">
-        <div class="s4-avatar" id="s4-avatar">🧑</div>
+        <div class="s4-avatar" id="s4-avatar"><img src="assets/man-red-hair.png" alt="" id="s4-avatar-img"></div>
         <p class="s4-name" id="s4-name">—</p>
         <div class="s4-details" id="s4-details"></div>
         <div class="s4-ids" id="s4-ids"></div>
@@ -548,7 +563,7 @@
         <span class="step-name">Synthesis</span>
       </div>
 
-      <div class="s5-scammer">🥷</div>
+      <div class="s5-scammer"><img src="assets/scammer.png" alt=""></div>
 
       <div class="s5-tactics">
         <div class="s5-tactic">
@@ -583,7 +598,7 @@
 
       <p class="s5-victim-label-mini">Victim</p>
       <div class="s5-victim-mini" id="s5-victim-mini">
-        <div class="s5-mini-avatar" id="s5-mini-avatar">🧑</div>
+        <div class="s5-mini-avatar" id="s5-mini-avatar"><img src="assets/man-red-hair.png" alt="" id="s5-mini-avatar-img"></div>
         <div class="s5-mini-info">
           <div class="s5-mini-name" id="s5-mini-name">—</div>
           <div class="s5-mini-meta" id="s5-mini-meta">—</div>
@@ -753,7 +768,11 @@
       const mob = '9' + randDigits(9);
       const sexLabel = sex === 'male' ? 'M' : sex === 'female' ? 'F' : 'NB';
       const marital = ageNum < 22 ? 'Unmarried' : pick(['Married','Unmarried']);
-      const avatarEmoji = sex === 'female' ? '👩‍🦰' : sex === 'non-binary' ? '🧑‍🦱' : '👨‍🦰';
+      const avatarSrc = sex === 'female'
+        ? pick(['assets/woman-red-hair.png','assets/woman-headscarf.png'])
+        : sex === 'non-binary'
+          ? 'assets/standing.png'
+          : 'assets/man-red-hair.png';
 
       const randPAN = () => Array.from({ length: 5 }, () => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[Math.floor(Math.random() * 26)]).join('') + randDigits(4) + 'A';
       const idMap = {
@@ -778,7 +797,7 @@
       };
 
       personaCache = {
-        name, ageNum, sexLabel, marital, occ, city, avatarEmoji,
+        name, ageNum, sexLabel, marital, occ, city, avatarSrc,
         ids: [...state.have].map(k => idMap[k]).filter(Boolean),
         bio: bios[occ] || bios.student
       };
@@ -787,7 +806,7 @@
 
     function populatePersona() {
       const p = personaCache || buildPersona();
-      document.querySelector('#s4-avatar').textContent = p.avatarEmoji;
+      document.querySelector('#s4-avatar-img').src = p.avatarSrc;
       document.querySelector('#s4-name').textContent = p.name;
       const occLabel = p.occ.charAt(0).toUpperCase() + p.occ.slice(1).replace('-', ' ');
       const details = document.querySelector('#s4-details');
@@ -803,7 +822,7 @@
 
     function populateVictimMini() {
       const p = personaCache || buildPersona();
-      document.querySelector('#s5-mini-avatar').textContent = p.avatarEmoji;
+      document.querySelector('#s5-mini-avatar-img').src = p.avatarSrc;
       document.querySelector('#s5-mini-name').textContent = p.name;
       document.querySelector('#s5-mini-meta').textContent =
         `${p.ageNum} ${p.sexLabel} · ${p.marital} · ${p.city}`;
