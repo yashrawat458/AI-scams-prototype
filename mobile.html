@@ -371,6 +371,94 @@
     .s5-mini-meta { font-size:10px; opacity:0.7; }
     .s5-victim-label-mini { font-size:10px; opacity:0.6; letter-spacing:1px; text-transform:uppercase; margin-bottom:-4px; }
 
+    /* ═══════════════ SHARED — Persona cards (scammer + victim, desktop parity) ═══════════════ */
+    .role-label { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:#efe8d4; opacity:0.6; margin-bottom:-6px; }
+    .persona-card {
+      background:#f4dfc1; color:#000;
+      border:3px solid #cca46a; border-radius:8px;
+      padding:14px 14px 12px;
+      display:grid; grid-template-columns:64px 1fr; gap:12px;
+      position:relative;
+    }
+    .persona-card.scammer { border-color:#d91cff; }
+    .persona-card .pc-avatar { width:64px; height:64px; overflow:hidden; border-radius:4px; background:#efe8d4; display:flex; align-items:center; justify-content:center; }
+    .persona-card .pc-avatar img { width:100%; height:100%; object-fit:cover; }
+    .persona-card .pc-info { display:flex; flex-direction:column; gap:4px; min-width:0; }
+    .persona-card .pc-name { font-size:15px; font-weight:600; margin:0; }
+    .persona-card .pc-details { display:flex; flex-wrap:wrap; gap:2px 8px; font-size:11px; color:#262626; }
+    .persona-card .pc-details span { white-space:nowrap; }
+    .persona-card .pc-ids { grid-column:1/-1; display:flex; flex-wrap:wrap; gap:2px 12px; font-size:10.5px; color:#262626; padding-top:8px; margin-top:4px; border-top:1px dashed rgba(0,0,0,0.18); }
+    .persona-card .pc-ids span { white-space:nowrap; }
+
+    /* Authority Fabrication pill sits on top edge of scammer card */
+    .af-pill {
+      display:inline-block; align-self:flex-start;
+      background:#ede3e2; color:#211d07;
+      font-size:11px; padding:5px 12px; border-radius:24px;
+      margin-bottom:-6px; margin-left:4px;
+      position:relative; z-index:2;
+    }
+    .pc-phone {
+      position:absolute; right:-6px; top:-12px;
+      width:32px; height:32px; transform:rotate(15deg);
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+    }
+    .pc-phone img { width:100%; height:100%; object-fit:contain; }
+
+    /* ═══════════════ SHARED — ISOLATION rotated label ═══════════════ */
+    .isolation-strip {
+      display:flex; align-items:center; gap:10px;
+      margin:6px 0;
+    }
+    .isolation-pill {
+      writing-mode:vertical-rl; transform:rotate(180deg);
+      background:#fff; color:#211d07;
+      font-size:11px; font-weight:600; letter-spacing:2px;
+      padding:10px 6px; border-radius:24px;
+      align-self:stretch;
+    }
+    .isolation-lines { flex:1; height:60px; opacity:0.5; }
+    .isolation-lines img { width:100%; height:100%; object-fit:contain; }
+
+    /* ═══════════════ SHARED — Time bar (clock + progress) ═══════════════ */
+    .time-bar {
+      display:flex; align-items:center; gap:10px;
+      background:rgba(0,0,0,0.18); border-radius:10px;
+      padding:8px 10px;
+    }
+    .time-bar .tb-clock { width:28px; height:28px; flex-shrink:0; }
+    .time-bar .tb-clock img { width:100%; height:100%; object-fit:contain; }
+    .time-bar .tb-strip { flex:1; height:14px; background:#d9d9d9; border-radius:7px; overflow:hidden; position:relative; }
+    .time-bar .tb-progress { height:100%; background:linear-gradient(90deg,#7bf12c,#FF61E1); border-radius:7px; transition:width 0.3s linear; }
+    .time-bar .tb-text { font-size:11px; color:#FF61E1; font-weight:700; min-width:62px; text-align:right; font-variant-numeric:tabular-nums; }
+    .time-bar.frozen .tb-progress { background:#FF61E1; }
+
+    /* ═══════════════ SHARED — Emotion emoji cascade row ═══════════════ */
+    .emotion-row {
+      display:flex; gap:8px; align-items:center; overflow-x:auto; overflow-y:visible;
+      min-height:60px; padding:10px 16px; margin:0 -16px;
+      scrollbar-width:none;
+    }
+    .emotion-row::-webkit-scrollbar { display:none; }
+    .emotion-row .emo {
+      width:44px; height:44px; flex-shrink:0;
+      animation: emoFloat 3s ease-in-out infinite;
+    }
+    .emotion-row .emo img { width:100%; height:100%; object-fit:contain; }
+    .emotion-row .emo:nth-child(odd)  img { transform: rotate(-12deg); }
+    .emotion-row .emo:nth-child(even) img { transform: rotate(12deg); }
+    .emotion-row .emo:nth-child(2)  { animation-delay:0.2s; }
+    .emotion-row .emo:nth-child(3)  { animation-delay:0.4s; }
+    .emotion-row .emo:nth-child(4)  { animation-delay:0.6s; }
+    .emotion-row .emo:nth-child(5)  { animation-delay:0.8s; }
+    .emotion-row .emo:nth-child(6)  { animation-delay:1.0s; }
+    .emotion-row .emo:nth-child(7)  { animation-delay:1.2s; }
+    .emotion-row .emo:nth-child(8)  { animation-delay:1.4s; }
+    .emotion-row .emo:nth-child(9)  { animation-delay:1.6s; }
+    .emotion-row .emo:nth-child(10) { animation-delay:1.8s; }
+    .emotion-row .emo:nth-child(11) { animation-delay:2.0s; }
+    @keyframes emoFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+
     /* ═══════════════ SCREEN 6 — Synthesis details ═══════════════ */
     #screen-6 { gap:14px; padding-top:24px; padding-bottom:80px; }
     .s6-hero { align-self:center; width:120px; height:120px; animation: floatY 3.5s ease-in-out infinite; }
@@ -447,8 +535,12 @@
 
     /* ═══════════════ SCREEN 13 — Extractions details ═══════════════ */
     #screen-13 { gap:14px; padding-top:24px; padding-bottom:80px; }
-    .s13-money { align-self:center; width:110px; height:110px; animation: floatY 3s ease-in-out infinite; }
+    .s13-money { align-self:center; width:110px; height:110px; animation: s13MoneyFly 0.9s cubic-bezier(0.34,1.56,0.64,1) 0.2s both, floatY 3s ease-in-out 1.2s infinite; }
     .s13-money img { width:100%; height:100%; object-fit:contain; }
+    @keyframes s13MoneyFly {
+      0%   { opacity:0; transform: translateY(40px) scale(1.6); }
+      100% { opacity:1; transform: translateY(0)    scale(1); }
+    }
 
     /* ═══════════════ SCREEN 15 — Review ═══════════════ */
     #screen-15 { gap:18px; padding-top:24px; padding-bottom:60px; }
@@ -718,7 +810,25 @@
         <span class="step-name">Synthesis</span>
       </div>
 
-      <div class="s6-hero"><img src="assets/scammer.png" alt=""></div>
+      <p class="role-label">Scammer</p>
+      <div class="af-pill">Authority Fabrication</div>
+      <div class="persona-card scammer" id="s6-scammer">
+        <div class="pc-phone"><img src="assets/phone-emoji.png" alt=""></div>
+        <div class="pc-avatar"><img src="assets/standing.png" alt=""></div>
+        <div class="pc-info">
+          <p class="pc-name"></p>
+          <div class="pc-details"></div>
+        </div>
+      </div>
+
+      <div class="s6-hero"><img src="assets/robot-cool.png" alt=""></div>
+      <div class="s3-crawlers" aria-hidden="true">
+        <img src="assets/alien-monster.png" alt="">
+        <img src="assets/alien-monster.png" alt="">
+        <img src="assets/alien-monster.png" alt="">
+        <img src="assets/alien-monster.png" alt="">
+        <img src="assets/alien-monster.png" alt="">
+      </div>
 
       <div class="info-card">
         <p><strong>Goal:</strong> Create a convincing digital persona you will trust.</p>
@@ -735,6 +845,16 @@
       <div class="info-card dark">
         <p><strong>AI's role:</strong> Turns raw data into believable identity artefacts — voice, face, language style, authority tone.</p>
         <p>Humans trust familiar identity signals more than logic.</p>
+      </div>
+
+      <p class="role-label">Victim</p>
+      <div class="persona-card" id="s6-victim">
+        <div class="pc-avatar"><img src="assets/man-red-hair.png" alt=""></div>
+        <div class="pc-info">
+          <p class="pc-name"></p>
+          <div class="pc-details"></div>
+        </div>
+        <div class="pc-ids"></div>
       </div>
 
       <div class="scroll-hint"><span>swipe up to continue</span><div class="chev"></div></div>
@@ -782,6 +902,36 @@
         <span class="step-name">Emotional<br>Triggers</span>
       </div>
 
+      <p class="role-label">Scammer</p>
+      <div class="af-pill">Authority Fabrication</div>
+      <div class="persona-card scammer" id="s8-scammer">
+        <div class="pc-phone"><img src="assets/phone-emoji.png" alt=""></div>
+        <div class="pc-avatar"><img src="assets/standing.png" alt=""></div>
+        <div class="pc-info">
+          <p class="pc-name"></p>
+          <div class="pc-details"></div>
+        </div>
+      </div>
+
+      <div class="isolation-strip">
+        <div class="isolation-pill">ISOLATION</div>
+        <div class="isolation-lines"><img src="assets/isolation-lines.svg" alt=""></div>
+      </div>
+
+      <div class="emotion-row" aria-hidden="true">
+        <div class="emo"><img src="assets/emoji-hearts.png" alt=""></div>
+        <div class="emo"><img src="assets/emoji-smile.png" alt=""></div>
+        <div class="emo"><img src="assets/emoji-fear.png" alt=""></div>
+        <div class="emo"><img src="assets/emoji-think.png" alt=""></div>
+        <div class="emo"><img src="assets/emoji-tired.png" alt=""></div>
+        <div class="emo"><img src="assets/emoji-worried.png" alt=""></div>
+        <div class="emo"><img src="assets/emoji-hushed.png" alt=""></div>
+        <div class="emo"><img src="assets/emoji-explode.png" alt=""></div>
+        <div class="emo"><img src="assets/emoji-tears.png" alt=""></div>
+        <div class="emo"><img src="assets/emoji-exhale.png" alt=""></div>
+        <div class="emo"><img src="assets/emoji-starstruck.png" alt=""></div>
+      </div>
+
       <div class="s8-tactics">
         <div class="s8-tactic">
           <div class="s8-tactic-head">Fear</div>
@@ -809,6 +959,16 @@
           <p class="s8-tactic-quote">"Unusual login attempt — was this you?"</p>
         </div>
       </div>
+
+      <p class="role-label">Victim</p>
+      <div class="persona-card" id="s8-victim">
+        <div class="pc-avatar"><img src="assets/man-red-hair.png" alt=""></div>
+        <div class="pc-info">
+          <p class="pc-name"></p>
+          <div class="pc-details"></div>
+        </div>
+        <div class="pc-ids"></div>
+      </div>
     </section>
 
     <!-- ═══════════════ SCREEN 9 — 30s reflection ═══════════════ -->
@@ -822,6 +982,12 @@
 
     <!-- ═══════════════ SCREEN 10 — Step 3 details ═══════════════ -->
     <section class="screen" id="screen-10">
+      <div class="time-bar frozen">
+        <div class="tb-clock"><img src="assets/clock-emoji.png" alt=""></div>
+        <div class="tb-strip"><div class="tb-progress" style="width:55%"></div></div>
+        <span class="tb-text">3:42 min</span>
+      </div>
+
       <div class="factor-pills">
         <span class="pill active">Scalability</span>
         <span class="pill active">Believability</span>
@@ -834,11 +1000,51 @@
         <span class="step-name">Emotional<br>Triggers</span>
       </div>
 
+      <p class="role-label">Scammer</p>
+      <div class="af-pill">Authority Fabrication</div>
+      <div class="persona-card scammer" id="s10-scammer">
+        <div class="pc-phone"><img src="assets/phone-emoji.png" alt=""></div>
+        <div class="pc-avatar"><img src="assets/standing.png" alt=""></div>
+        <div class="pc-info">
+          <p class="pc-name"></p>
+          <div class="pc-details"></div>
+        </div>
+      </div>
+
+      <div class="isolation-strip">
+        <div class="isolation-pill">ISOLATION</div>
+        <div class="isolation-lines"><img src="assets/isolation-lines.svg" alt=""></div>
+      </div>
+
+      <div class="emotion-row" aria-hidden="true">
+        <div class="emo"><img src="assets/emoji-hearts.png" alt=""></div>
+        <div class="emo"><img src="assets/emoji-smile.png" alt=""></div>
+        <div class="emo"><img src="assets/emoji-fear.png" alt=""></div>
+        <div class="emo"><img src="assets/emoji-think.png" alt=""></div>
+        <div class="emo"><img src="assets/emoji-tired.png" alt=""></div>
+        <div class="emo"><img src="assets/emoji-worried.png" alt=""></div>
+        <div class="emo"><img src="assets/emoji-hushed.png" alt=""></div>
+        <div class="emo"><img src="assets/emoji-explode.png" alt=""></div>
+        <div class="emo"><img src="assets/emoji-tears.png" alt=""></div>
+        <div class="emo"><img src="assets/emoji-exhale.png" alt=""></div>
+        <div class="emo"><img src="assets/emoji-starstruck.png" alt=""></div>
+      </div>
+
       <p class="s10-goal">Goal is to disable rational thinking. <span class="accent">Scammers don't start with money. They start with emotions.</span></p>
 
       <div class="info-card dark">
         <p><strong>AI's role:</strong> Crafts hyper-realistic language, tone, and timing tailored to the victim. This is the behavioural manipulation layer.</p>
         <p>AI increases emotional realism.</p>
+      </div>
+
+      <p class="role-label">Victim</p>
+      <div class="persona-card" id="s10-victim">
+        <div class="pc-avatar"><img src="assets/man-red-hair.png" alt=""></div>
+        <div class="pc-info">
+          <p class="pc-name"></p>
+          <div class="pc-details"></div>
+        </div>
+        <div class="pc-ids"></div>
       </div>
 
       <div class="scroll-hint"><span>swipe up to continue</span><div class="chev"></div></div>
@@ -856,15 +1062,13 @@
     </section>
 
     <!-- ═══════════════ SCREEN 12 — Step 4 cover ═══════════════ -->
-    <section class="screen step-cover" id="screen-12">
-      <span class="step-cover-num">Step 4.</span>
-      <h2 class="step-cover-title">Extractions</h2>
-      <div class="step-cover-hero"><img src="assets/money-wings.png" alt=""></div>
-      <div class="scroll-hint" style="margin-top:auto;"><span>swipe up to continue</span><div class="chev"></div></div>
-    </section>
+    <section class="screen" id="screen-12">
+      <div class="time-bar frozen">
+        <div class="tb-clock"><img src="assets/clock-emoji.png" alt=""></div>
+        <div class="tb-strip"><div class="tb-progress" style="width:88%"></div></div>
+        <span class="tb-text">7:12 min</span>
+      </div>
 
-    <!-- ═══════════════ SCREEN 13 — Extractions details ═══════════════ -->
-    <section class="screen" id="screen-13">
       <div class="factor-pills">
         <span class="pill active">Scalability</span>
         <span class="pill active">Believability</span>
@@ -877,7 +1081,75 @@
         <span class="step-name">Extractions</span>
       </div>
 
-      <div class="s13-money"><img src="assets/money-wings.png" alt=""></div>
+      <p class="role-label">Scammer</p>
+      <div class="af-pill">Authority Fabrication</div>
+      <div class="persona-card scammer" id="s12-scammer">
+        <div class="pc-phone"><img src="assets/phone-emoji.png" alt=""></div>
+        <div class="pc-avatar"><img src="assets/standing.png" alt=""></div>
+        <div class="pc-info">
+          <p class="pc-name"></p>
+          <div class="pc-details"></div>
+        </div>
+      </div>
+
+      <div class="isolation-strip">
+        <div class="isolation-pill">ISOLATION</div>
+        <div class="isolation-lines"><img src="assets/isolation-lines.svg" alt=""></div>
+      </div>
+
+      <div class="step-cover-hero" style="align-self:center;width:140px;height:140px;"><img src="assets/money-wings.png" alt=""></div>
+      <div style="align-self:center;width:60px;height:60px;margin-top:-10px;"><img src="assets/emoji-fear.png" alt="" style="width:100%;height:100%;object-fit:contain;transform:rotate(-12deg);"></div>
+
+      <p class="role-label">Victim</p>
+      <div class="persona-card" id="s12-victim">
+        <div class="pc-avatar"><img src="assets/man-red-hair.png" alt=""></div>
+        <div class="pc-info">
+          <p class="pc-name"></p>
+          <div class="pc-details"></div>
+        </div>
+        <div class="pc-ids"></div>
+      </div>
+
+      <div class="scroll-hint"><span>swipe up to continue</span><div class="chev"></div></div>
+    </section>
+
+    <!-- ═══════════════ SCREEN 13 — Extractions details ═══════════════ -->
+    <section class="screen" id="screen-13">
+      <div class="time-bar frozen">
+        <div class="tb-clock"><img src="assets/clock-emoji.png" alt=""></div>
+        <div class="tb-strip"><div class="tb-progress" style="width:88%"></div></div>
+        <span class="tb-text">7:12 min</span>
+      </div>
+
+      <div class="factor-pills">
+        <span class="pill active">Scalability</span>
+        <span class="pill active">Believability</span>
+        <span class="pill active">Personalization</span>
+        <span class="caption">Factors amplified by AI.</span>
+      </div>
+
+      <div class="step-head">
+        <span class="step-num">Step 4.</span>
+        <span class="step-name">Extractions</span>
+      </div>
+
+      <p class="role-label">Scammer</p>
+      <div class="af-pill">Authority Fabrication</div>
+      <div class="persona-card scammer" id="s13-scammer">
+        <div class="pc-phone"><img src="assets/phone-emoji.png" alt=""></div>
+        <div class="pc-avatar"><img src="assets/standing.png" alt=""></div>
+        <div class="pc-info">
+          <p class="pc-name"></p>
+          <div class="pc-details"></div>
+        </div>
+      </div>
+
+      <div class="isolation-strip">
+        <div class="isolation-pill">ISOLATION</div>
+        <div class="isolation-lines"><img src="assets/isolation-lines.svg" alt=""></div>
+      </div>
+
+      <div class="s13-money" id="s13-money"><img src="assets/money-wings.png" alt=""></div>
 
       <div class="info-card">
         <p><strong>Goal:</strong> Get the asset.</p>
@@ -894,6 +1166,16 @@
       <div class="info-card dark">
         <p><strong>AI's role:</strong> Maintains persuasion until compliance happens. Sometimes even guides victims step-by-step.</p>
         <p>This is the only step scammers actually care about. Everything else is setup.</p>
+      </div>
+
+      <p class="role-label">Victim</p>
+      <div class="persona-card" id="s13-victim">
+        <div class="pc-avatar"><img src="assets/man-red-hair.png" alt=""></div>
+        <div class="pc-info">
+          <p class="pc-name"></p>
+          <div class="pc-details"></div>
+        </div>
+        <div class="pc-ids"></div>
       </div>
 
       <div class="scroll-hint"><span>swipe up to continue</span><div class="chev"></div></div>
@@ -1049,6 +1331,11 @@
         if (!personaCache) buildPersona();
         const v = document.querySelector('#s7-victim-img');
         if (v && personaCache) v.src = personaCache.avatarSrc;
+      }
+      if (['screen-6','screen-8','screen-10','screen-12','screen-13'].includes(id)) {
+        if (!personaCache) buildPersona();
+        populateScammerCard('#' + id.replace('screen-', 's') + '-scammer');
+        populateVictimCard('#' + id.replace('screen-', 's') + '-victim');
       }
       if (id === 'screen-8') setTimeout(startS8Timer, 400);
       if (id === 'screen-11') runS11Pin();
@@ -1232,6 +1519,50 @@
       document.querySelector('#s5-mini-name').textContent = p.name;
       document.querySelector('#s5-mini-meta').textContent =
         `${p.ageNum} ${p.sexLabel} · ${p.marital} · ${p.city}`;
+    }
+
+    /* ═══════════════ Generic persona card filler (desktop parity) ═══════════════ */
+    const SCAMMER = {
+      name: 'Inspector Shinde saheb',
+      avatarSrc: 'assets/standing.png',
+      details: ['43 M', 'Narcotics Branch', 'Nagpur Police', 'Nagpur, MH'],
+      tactic: 'Authority Fabrication'
+    };
+
+    function fillPersonaCard(rootSel, data) {
+      const root = document.querySelector(rootSel);
+      if (!root) return;
+      const img = root.querySelector('.pc-avatar img');
+      const name = root.querySelector('.pc-name');
+      const det = root.querySelector('.pc-details');
+      const ids = root.querySelector('.pc-ids');
+      if (img && data.avatarSrc) img.src = data.avatarSrc;
+      if (name) name.textContent = data.name || '';
+      if (det) {
+        det.innerHTML = '';
+        (data.details || []).forEach(t => { const s = document.createElement('span'); s.textContent = t; det.appendChild(s); });
+      }
+      if (ids) {
+        ids.innerHTML = '';
+        (data.ids || []).forEach(t => { const s = document.createElement('span'); s.textContent = t; ids.appendChild(s); });
+      }
+    }
+
+    function populateScammerCard(rootSel) { fillPersonaCard(rootSel, SCAMMER); }
+
+    function populateVictimCard(rootSel) {
+      const p = personaCache || buildPersona();
+      fillPersonaCard(rootSel, {
+        avatarSrc: p.avatarSrc,
+        name: p.name,
+        details: [`${p.ageNum} ${p.sexLabel}`, p.marital, p.occ.charAt(0).toUpperCase()+p.occ.slice(1).replace('-',' '), p.city],
+        ids: p.ids
+      });
+    }
+
+    function populateAllCards() {
+      ['#s6-scammer','#s8-scammer','#s10-scammer','#s12-scammer','#s13-scammer'].forEach(populateScammerCard);
+      ['#s6-victim','#s8-victim','#s10-victim','#s12-victim','#s13-victim'].forEach(populateVictimCard);
     }
   </script>
 </body>
